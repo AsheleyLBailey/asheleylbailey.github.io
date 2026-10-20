@@ -259,9 +259,13 @@ Work in passes. After each pass, say in one line what changed, and ask with a ca
 **Deliver** in your final message:
 1. The finished `.html` file.
 2. A how-to-use note under 15 lines: open it in Chrome or Edge, connect the backup file first, import contacts, run the first morning exchange, and the daily routine.
-3. The daily and weekly routine in 5 bullets.
-4. A list of what you changed from the foundation, 3 to 8 bullets.
-5. One line on what to try changing after two weeks of use.
+3. How to open it as its own window (Chrome and Edge offer no Install option for a local file):
+   - Windows: a desktop shortcut whose target is the browser plus `--app="file:///<path to the .html>"` (for example `msedge.exe --app="file:///C:/Users/me/Documents/App.html"`). If New > Shortcut is blocked on a work PC, copy the browser's own shortcut and add the `--app=...` part to the end of Target.
+   - Mac: in Script Editor, a new document with one line, `do shell script "open -na 'Google Chrome' --args --app='file:///<path to the .html>'"`, saved with File Format set to Application, then dragged to the Dock. For an icon, copy a PNG in Preview and paste it onto the small icon in the app's Get Info window.
+   - Don't write a script that "switches to the existing window": Chrome app windows can't be found that way, and the app already pauses older windows itself.
+4. The daily and weekly routine in 5 bullets.
+5. A list of what you changed from the foundation, 3 to 8 bullets.
+6. One line on what to try changing after two weeks of use.
 
 ---
 
@@ -346,7 +350,7 @@ In Pass 1, write every slot from scratch from the rep's answers: what they sell 
 **Buyer playbooks and angles.** These also ship empty. For each buyer type, write what they care about, a value line, one good question, and what to avoid. Base them on Q3 and Q12, and make them editable.
 
 **Each step card** shows:
-- The draft, filled from templates.
+- The draft, filled from templates, or today's AI draft from the Due today batch (with a toggle back to the template version).
 - A "Copy AI prompt" button for a tailored draft. The prompt includes the person's context, last contact, topic, referral, focus talking point, the rep's tone and voice sample, and "check my email and chats for past conversations with this person".
 - Buttons: Done, Voicemail, No answer, Talked, Booked meeting, Not now, Stop contacting.
 
@@ -376,7 +380,7 @@ A search box in the top bar jumps to any account. A goal pill in the top bar sho
 **Pace:** expected so far = goal × business days elapsed ÷ business days in the period. Behind = expected minus actual, never below zero. Per week = remaining ÷ weeks left.
 
 - **Every day:** Today, Hot Follow-ups, Opportunities, Archive
-- **Accounts:** Coverage, Contacts, the account page, Focus, AI Feed (named after their AI)
+- **Accounts:** Coverage, Contacts, the account page, Focus, Strategies, AI Feed (named after their AI)
 - **Fridays** (rename it to their report day): Weekly report, Meetings, What's working
 - **Footer:** Start here, Templates, Data & Settings
 
@@ -391,9 +395,10 @@ A search box in the top bar jumps to any account. A goal pill in the top bar sho
 8. Check back today.
 9. Suggested next people.
 10. Call blitz: a phone-first list for catching up on the goal.
-11. Other buyers at engaged accounts.
-12. Account rotation: the 3 most overdue.
-13. Goal card.
+11. Strategy touches: people an active strategy says are due.
+12. Other buyers at engaged accounts.
+13. Account rotation: the 3 most overdue.
+14. Goal card.
 
 **Deals:** active deals only. Each shows the next step and date, questions for missing info ("Who signs off?", "Close date?"), and value totals. After `30` quiet days, a deal moves to **Follow-ups** with a revival draft. **Archive** holds won, lost and no-response items, with Restore.
 
@@ -410,6 +415,8 @@ Filters: overdue, missing roles, existing/new. Sort by most overdue. Tier comes 
 **Account page:** structure, people by site, deals, meetings, touches, and the account-mapping exchange.
 
 **Focus:** current campaigns, grouped by area. Types are Event, Offer, Partner/Vendor, Project type and Trend; pick the first type that fits, in that order. The AI suggests a type using that rule, the app shows the rule under the dropdown, and the rep confirms. Each campaign shows touches, people, replies, meetings within 60 days, deals and value. Buying-calendar plays turn themselves on and off by date window. A window may wrap the year end (for example Nov 15 to Feb 15).
+
+**Strategies:** repeatable plays: who to reach (by buyer type and account, or people the AI finds from the rep's data), how often, the angle and the ask. Active strategies put people on Today and give batch drafts the angle. None ship; the rep adds their own.
 
 **Weekly report** (if the team has one):
 - this week's meetings, with "Logged in CRM" checkboxes
@@ -436,7 +443,7 @@ Filters: overdue, missing roles, existing/new. Sort by most overdue. Tier comes 
 ## 6. AI exchanges, imports and sync
 
 The foundation already has them all. Part D §5 lists each exchange's prompt builder, output columns and paste-router signature. The rules that matter when you change them:
-- **One table per exchange.** Every prompt ends with `OUT_RULE`, and the router picks the exchange from the header row. If you add an exchange, add its signature to `previewPaste(` before the catch-all, and make the signature specific.
+- **One table per exchange.** Every prompt ends with `OUT_RULE`, and the router picks the exchange from the header row. The one exception is batch drafts, which come back as `=== D1` blocks. If you add an exchange, add its signature to `previewPaste(` before the catch-all, and make the signature specific.
 - **Check-in markers:** "STOP:" in Update means do-not-contact. "NOT NOW: [what they said]" plus Next Touch Date sets a check-back. Meeting Change is "Rescheduled to YYYY-MM-DD", "Canceled" or "No-show". Referral is "Name, Title, email - what it's about".
 - **History backfill** works in 2-week chunks. Each row carries a Period code like `H-2026-01-05`. A "MORE" row means split the chunk; a "NONE" row means the window was empty.
 - **Topics** follow the rep's priority order, are 2 to 6 words, name their source, and are never generic. If nothing specific is found, the topic is "Needs input".
@@ -607,7 +614,14 @@ Derived wording: `const TX = {` (TX.parent, TX.Site, TX.aParent, TX.sources, TX.
 - Matching: `canonParent(`, `canonSite(`, `canon(`, `parentOf(`, `multiSite(`, `contactParent(`.
 - Site kinds: `const KIND_CENTRAL`, `KIND_SITE`, `KIND_UNIT`, `function siteKind(`, `function kindFrom(`; roles shown per kind: `SHARED_ROLES`, `CENTRAL_ROLES`.
 - `const CORE_ROLES` (right after `PERSONAS`; default PERSONAS minus "Other"): the roles Coverage, account pages, `gapDlg`, `gapList` (Find missing buyers), `mapPrompt` step 3 and the "Other buyers at engaged accounts" card (`spreadCard`) count as gaps. It replaces the old `KEY_ROLES`.
-- Tree for Coverage: `function accountTree(` returns `{parent, sites, org}` per parent.
+- Tree for Coverage: `function accountTree(` returns `{parent, sites, org}` per parent. An org that isn't from your account list (`o.listed`, set by `applyAccounts`; `orgListed(o)` treats older orgs with sites or a tier as listed) and isn't in TERRITORY shows only while a contact maps to it.
+- Hand matches: `S.acctAlias` (lowercase name -> `{d, c}` or `"skip"`, from the spend list dropdowns and `siteMerge`); `acctAlias(name)` is checked first in `canon(`.
+- Official sites: `siteOfficial(parent, name)` is true for a site from TERRITORY (or TERRITORY_EXTRA, or the central office when the parent has 2+ sites) or from an imported account list (`applyAccounts` marks those `org.sites` entries `list:true`). Official sites can't be deleted or merged away.
+- Official parents: `parentOfficial(par)` is true for a TERRITORY parent or an org with `listed === true` (set by `applyAccounts`; older imports without the flag need a re-import). `officialParents()` lists them; `hasOfficial()` is false with an empty TERRITORY and no import, and then nothing is flagged.
+- Merge a parent: the Coverage/account card header shows "not on your account list" + "Merge into…" (also in SINGLE) -> `distMergeDlg(idx)` (`#dmTo`, pre-selected by `mergeGuess`: alias, name, then a site via `siteIn(parent, name)`) -> `distMerge(idx, to)` (in-app `askConfirm`; contacts get parent `to`, central office row or old-name site -> `to`, else the site it maps to in `to` or as is; meetings, opps, deals with the old name -> `to`; old org sites move in (minus central office and ones that map into `to`, `list` flag dropped); `na` merged (target wins); `itModel`, `tier`, `acct` copied if empty; old org deleted; `S.acctAlias[old] = {d:to, c:""}` and aliases that pointed at the old name re-pointed).
+- Site descriptions: `org.sites[].desc` (set by `siteSave`) overrides the built-in note in `accountTree` when present, even when empty.
+- Account pickers (anchor `// ---------- Account pickers`): `acctPickers(c)`, `acctSites()`, `acctSitePick()`, `acctPicked()`, `acctPickedName()`: parent and site dropdowns from `accountTree()` (one dropdown when SINGLE), "Other (type it)", in `editContact`, `editDeal`, `editOpp`.
+- Existing vs New per account: `org.acct` (your pick, `acctSelect` on each Coverage card, `setAcct`), `distAcct`, `distExisting(d)`, `syncAccountTypes(force)` (pick > spend list > contacts). Changing a contact's account type in `saveContact` sets it for the account.
 
 ## D3. Main constants
 
@@ -622,6 +636,8 @@ Derived wording: `const TX = {` (TX.parent, TX.Site, TX.aParent, TX.sources, TX.
 | Buyer playbooks | `const DEFAULT_PLAYS =` (empty), used by `function play(`, `playGuide(` (leaves out empty fields), `PLAY_RESEARCH` |
 | Focus types | `const FOCUS_TYPES =` (Trend, Project type, Partner/Vendor, Offer, Event), rules `const FOCUS_RULES =`, `FOCUS_ORDER` |
 | Solution areas | `const SOL_AREAS =` (Core product, Add-ons, Services) |
+| Strategy cadences | `const STRAT_CAD =`; `defaultStrats()` returns `[]` (no strategies ship) |
+| Owners | `S.settings.team` (ships `[]`); `teamList`, `ownerSelect(id, val)`, `ownerAdd`, `setOwner`: one dropdown ("Me" = `""`) for follow-up owner (Hot rows and `editDeal`), opp owner, next-step owner (`editOpp`, `oppStepDone`) |
 | Buying-calendar plays | `const CAL_PLAYS = []` (`from`/`to` are [fiscal month, day]); `addCalendar` seeds them as Focus items, `calSync`/`inWin` toggle them by date, `function fyMD(` converts using fyStartMonth |
 | Import column guesses | `const FIELD_GUESS =`, `const FIELD_LABELS =` |
 | Opportunity stages | `const OPP_STAGES =` |
@@ -631,7 +647,7 @@ Derived wording: `const TX = {` (TX.parent, TX.Site, TX.aParent, TX.sources, TX.
 | Weekly report columns | `settings.reportColumns`: `{name, from, vm, hot}`, `from` in `WK_SRC` (calls, emails, linkedin, set, held, first, manual), empty by default; rules per column, none fixed: `vm` (calls: voicemails/no-answers, default off), `hot` (touch columns: hot/opp touches, default on); set/first by booking date, held by meeting date. `wkRule` note, `wkDesc` `wkPrompt` rule; First time? only with a `first` column. `wkCols`, `wkColsEditor`, `weekData`; fixes in `S.weeklyAdj` |
 | Sample data | `function loadSample(` / `loadSampleGo` (fictional accounts; no template text). Jordan booked (meeting in 3 days), Morgan met today, colleagues ready (Prep, Follow up, Other buyers). Demo-only settings when empty: goal 40, daily touches 20, three report columns |
 | Day-one checklist | `const SETUP =` (first item "Set your goal and basics"; includes "Set your courtesy rules" (done when any is set) and "Write your email and call templates") |
-| In-app dialogs | No native `confirm/alert/prompt` (blocked in sandboxed previews). `askConfirm(msg, okLabel)`, `askAlert(msg)`, `askPrompt(msg, def)` return promises and use their own `<dialog id="ask">`, stacked over `#dlg`. `beginSeq` warns with Start anyway / Get topic (`askDlg` `extra`, opens `ctxPrompt`) / Cancel |
+| In-app dialogs | No native `confirm/alert/prompt` (blocked in sandboxed previews). `askConfirm(msg, okLabel)`, `askAlert(msg)`, `askPrompt(msg, def, multi)` return promises and use their own `<dialog id="ask">`, stacked over `#dlg`. `multi` (askDlg `o.multi`) asks with a textarea where Enter adds a line (`histNote` uses it). `beginSeq` warns with Start anyway / Get topic (`askDlg` `extra`, opens `ctxPrompt`) / Cancel |
 
 ## D4. Views
 
@@ -647,6 +663,7 @@ Derived wording: `const TX = {` (TX.parent, TX.Site, TX.aParent, TX.sources, TX.
 | contacts | Contacts | `vContacts` |
 | account | (current account name) | `vAccount`; open with `openAccount(name)`, header search `findAccount` |
 | focus | Focus | `vFocus` |
+| strategy | Strategies | `vStrategy` (anchor `// ---------- Strategies`) |
 | feed | AI Feed | `vFeed` |
 | weekly | Weekly report | `vWeekly` |
 | meetings | Meetings | `vMeetings` |
@@ -655,14 +672,25 @@ Derived wording: `const TX = {` (TX.parent, TX.Site, TX.aParent, TX.sources, TX.
 | templates | Templates | `vTemplates` |
 | data | Data & Settings | `vData0` (`vData` is only a wrapper that returns `vData0()`; edit `vData0`. Settings saved by `saveSettings`) |
 
+Coverage and the account page: under a row, "+N other people" opens `otherDlg(parent, site)` (looks up `window._tree`), listing live contacts there whose persona is Other or blank, each linking to `editContact`. Each site name (not when SINGLE) opens `siteDlg(parentIdx, siteIdx)` (also `window._tree`): Description `#sgDesc` and Type `#sgKind` (non-official only) -> `siteSave`; "Merge into" `#sgTo` -> `siteMerge` (moves contacts, and meetings, opps and deals by site name; the central office row maps to the parent name; a non-official site also gets an `S.acctAlias` entry and is dropped via `siteDrop`); "Delete site" (non-official and empty only, in-app `askConfirm`) -> `siteDel`. The card header names the non-`KIND_SITE` rows (central office, central units) with "(rows below)".
+Coverage filters live in `window.covF` (`q`, `has`, `type`, `tier`, `role`, `sort`, `scope`); `tier` ("" / "top" / "standard") matches the rotation tier (`RO(name).top`), and its select sits after the type select.
+
+Opportunities: `oppFilt.qs` shows only active opps with `oppGaps(o).length + openQs(o).length > 0`. The "Questions for you" stat card and the toolbar checkbox "Only ones with questions for me" toggle it. Below the stats, "Plus N questions on Hot follow-ups" shows open deal questions (only when the hot view is in NAV); its link sets `hotFilt.qs` and opens Hot.
+Question counts: `oppQCount()` (active opps: gaps + open questions), `dealQCount()` (open deals), `questionCount()` = both. The Opportunities sidebar badge counts `oppQCount()` only. The header "N questions" pill (views in NAV only) calls `qGo()`: opp questions -> `oppFilt.qs` + Opportunities, else `hotFilt.qs` + Hot follow-ups.
+Hot follow-ups: `hotFilt.qs` shows only open deals with open questions. Below the stats a hint bar ("N questions from `CONFIG.ai` on M hot follow-ups") has "Show the questions" / "Show all follow-ups" and "Skip all N" (`skipAllDealQs()`: in-app `askConfirm`, then `q.a = "(skipped)"` on every open deal question). With the filter on, each row lists `qInput("deal", id, q)` inline; otherwise "N questions for you" is a link that turns it on.
+
+Search boxes that filter a view (`#cQ` on Contacts, `#focusQ` on Focus) set the filter and call `renderKeep(sel)`, which re-renders and puts focus and caret back; the view filters on render, so a sync or save mid-search can't strand hidden rows.
+
 **Add a view:** write `vMyView()`, then add the key to `NAV` (or `NAV_FOOT`), `NAV_TIPS`, `ICONS`, `VIEWS` and the `fn` map in `render(`. Remove from the same five places, or just from NAV: links to optional views check `hasView(key)` (in NAV or NAV_FOOT), and `go()`/`render()` fall back to Today. Badges: `navCounts(`.
 
 ## D5. AI exchanges
 
-Every table prompt ends with `OUT_RULE` (Markdown table, exact header). `pasteDlg()` opens the box; `previewPaste()` takes **no argument**, reads `#pasteBox`, and routes by header (lower-cased) in this order. Morning check-in, action items, opportunity review, hot follow-ups and history apply **directly on paste, with no review screen**; topics, weekly check, account list, mapping and CRM import show a review first; people/signals/themes show a preview with "Add to my list".
+Every table prompt ends with `OUT_RULE` (Markdown table, exact header, plain text cells with no links or citations, plain emails, dates in the user's time zone `MY_TZ`; `tzLine()` says the same in `histPrompt`). Pasted cells are cleaned anyway: `cleanCell`, `cleanEmail`, `cleanName`, `cleanNote` (`CITE` citation markers), `cleanLink` (source/link columns keep the URL) in `parseTable` and `doImport`; `unesc` undoes AI markdown escapes (`\[`, `\]`, `\|`, doubled brackets) first, and `parseTable` splits only on unescaped pipes (`\|` stays in the cell as `|`); `fixContacts()` repairs saved names, emails and notes on every `save()` and once at startup (the startup check snapshots contacts, meetings, tasks, touches and opps, and saves if any changed). `cleanNote` also strips a stray `[\[` tag and trailing `\` anywhere in a note (`[[x]]` folds to `[x]`); `applyHistory` runs it on each summary. `pasteDlg()` opens the box; `previewPaste()` takes **no argument**, reads `#pasteBox`, and routes by header (lower-cased) in this order. Morning check-in, action items, opportunity review, hot follow-ups and history apply **directly on paste, with no review screen**; topics, weekly check, account list, mapping and CRM import show a review first; people/signals/themes show a preview with "Add to my list".
 
 | # | Router signature (headers) | Goes to |
 |---|---|---|
+| 0 | not a table: `=== D1` / `=== B1` blocks (`/^\s*(\*\*)?\s*={2,}\s*(\*\*)?\s*[DB]\d+/im`, checked first) | `applyDrafts` (batch drafts and blitz scripts) |
+| 0b | `strategy` + `name` | `applyFinds` (strategy finds) |
 | 1 | `activity log` | `applyOpps` |
 | 1b | `stage` + `close date`, no `draft body` | `crmMap` -> `crmReview` -> `crmApply` (CRM deal import) |
 | 2 | `ref` + (`draft body` or `next step` or `expires/renews`) | `applyHot` |
@@ -693,14 +721,28 @@ Every table prompt ends with `OUT_RULE` (Markdown table, exact header). `pasteDl
 | Feed: Missing buyers | `roles` | Name, Title, Site, Email, Phone, Context |
 | Feed: Trends | `trends` | Theme, Type, Solution Area, Talking Point, Personas |
 | Feed: Buying signals | `signals` | Site, Date, Signal, Source |
+| Strategy finds (Strategies > Find people) | `stratFindPrompt` (copy: `copyStratFind`; codes S1, S2... in `S.stratFind`) | Strategy, Name, Title, Site, Email, Phone, Why |
+| Batch drafts (Today > Due today, "Draft N with AI" / "Paste drafts") | `batchPrompt` (copy: `copyBatch`) | Not a table: one `=== D1` block per person with `SUBJECT:` / `NOTE:` / `MESSAGE:` / `TALKING POINTS:` |
+| Blitz scripts (Today > Call blitz, "Draft N scripts with AI" / "Paste scripts") | `blitzPrompt` (copy: `copyBlitz`) | Not a table: one `=== B1` block per person with `NOTE:` / `MESSAGE:` / `TALKING POINTS:` |
 
 The `...Prompt` builders return the text; the `copy...` functions only copy it (the automation writer in §9 uses the builders). Automation ids for these four: `checkin`, `tasks`, `opps`, `hot` (§9).
 
+**Batch drafts** (anchor `// ---------- AI batch drafts`): `dueNow()` (due today, not held by courtesy), `batchTodo()` (those without today's draft), `batchPrompt()` (up to 10: step, type, topic and earlier topics, context, update, referral or colleague, focus, `historyLines(c, 5)`, the filled template or "No template for this step yet"; mail/chat lines only when `CONFIG.aiReads`) stores code -> `{id, key}` in `S.draftBatch`. Strategy touches due today (`stratDueList`) are also in `batchTodo`, with key `"st:<strategy id>"`; sequence blocks get the person's strategy angle (`stratFor`). Strategy lines are labeled "Strategy notes (background only, don't copy)" and `STRAT_RULE` asks for 2 to 4 `TALKING POINTS` instead of copying them. `applyDrafts(raw)` sets `c.aiDraft = {date, key, subj, body, note, points}` (points: the `TALKING POINTS:` lines, `cleanNote`ed, bullets stripped, kept out of body); `aiDraftFor(c, key)` returns it only for today and that step. Due today shows "N drafted by AI" and an "AI draft" / "AI note" chip; `openDraft(id, key, fo, tpl)` shows the draft, with "Show the template version" (`tpl` = true) and back. `aiPts(ai)` shows the points ("for you, not to read out") in `openDraft`, `openStratDraft` and `blitzScript`. Paste exchange only: not an automation id.
+
+**Blitz scripts:** `blitzTodo()` (blitz list without today's `c.aiBlitz`), `blitzPrompt()` (codes `B1..` in `S.blitzBatch.map` with key `"blitz"`; who, topic, `latestNote`, update, renewal, open deal at the site, focus, strategy notes, `historyLines`; OPENER / WHY / QUESTION / CLOSE / VOICEMAIL, or a NOTE when the person asked to stop, left or is out of office), `copyBlitz()`. `blitzCard` has the toolbar ("Draft N scripts", "Paste scripts", "x of y written by AI") and the row button reads "AI script". `applyDrafts` merges both maps; key `"blitz"` sets `c.aiBlitz = {date, body, note, points}`. `blitzScript(id, tpl)` shows it for today with a chip, the note, `aiPts` and "Show the template version" (`tpl` = true).
+
+Call scripts: `callFocus(body, focus)` adds `TALKING POINT (name): …` before `\nQUESTION:` (or at the end) unless the body already has it; used by `blitzScript` (also sets `c.draftFocus`), `openDraft` for non-email steps and `batchPrompt`. Call blitz rows show "Talking point (name): …" from `pickFocus(c, c.focusId)`.
+
 Text-only prompts (no table): `ctxPrompt` (TOPIC/OPENER -> `saveCtx`), `aiDraftPrompt` (draft any sequence step), `dealDraftPrompt` (hot follow-up draft), `prepPrompt` / `copyPrep` (meeting prep), `followPrompt` / `copyFollow` (meeting follow-up), `taskDraft`, `blitzScript`, `focusOutreach`, `copyHotSummary`, `gapDlg` (one missing role).
+
+Map an account keeps its account: `mapPrompt` sets `window._mapFor`; `reviewMap` uses it for a row whose parent is blank or unknown (neither `canon("", par)` nor `aliasOf` knows it); `applyMap` clears it and resolves the parent with `canon("", par)` (so merged-away names follow `S.acctAlias`). `pasteDlg(keepMap)` clears it unless called from the Map dialog (`pasteDlg(1)`).
+
+AI-invented people (map): `mapPrompt` ends with ACCURACY RULES (a real page, or with `CONFIG.aiReads` one of your messages or meetings, names the person now; full https address or message subject and date in Source; no source, no row; never fill in names, titles, emails or phones; Left/Title changed only from a current page; no web, no rows). `reviewMap` checks Source on person rows with `mapSrcReal` (an http address, a domain, or email/e-mail/meeting/chat/transcript/notes, plus the words of `CONFIG.chat` and `CONFIG.meetingNotes`): `nosrc` rows show a red "no source" chip and start unticked; `mapSrcHtml` links http(s) sources only (`target=_blank rel=noopener`). `applyMap` stamps new people `fromMap` and saves `c.mapPrev` ({date, title, email, phone, persona, status, left, lastNote}) before a changed or left update.
 
 Headers use `COL.Site` / `COL.Parent` / `COL.Value`; readers accept `KS` aliases, so old pastes still work after renaming.
 
-Non-AI imports: contacts `pickFile` -> `#fileIn` -> `showMapping` -> `doImport`; account list `pickAccounts` -> `#acctIn` -> `reviewAccounts`; spend list `pickSpend` -> `spendReview` -> `spendSave` (sets Existing vs New by parent); hot follow-ups `importHot`; backup restore `#restoreIn`.
+Non-AI imports: contacts `pickFile` -> `#fileIn` -> `showMapping` -> `doImport`; account list `pickAccounts` -> `#acctIn` -> `reviewAccounts`; spend list `pickSpend` -> `spendReview` (a dropdown per name, `acctOptions`: skip, its own new parent, a parent or one site) -> `spendSave` (sets Existing vs New by parent, remembers changed picks in `S.acctAlias`); hot follow-ups `importHot`; backup restore `#restoreIn`.
+Contact import columns: separate `lastEmail` / `lastCall` / `lastMeeting` dates (or one `lastTouch` + `lastType`). `doImport` makes the newest past date the last activity, adds each date to history (emails and calls as touches with `step:"history"`; meetings as `status:"held"` with `fuSkip`/`prepped` set, so no follow-up or prep nag), dedupes on re-import, moves an imported item that is 1 day off to the file's date instead of copying it (`nearDay`, `fixLast`; `applyHistory` does the same within 2 days), never moves `lastTouch` backwards on merge, and counts the history entries in the toast. Dates: `parseDate` keeps plain YYYY-MM-DD as is and reads "YYYY-MM-DD HH:MM" as local time. Data & Settings shows "Redo history import" (`redoHist`, clears `S.histDone`) once history was imported.
 
 CRM deal import (Opportunities > "Import CRM export"): `crmImportDlg` (file via `crmPickFile`, or paste -> `crmFromPaste`) -> `crmMap` (guesses from `CRM_FIELDS`) -> `crmReview` (New / Update / No change / Skip closed) -> `crmApply`. Matches opps by Ref, then name + site. `crmStage` maps Closed Won/Lost to status; other stages are kept as written.
 
@@ -708,21 +750,39 @@ CRM deal import (Opportunities > "Import CRM export"): `crmImportDlg` (file via 
 
 - Courtesy limits: `CR(` (empty = 0 = off), `courtesyHold(`, `resting(`, `activeAt(` (in sequence at one site). `crText(` states them or "Not set…"; `crBanner(` Today notice; `CR_PRESETS` (Gentle 4/5/90/1, Balanced 3/7/45/2, High volume 1/10/30/3) fill inputs via `crPreset(`; `loadSample` sets Balanced only if all empty.
 - Suggestions: `function suggestScore(` (existing account, renewal window, quiet days, context, persona, referral, colleague engaged, learned weights `S.learn`).
+- Who to start next: `window.sugF = {f, n}`; candidates skip `c.sugSkip` (a date; `sugSkip(id)` sets today + 14). `sugMatch(x)` filters "" / "ex" / "new" / "renew" (180 days) / "nostrat" / "st:<id>"; `sugPick(L)` keeps one per site (else parent) and at most 3 per strategy unless filtering to it, extras in `out.rest`. First page shows `out` sliced to `n` (8); "Show more" adds 8 and then includes `rest`. `sugSel()` is the filter select (strategy options only with the Strategies view).
+- Relationship: `c.rapport = {date, text}`. `REL_RULE` (in `batchPrompt` and `blitzPrompt`) asks for one public, professional connection point with its source in a `RAPPORT:` line (never family, health, politics or religion; blank rather than invented). `applyDrafts` reads `RAPPORT:` anywhere in a block and keeps it unless blank or a placeholder (`cleanCell`). Prompt blocks add "Personal note I already have" when set. `rapHtml(c)` shows it in `openDraft`, `openStratDraft` and `blitzScript`; blitz rows show "Personal: …". Edit contact has `#cRap`; `saveContact` keeps the old date when the text is unchanged and clears it when empty.
 - Sequence: `function startSeq(` / `beginSeq(` / `newTopicSeq(`, `function nextStep(`, `function doneStep(`, `stopSeq`, `resumeSeq`; Focus pick `function pickFocus(`.
+- Talked (`talked` / `saveTalked`): next step "pause" with a date adds an action item for that date, "Follow up with {name}: {first line of note}" (source "Phone call"); a help line under the date says so.
+- Multi-line notes: `tkNote`, `otNote`, `mNote`, `ddNote`, `osNote`, `dncNote`, `cbNote`, `cCbNote` are `<textarea rows="3">` (value between the tags, escaped). Timeline text (`.tlr .tlt`) uses `white-space:pre-line`; `historyLines` joins line breaks with " / " so prompt lines stay one line.
+- Strategies (anchor `// ---------- Strategies`): `S.strategies` (shared, synced) `{name, goal, who:"filter"|"ai", personas, acct, siteNames, onePer, find, cadence, channel, angle, ask, active}`; per contact `c.strat[id] = {last, found, why, skipped}`. `stratFits`, `stratMatches`, `stratIsDue`, `stratDueList` (one per person, skips people in a sequence), `stratFor`, `stratTouched` (any touch counts), `stratCard` on Today (before `spreadCard`; those people leave Suggestions), `openStratDraft`, `stratDone`, `stratSkip`, `editStrat`/`saveStrat`, `stratPeople`, `stratHelp`. `suggestScore` adds 3 for a matching strategy.
+- Meetings with several people (anchor `// ---------- Meetings with several people`): `m.others` (attendee ids), `mtgPeople`, `mtgNames`, `othersBox`/`othersPicked` in Log meeting and `mtgPeopleDlg` (Edit meeting: Meetings "+ people" and the row's Edit button; also date `#meDate`, type `#meType`, notes `#meNote`; `mtgPeopleSave` moves `m.created` with the date when it was on or after the old date), `touchAttendees`, `mtgSplit`. `save()` runs `dedupeMeetings()` (same date + same person by id or name, `mtgKeys`, `mergeInto`). "Same meeting?" card on Meetings: `groupSuggest`/`groupCard`/`groupMerge`/`groupKeep` (`S.grpSkip`, `m.solo`). `mtgSet(m)` (booked-on) uses the meeting date when the record was entered after it.
+- `mtgDupOk(a, b)`: decides whether two same-day, same-person meetings are one. Hand-logged ones merge only with identical notes; a history copy merges when either note is empty or one contains the other; `m.solo` never merges.
+- `latestNote(c)`: newest real note about a person (touch notes, meetings they were in, notes with source "Note"), falling back to `c.context`. The call blitz rows show it, and `blitzScript` passes it to `fill()` as `{context}`.
+- Contacts table: a parent-account column and an "All {parents}" filter (`filt.parent`, from `canon(site, parent).d`), hidden in singleLevel mode.
+- `isMe(by)` / `mine(m)`: a meeting or touch is yours unless `by` names a teammate in `S.settings.team`, so renaming yourself never hides older activity. Used by goal, today, rotation and weekly counts.
+- `fixContacts` also rewrites `by:"[Your Name]"`-style placeholders on meetings, touches and tasks to your name once a real one is set, so activity logged before setup counts as yours.
+- Duplicate contacts: `dupGroups` (same email, or name + `contactParent`), `dupCard` (top of Contacts; `dupKeep`, `S.dupSkip`), `mergeDlg` ("Merge duplicate" in `editContact`), `mergeContacts(keepId, ids, ask)` moves touches, meetings (main or attendee), action items, notes, referrals, opp `contactIds`, strategy records.
+- Map review (top of Contacts, above `dupCard`): `mapCard` shows only when `mapSuspects()` (no `mapOk`, and `fromMap` or a source other than Strategy:/Referral/Manual/Import/History/Meeting/Me/Phone; imports and manual adds have no source) or `mapChanged()` (no `mapOk`, and `mapPrev`, or left with "(per {aiShort}," in `lastNote`) has anyone. `mapReview()` dialog: suspects ticked = delete (ticked when `actCount` is 0), changed ticked = put back from `mapPrev` (or un-left). `mapClean()` asks `askConfirm`, deletes ticked people with their touches and meetings where they were the only person (shared meetings move to the next attendee; tasks, opp `contactIds`, `referredBy`/`colleague` cleared; `stamp()` tombstones it), gives everyone else `mapOk`, and drops `mapPrev`. The card's second button, "Delete all N {aiShort}-added", runs `mapDelAll()`: one `askConfirm` that says how many have logged activity, then `mapDrop` on every suspect (`mapDrop(del)` is the shared delete used by `mapClean`).
+- Opportunity from a meeting: `oppFromMeeting` -> `editOpp("", preset)` with account, attendees ticked (`oppConBox`, `oppConRefresh`, saved as `o.contactIds` plus typed names in `o.contacts`) and notes.
+- Who signs off (`editOpp`): select `#oDecSel` built by `oppDecRefresh` (called from `oppConRefresh` and each tick) from the ticked contacts, plus "Someone else (type it)" (`__other`), which shows `#oDec`; `saveOpp` writes `o.decider` from the select.
 - Rotation (accounts going cold): `function rotation(` and `rotationCard`; tier goals 30 days top, 90 standard.
 - Learning: `function vLearn(`, `bucket(`, `setLearn(`.
 - History: `c.notes[]` ({date, text, source}). Every writer of `context`/`update`/`lastNote`/`referralNote` uses `setText(c, field, value, source, logNew)`: old value kept first, blanks and date+text duplicates skipped. Also `noteAdd`, `cbArchive` (old not-now), `seqLog`. Touch `note` = step label + typed text (`joinNote`).
-- Timeline: `timelineRows(contacts, extraMeetings)` + `timelineHtml(rows, showWho)` (15 rows, Show all) on `editContact` and `vAccount` (filter `_acctWho`); `historyLines(c, 5)` feeds `prepPrompt` and `aiDraftPrompt`. `mergeIn` unions `notes` (`mergeNotes`).
+- Timeline: `timelineRows(contacts, extraMeetings)` + `timelineHtml(rows, showWho)` (15 rows, Show all) on `editContact` and `vAccount` (filter `_acctWho`); `historyLines(c, 5)` feeds `prepPrompt`, `aiDraftPrompt` and `batchPrompt`. `mergeIn` unions `notes` (`mergeNotes`).
 - History dialog: `histDlg(id, key)` shows phone/email (copy), facts (status + next step, topic, context, update, last touch, check back, referral, renewal, do not contact), the timeline and "Add a note" (`histNote`); Edit contact, Done, and Open draft when `key` is the current step. Names that open it: `cn(c, key)` (bold, `.cn`), `mn(m)` (meeting contact), `cnA(c)` (inline link). On every Today card (step rows pass the step key), Contacts table, account People.
+- Sync safety: `save()` runs `stamp()` (edit times and tombstones) once `snapAll()` has set `SH.ready`; `shSync` stamps again before `mergeIn`, so a sync never brings a deleted item back. Clearing data and restoring a backup take a fresh `snapAll()` (they don't tombstone the sync file).
+- One window at a time (anchor `// ---------- one window at a time`, end of script): `WIN` + BroadcastChannel `KEY + ".win"`; a newer window locks older ones (`winLock`, full-screen card); `save()`, `shSync` and `autoCheck` return early while `window._winLocked`; `winTake()` reloads `S`, runs `snapAll()`, renders and re-announces.
 - Guide: `vGuide` steps are lists (`gSteps`, null = hidden). `guideDecides` reads `crText`, `talkOn`, `topicSources` (topic order, shared with `topicRules`), `rotSet`, `STEPS` and the flags: update when logic changes.
 
 ## D7. SheetJS (optional)
 
 Placeholder `<script>/*SHEETJS*/</script>` (cdnjs URL in the comment above it). Excel goes through `hasXLSX(`, `readBook(` (CSV/TSV fallback via `parseDelimited`) and `saveSheet(` (CSV fallback). Without it, .xlsx can't be read; CSV, TSV and pasted tables work.
+A workbook SheetJS can't open (sensitivity label, password, damaged) goes to `xlsxFail(err)`, an in-app `askAlert` that says to Save As CSV.
 
 ## D8. Leftover identifiers (internal only, not visible)
 
-- `S.deals` = Hot follow-ups; `S.opps` = Opportunities; `S.orgs` = accounts; `S.campaigns` = solution areas; `S.tomb` = deleted-item tombstones for sync.
+- `S.deals` = Hot follow-ups; `S.opps` = Opportunities; `S.orgs` = accounts; `S.strategies` = Strategies (in `SHARED`, synced record by record); `S.campaigns` = solution areas; `S.tomb` = deleted-item tombstones for sync.
 - `tIdx()` keys: `d` parent, `c` site, `n` normalized, `a` acronym. `.acct` = a Coverage card; `L.acct` = Existing vs New bucket.
 - Prefixes: `hot*` Hot Follow-ups, `wk*` Weekly, `sh*` sync, `cal*` buying calendar, `camp*` solution areas, `crm*` CRM import; `naGet`/`naSet` n/a roles.
 - Template keys (section 0) are stored in user data; renaming them breaks saved templates. `breakup` is only a key; its step label is "Last email".
