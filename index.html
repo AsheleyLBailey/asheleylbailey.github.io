@@ -169,7 +169,7 @@ a.pcard p { color: var(--muted); font-size: 0.97rem; }
 a.pcard .go { font-weight: 700; color: var(--c); font-size: 0.95rem; }
 a.pcard .go span { display: inline-block; transition: transform .2s ease; }
 a.pcard:hover .go span { transform: translateX(4px); }
-.c-scam { --c: var(--scam); --c-soft: var(--scam-soft); } .c-flow { --c: var(--flow); --c-soft: var(--flow-soft); } .c-rent { --c: var(--rent); --c-soft: var(--rent-soft); } .c-kang { --c: var(--kang); --c-soft: var(--kang-soft); } .c-desk { --c: var(--desk); --c-soft: var(--desk-soft); }
+.c-scam { --c: var(--scam); --c-soft: var(--scam-soft); } .c-flow { --c: var(--flow); --c-soft: var(--flow-soft); } .c-rent { --c: var(--rent); --c-soft: var(--rent-soft); } .c-kang { --c: var(--kang); --c-soft: var(--kang-soft); } .c-desk { --c: var(--desk); --c-soft: var(--desk-soft); } .c-int { --c: var(--accent); --c-soft: var(--accent-soft); }
 @media (prefers-reduced-motion: reduce) { a.pcard:hover .go span { transform: none; } }
 
 /* Section heads, shared */
@@ -292,6 +292,7 @@ footer a { color: var(--muted); }
           <a class="c-rent" href="#paintedroof" data-nav="paintedroof"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 19 L20 6 L35 19" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><rect x="10" y="18" width="20" height="17" rx="2" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M20 22 l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z" fill="currentColor"/></svg></span><span class="txt"><b>paintedROOF</b><span>Long-term rental review platform · 2022–2023</span></span></a>
         </div>
       </div>
+      <a href="#interests" data-nav="interests">Interests</a>
     </nav>
     <div class="contact">
       <a class="btn ghost sm icon-only" href="https://www.linkedin.com/in/asheley-bailey/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zm7 0h3.8v1.5h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v5.46h-4v-4.84c0-1.16-.02-2.64-1.61-2.64-1.61 0-1.86 1.26-1.86 2.56v4.92h-4z"/></svg></a>
@@ -1116,6 +1117,81 @@ footer a { color: var(--muted); }
   <div class="wrap cta"><a href="#scam-ray"><span><span class="label">Back to the first project</span><b>Scam Ray</b></span><span class="arrow">Read case study →</span></a></div>
 </main>
 
+<main data-page="interests" class="c-int" hidden>
+  <section class="cs-hero">
+    <div class="wrap">
+      <span class="tag">What I'm interested in</span>
+      <h1>Software built around each person</h1>
+      <p class="sum">I'm exploring a future where everyone works from the same data, but each person has an application built around their role and the way they work best. Prospecting Desk is where I'm starting.</p>
+    </div>
+  </section>
+
+  <section class="sec alt">
+    <div class="wrap">
+      <div class="head"><div class="label">The idea</div><h2>Same data, a different app for each person</h2><p>Most business software gives everyone the same screens and asks people to adapt to them. Two people in the same role often work in very different ways, and the tool fits neither of them well. AI coding tools change the cost of that: a version built for one person can now come out of a single guided conversation, not a months-long project.</p></div>
+      <div class="grid">
+        <div class="feat"><div class="top"><span class="n">1</span><span class="t">Shared</span></div><h3>One source of truth</h3><p>Everyone works from the same records, like the CRM, email, calendar and files, with the same permissions. Nobody keeps a private copy of the truth.</p></div>
+        <div class="feat"><div class="top"><span class="n">2</span><span class="t">Personal</span></div><h3>An app for each person</h3><p>The views, wording, rules and order of the day fit the person using it, so the app works the way they already think about their job.</p></div>
+        <div class="feat"><div class="top"><span class="n">3</span><span class="t">Consistent</span></div><h3>Guardrails stay the same</h3><p>Privacy rules, review steps and the tested core stay the same in every build, so personal never means unsafe or unreliable.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head"><div class="label">Starting with Prospecting Desk</div><h2>Testing the idea on one role</h2><p>Prospecting Desk is where I'm testing the custom app part of this idea. One tested core app is shared by everyone, and a setup interview turns it into a version built for each salesperson, with their own rules, wording, views and daily routine.</p></div>
+      <ul class="checks">
+        <li>A single core app holds every view and engine, with no one's wording or numbers in it.</li>
+        <li>A setup interview of about 30 to 55 questions captures how each person sells: their buyers, goals, tone and courtesy rules.</li>
+        <li>Claude customizes the core app's code for each person, so every build keeps the same design and tested engine.</li>
+        <li>Each person's data stays with them, and every AI result is reviewed before it's saved.</li>
+      </ul>
+      <div class="btns" style="justify-content:center;margin-top:24px"><a class="btn primary" href="#prospecting-desk">Read the Prospecting Desk case study</a></div>
+    </div>
+  </section>
+
+  <section class="sec alt">
+    <div class="wrap">
+      <div class="head"><div class="label">What's next for Prospecting Desk</div><h2>Built around how each person thinks</h2><p>Today the setup interview shapes what the app does: its rules, wording and goals. The next step I'm exploring is shaping how it shows things, based on how each person takes in information and likes to work. Some examples of where that could go:</p></div>
+      <div class="grid">
+        <div class="feat"><h3>For someone who thinks in pictures</h3><p>Accounts on a map or a color-coded board instead of a table, with coverage gaps visible at a glance.</p></div>
+        <div class="feat"><h3>For someone who likes one thing at a time</h3><p>Today shows a single next step, and the rest of the list stays tucked away until it's done.</p></div>
+        <div class="feat"><h3>For someone who wants the big picture first</h3><p>The day opens with goal pace and the week's plan, with the details one tap away.</p></div>
+        <div class="feat"><h3>For someone who wants every detail</h3><p>Full history, dates and numbers up front, with nothing hidden behind a click.</p></div>
+        <div class="feat"><h3>For someone who learns by listening</h3><p>Meeting prep and the morning summary read aloud, for a rep who prepares on the drive.</p></div>
+        <div class="feat"><h3>For someone who works in bursts</h3><p>Calls, emails and research grouped into focused blocks instead of one mixed list.</p></div>
+      </div>
+      <div class="grid" style="margin-top:28px">
+        <div class="feat"><div class="top"><span class="n">1</span><span class="t">Ask</span></div><h3>Learn how you work</h3><p>A few setup questions about how you plan, read and decide, like "Do you plan your day from a list, a calendar or a map?"</p></div>
+        <div class="feat"><div class="top"><span class="n">2</span><span class="t">Build</span></div><h3>Fit the format to you</h3><p>The same data and the same rules, with the layout, level of detail and format chosen for how you work.</p></div>
+        <div class="feat"><div class="top"><span class="n">3</span><span class="t">Adjust</span></div><h3>Refine it over time</h3><p>After a few weeks, the app could show which views you actually use and suggest changes for you to approve.</p></div>
+      </div>
+      <div class="callout"><div class="label">Where this stands</div><p>These are goals I'm working toward, not features in the app yet. The aim is a repeatable method: one tested core, shared data and guardrails, and an app that adapts to the way each person thinks.</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="head"><div class="label">Open questions</div><h2>What I want to learn</h2></div>
+      <div class="grid two">
+        <div class="feat"><h3>How much is too much?</h3><p>At what point does customizing an app stop helping and start getting in the way?</p></div>
+        <div class="feat"><h3>What has to stay shared?</h3><p>Which definitions, reports and rules need to match across a team so the numbers still add up?</p></div>
+        <div class="feat"><h3>How do updates reach everyone?</h3><p>When the core app improves, how does each personal build get the fix without losing what makes it theirs?</p></div>
+        <div class="feat"><h3>How does IT say yes?</h3><p>What does a company need to see before it trusts one app per person, and how is that kept simple?</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec alt">
+    <div class="wrap">
+      <div class="head"><div class="label">Where it could go</div><h2>Any role that works from shared data</h2><p>Sales is a good place to start, because every rep sells a little differently. The same pattern could fit customer success, recruiting, operations or any role where people share the same records but need to work with them in their own way.</p></div>
+    </div>
+  </section>
+
+  <div class="wrap cta"><a href="#prospecting-desk"><span><span class="label">See it in practice</span><b>Prospecting Desk</b></span><span class="arrow">Read case study →</span></a></div>
+</main>
+
+
 <footer id="footer">
   <div class="wrap">
     <span>Asheley Bailey · Updated October 22, 2026</span>
@@ -1135,8 +1211,8 @@ footer a { color: var(--muted); }
     if (!pages.some(function (p) { return p.dataset.page === id; })) { anchor = document.getElementById(id); id = 'home'; }
     pages.forEach(function (p) { p.hidden = p.dataset.page !== id; });
     document.querySelectorAll('[data-nav]').forEach(function (a) { a.classList.toggle('current', a.dataset.nav === id); });
-    btn.classList.toggle('current', id !== 'home');
-    var t = { 'home': 'Asheley Bailey Builds', 'scam-ray': 'Scam Ray', 'workflow-automation': 'Workflow Automation', 'paintedroof': 'paintedROOF', 'kangaroo': 'Kangaroo', 'prospecting-desk': 'Prospecting Desk' }[id];
+    btn.classList.toggle('current', id !== 'home' && id !== 'interests');
+    var t = { 'home': 'Asheley Bailey Builds', 'scam-ray': 'Scam Ray', 'workflow-automation': 'Workflow Automation', 'paintedroof': 'paintedROOF', 'kangaroo': 'Kangaroo', 'prospecting-desk': 'Prospecting Desk', 'interests': 'What I\'m interested in' }[id];
     document.title = id === 'home' ? t : t + ' · Asheley Bailey';
     setMenu(false);
     if (anchor) anchor.scrollIntoView(); else window.scrollTo(0, 0);
@@ -1166,7 +1242,7 @@ footer a { color: var(--muted); }
     e.preventDefault();
     var d = null;
     try { d = window.claude && window.claude.use ? await window.claude.use('downloads') : null; } catch (err) { d = null; }
-    if (!d && !window.claude) { var l = document.createElement('a'); l.href = 'downloads/' + ZIPNAME; l.download = ZIPNAME; document.body.appendChild(l); l.click(); l.remove(); return; }
+    if (!d && !window.claude) { var l = document.createElement('a'); l.href = RELEASE; document.body.appendChild(l); l.click(); l.remove(); return; }
     if (!d) { say('Downloads aren\'t available in this view. Open each file instead: ' + links() + '.'); return; }
     a.textContent = 'Preparing the zip…';
     try {
