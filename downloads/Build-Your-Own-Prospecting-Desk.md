@@ -11,9 +11,9 @@
 2. **Pick the model and turn on thinking.** Start a new chat, then click the model name under the message box.
    - Choose a model with **Opus** in its name. If there's no Opus, pick the top one in the list.
    - In the same menu, set the **effort** to **High**. Some versions of Claude show an **Extended thinking** switch instead; turn that on.
-   - Why: the job is about 60 to 90 careful edits to a big file, and the stronger model makes fewer mistakes.
+   - Why: the job is about 70 to 100 careful edits to a big file, and the stronger model makes fewer mistakes.
 3. Attach **both files** and type **Run this**.
-4. Answer the cards. **Quick setup** is about 22 short questions, with sensible defaults for the rest. **Full setup** is about 45.
+4. Answer the cards. **Quick setup** is about 30 short questions, with sensible defaults for the rest. **Full setup** is about 55. Each extra meeting type you name adds 1.
 5. Claude shows a one-screen blueprint. Approve it, and Claude customizes the app, tests it and gives you the finished `.html` file. Open it in Chrome or Edge.
 
 Required Notice: Copyright 2026 Asheley Bailey
@@ -61,7 +61,7 @@ Where Part B and the file differ, the file wins. The foundation ships with empty
 ## Stage 1: Check your tools and files (don't narrate this)
 
 - **Foundation file.** Is `Prospecting-Desk-Foundation.html` attached? If not, ask the rep to attach it, and don't start the interview without it.
-- **File tools.** Can you create and edit files and run code? If not, stop. Tell the rep in two lines to turn on code execution and file creation under **Settings > Capabilities**, then start a new chat with both files. Don't try to rebuild the app in chat: it is about 450 KB, and a rebuilt version loses the design.
+- **File tools.** Can you create and edit files and run code? If not, stop. Tell the rep in two lines to turn on code execution and file creation under **Settings > Capabilities**, then start a new chat with both files. Don't try to rebuild the app in chat: it is about 600 KB, and a rebuilt version loses the design.
 - **Question cards.** Can you show tap-to-answer cards? This decides the question format.
 - **Automation tools.** Can you publish artifacts that store data or call Claude, and do you have connectors (email, calendar, CRM, drive)? This matters only for the Automated modes.
 
@@ -81,7 +81,7 @@ Open with two sentences on what you're about to do. Add one line reminding the r
   - Automated: your data sources and AI are connected so results arrive on their own. Needs connectors or IT approval.
   - Start semi, plan for automated (Recommended): build semi-automated now, with the automation piece built in but switched off until it's approved.
   - Reason to give: semi-automated works on day one, and automation is easiest to add once the routine is proven.
-- **Q2 [Q] Pace.** Quick setup (about 22 questions) / Full setup (about 45 questions, more tailored). Recommend Full if they have 15 minutes.
+- **Q2 [Q] Pace.** Quick setup (about 30 questions) / Full setup (about 55 questions, more tailored; each extra meeting type adds 1). Recommend Full if they have 15 minutes.
 
 ### A. You and your goal
 - **Q3 [Q] What do you sell, and to whom?** Free text. Example: "Payroll software to manufacturers with 200 to 2,000 employees."
@@ -99,7 +99,14 @@ Open with two sentences on what you're about to do. Add one line reminding the r
     - Only scheduled meetings (Recommended unless their team says otherwise)
     - Scheduled meetings plus live phone conversations, meaning calls where you actually talked
     - Ask them to check how their team counts if they aren't sure
-  - A meeting counts toward the goal on the day it happens. No-shows and cancellations don't count.
+  - Then (Meetings scoreboard only): "Does your team count any other activity as a meeting, like a dropoff, site visit, demo or lunch-and-learn? Name each one." None (Recommended: most teams have none) / Name them
+    - Then one card per name: "How should a [name] work?"
+      - Counts toward my goal only (Recommended): `{goal:true, weekly:false, endsSeq:false}`
+      - Counts like a booked meeting: toward the goal, in weekly counts, and it ends the person's sequence: `{goal:true, weekly:true, endsSeq:true}`
+      - Doesn't count toward my goal (it's logged, nothing more): `{goal:false, weekly:false, endsSeq:false}`
+      - Let me set each one: then ask the three yes/no questions (goal, weekly counts and meetings set, ends the sequence)
+    - With Package Essentials, or Q33 = No, there is no weekly report, so use `weekly:false` and don't ask about weekly counts.
+  - A meeting counts toward the goal on the day it happens (`quarterMeetings` skips future dates). No-shows and cancellations don't count.
 - **Q6 Pipeline value.** Which number do your deals use? Revenue (Quick default) / Margin / Annual recurring value / I don't track value.
 - **Q7 Fiscal year.** Starts in January (Recommended if unsure) / July / October / Other (ask month). This sets quarters, the goal pace and the "next fiscal year" check-back option.
 - **Q8 When does a deal or quote count as stale?** 30 days with no activity (Recommended) / 45 / 60 / Other.
@@ -109,6 +116,8 @@ Open with two sentences on what you're about to do. Add one line reminding the r
   - Parent organization with several sites or divisions, sometimes with a central office that buys for the others
   - Single companies, one buying team each
   - A mix of both (Recommended if unsure)
+  - Then (parent with sites, or a mix): "What do you call the top level and each location?" Free text. Example: "Portfolio and Building", or "Company and Site". Also ask what they call a head office that buys for the others (default "Central office"). These set `CONFIG.parent`/`parents`, `site`/`sites` and `centralOffice`.
+  - Then (single companies): "What do you call a customer: Account, Company or Client?" This sets `CONFIG.parent`/`parents` and `CONFIG.site`/`sites` to the same word.
 - **Q10 How is your territory defined?** Named account list / Geography / Industry or segment / Whatever comes in (Quick default).
   - Geography or segment: offer to build the account list with the rep's AI assistant during setup, using the Account list exchange, instead of typing it now.
 - **Q11 [Q] Growth focus.** Mostly grow existing accounts / Mostly win new accounts / Balanced.
@@ -137,11 +146,11 @@ Open with two sentences on what you're about to do. Add one line reminding the r
   - High volume: 1 day, 10 per 30 days, 30-day rest, 3 per site
   - Custom: ask for the four numbers
 - **Q18 Topic priority.** "When the app picks a reason to reach out, which comes first?" The recommended order is:
-  1. An upcoming renewal
-  2. Whitespace: what similar accounts buy that this one doesn't
-  3. A past conversation
-  4. A public signal
-  5. A current focus campaign
+  1. A past conversation or your latest note on them
+  2. The strategy or focus campaign that fits them
+  3. An upcoming renewal
+  4. Whitespace: what similar accounts buy that this one doesn't
+  5. A public signal
 
   Card: Use this order (Recommended) / Change it.
 - **Q19 Who writes the drafts?**
@@ -164,6 +173,7 @@ Open with two sentences on what you're about to do. Add one line reminding the r
 - **Q24 [Q] Email and calendar.** Microsoft 365 / Google Workspace / Other.
 - **Q25 [Q] AI assistant at work.** Microsoft 365 Copilot / Gemini / ChatGPT / Claude / Other.
   - Then: "Can it read your email, calendar and chats?" Yes / Some of it / No.
+  - Then (Some of it): "Which of these can't it see?" Chats / Phone call-backs and voicemails / Meeting recaps / Other. Chats sets `CONFIG.chat = ""`; the rest go in `CONFIG.aiMisses` (for example "phone call-backs and voicemails").
   - Then: "Can it run a saved prompt on a schedule?" Yes / No / Not sure. Skip this in Automated mode (the automation tool does the scheduling) and set `CONFIG.aiSchedules = false`, so the manual fallback is "Copy all morning prompts".
 - **Q26 CRM.** Salesforce / Dynamics / HubSpot / Spreadsheet or none / Other. Quick default: if Q21 keeps a CRM as the record, ask which one (one short card); otherwise Spreadsheet or none.
   - Then: "Can your AI assistant read it?" Yes / No / Not sure. If No or Not sure, the app imports a regular CRM export instead.
@@ -186,7 +196,7 @@ Open with two sentences on what you're about to do. Add one line reminding the r
   - **Help me choose** (Recommended if unsure): recommend from Q24 to Q26 and Q30.
 
 ### F. Layout and you
-- **Q33 Weekly report.** "Does your team have a weekly activity report?" Yes / No. Quick default: keep the Weekly report view with no categories, so the rep adds them in the app.
+- **Q33 Weekly report.** "Does your team have a weekly activity report?" Yes / No. Quick default: keep the Weekly report view with no categories, so the rep adds them in the app. Tell them "Try sample data" fills three example categories and 20 daily touches when those are empty; they can change them in Settings.
   - Then (if Yes): "Which activity counts does it ask for, in what order?" Free text. Example: "Calls, Emails, Meetings set." These become the report's columns, and the person can edit them later in Settings.
   - Then (if Yes): "Which day do you report?" Friday (Recommended) / Monday / Other.
 - **Q34 Buying calendar** (Full package only). "Should the app switch seasonal talking points on and off by date?"
@@ -203,6 +213,9 @@ Open with two sentences on what you're about to do. Add one line reminding the r
     - My own image: they attach a PNG, JPG or SVG they have the right to use
     - A simple icon with my initials
 - **Q38 Your details for drafts.** Name, phone and signature, or "use placeholders". Remind them they can change these in Settings later.
+- **Q39 [Q] Phone.** "Will you use it on your phone? Which pages do you want there?" List the views in their NAV (after Q32/Q33 trims) as choices, pick up to 4; "Log meeting" is always on the phone bar. Recommend Today, Contacts and Meetings. "Not on my phone" keeps the defaults and skips the follow-up.
+  - Then: "Show a More button for everything else?" Yes (Recommended) / No, only these pages.
+  - Tell them they can change both later under Data & Settings > Phone pages.
 
 Before the blueprint, ask once: **"Anything about how you prospect that I haven't asked?"** (free text, optional).
 
@@ -227,6 +240,7 @@ Then ask with a card: Build it (Recommended) / Change something.
 
 **How to edit**
 - Copy the foundation to your output folder under the new name (for example `Pipeline-Pal.html`). Edit the copy.
+- **Read this prompt in parts.** It's about 100 KB: read Parts A to C fully, and Part D's sections as you reach each pass (Part D is a lookup table).
 - **Don't read the whole file into context.** Use Part D's anchors with grep to find each spot, read a few lines around it, and make small, exact replacements.
 - **Change what the answers require and nothing else.** No restyling, no reformatting, no renaming that the answers don't call for.
 - **New features use the existing patterns:** the same card markup, button classes (`b`, `b p`), chips, `openDlg`, `toast`, `save()` / `render()`, and the paste router in `previewPaste(`.
@@ -236,13 +250,13 @@ Then ask with a card: Build it (Recommended) / Change something.
 - **Name, color and logo:** change the name (CONFIG.appName and the page `<title>`), the accent color (the `--accent` and `--accent-soft` CSS variables, in both the light and dark sets) and the logo only as the rep chose in Q37.
   - Replace only the favicon (`<link rel="icon">`); the sidebar logo copies it when the page loads.
   - Embed it as a data URI, so the app stays one file, and keep it under 50 KB: resize an uploaded image to 128 px first.
-  - For the recolored target or the initials icon, draw a simple inline SVG in the accent color.
+  - For the recolored target or the initials icon, draw a simple inline SVG in the accent color, and set `type="image/svg+xml"` on the `<link rel="icon">` (the foundation's is `image/png`).
 
 Work in passes. After each pass, say in one line what changed, and ask with a card: Continue (Recommended) / Show me so far / Change something.
 
 | Pass | What to change |
 |---|---|
-| 1. Words and settings | CONFIG (company, parent/site labels, AI and tool names, CRM, value label, segment, region, fiscal-year month); settings in `blank(`, which ship empty, filled from their answers (goal, daily touches, stale days, quota, start date, name, phone, signature) plus the four courtesy numbers from Q17 (they ship empty, which means off) and rotation tiers if they changed them; `reportColumns` (their weekly report categories, in order, each with what it counts from); personas and `guessPersona(` keywords; **write** all templates, call scripts, playbooks (`DEFAULT_PLAYS`) and angles (`DEFAULT_ANGLES`) from scratch for their market, ask and tone (the foundation ships them empty); solution areas; nav group names (for example "Fridays" becomes their report day) |
+| 1. Words and settings | CONFIG (company, parent/site labels, AI and tool names, CRM, value label, segment, region, fiscal-year month); settings in `blank(`, which ship empty, filled from the answers you have (goal, stale days, name, phone, signature; leave daily touches, quota and start date blank unless the rep gave them, and the in-app setup checklist asks), `talkCounts: true` or `false` from Q5 (never leave it `""`) plus the four courtesy numbers from Q17 (they ship empty, which means off) and rotation tiers if they changed them; `reportColumns` (their weekly report categories, in order, each with what it counts from); personas and `guessPersona(` keywords; **write** all templates, call scripts, playbooks (`DEFAULT_PLAYS`) and angles (`DEFAULT_ANGLES`) from scratch for their market, ask and tone (the foundation ships them empty); solution areas; nav group names (for example "Fridays" becomes their report day) |
 | 2. Logic | Sequences (`STEPS`, `stepsFor(`) per Part B §3 and their answers; re-engage rule (`firstTypeFor(`); ranking weights (`suggestScore(`); topic priority (`topicRules(` or its equivalent); deal and follow-up rules; meeting-count rule; anything else Part C lists |
 | 3. Layout | Add or remove views (Part D §4 "Add or remove a nav view"); reorder or hide Today cards (`vToday(`); start view; call blitz placement; quota or goal card |
 | 4. Buying calendar and sample data | `CAL_PLAYS` windows and talking points written for their segment (if chosen; the foundation ships them empty); `loadSample(` rewritten with fictional data that fits their market |
@@ -438,7 +452,7 @@ Filters: overdue, missing roles, existing/new. Sort by most overdue. Tier comes 
 - Clean cards on a light gray background, with a 14px system font and rounded 8px corners.
 - Small colored chips for reasons: green good, amber warning, red overdue. One accent color.
 - Colors defined as CSS variables, with a dark set.
-- Usable at laptop width; the sidebar collapses to icons under 760px, with no sideways scrolling on a phone.
+- Usable at laptop width; the sidebar collapses to icons under 760px. At phone width (640px or less) the sidebar becomes a drawer, a bottom bar shows the phone pages (Q39) plus Log meeting and More, dialogs open as bottom sheets, and nothing scrolls sideways. The rep can change the phone pages in Data & Settings.
 
 ## 6. AI exchanges, imports and sync
 
@@ -507,17 +521,18 @@ Use this table while building. Each answer changes logic, and some change layout
 | Q4 Meetings | Goal pace from meetings that count (Q5 rule) | Goal pill and Today goal card show meetings and pace |
 | Q4 Pipeline or revenue | Pace from deal value created or closed | Quota card on Deals and Today; value totals prominent; goal pill shows value |
 | Q4 Activity | Pace from touches per day | Daily touch counter replaces the meeting pill |
+| Q5 Other activities count as meetings | `CONFIG.extraMeetingTypes = [{name, goal, weekly, endsSeq}]` (ships empty), one per named activity with their three answers | Each shows in Log meeting and Did something else as "Name (counts as a meeting)"; logging one without a contact credits the picked account; "not in counts" chip on the weekly CRM list when weekly is off |
 | Q5 Live conversations count | `settings.talkCounts` = true (ships off): a call marked Talked also counts toward the goal | Talked button and call-blitz text say it counts |
 | Q6 No deal value | Skip value fields | Hide value totals and quota card |
 | Q7 Fiscal year | Quarter boundaries, pace, the "next fiscal year" check-back pick | Goal pill period label |
 | Q8 Stale days | Deal moves to Follow-ups after N quiet days | Badge text on deal cards |
-| Q9 Single companies | `CONFIG.singleLevel = true`; keep `CONFIG.parent` and `CONFIG.site` different words; the per-site limit becomes per account | Coverage collapses to one level |
+| Q9 Single companies | `CONFIG.singleLevel = true`; set `CONFIG.parent`/`parents` **and** `CONFIG.site`/`sites` to the rep's word (for example Venue / Venues). Equal words switch on `SAME_LEVEL`, and the parent column header becomes "Parent". The per-site limit becomes per account | Coverage collapses to one level |
 | Q9 Parent with sites | Parent > site tree, central office that buys for others, buyingModel note | Account page grouped by site; central office row |
 | Q10 Named list | Accounts come from an import | Setup step "import your account list" |
 | Q10 Geography or segment | Account list exchange at setup | Coverage shows all accounts, including untouched ones |
 | Q11 Grow existing | Existing +3; whitespace topics ranked high | "Existing" chips; customer-list import in setup |
 | Q11 New accounts | New +3 instead in `suggestScore(`; drop whitespace from `topicRules(` and `ctxPrompt(` | Coverage defaults to companies with no one yet (`covF.has = "none"` in `vCoverage(`) |
-| Q12 Buyer types | Persona list, title-keyword guessing, playbooks, core roles for gap checks | Coverage gap chips list the core roles |
+| Q12 Buyer types | Persona list, title-keyword guessing, playbooks; `CORE_ROLES` = the Q12 core buyers (every persona but Other if they skip); `SHARED_ROLES` = the roles a central office usually holds for all sites | Coverage gap chips list the core roles |
 | Q13 Tiered | Rotation days by tier | Tier toggle on account cards |
 | Q13 No rotation | Skip rotation math | Drop the rotation card and the overdue filter |
 | Q14 Mostly phone | "Mostly phone" sequence; call-first re-engage rule (§3) | Call blitz moves to the top of Today and stays open |
@@ -536,7 +551,7 @@ Use this table while building. Each answer changes logic, and some change layout
 | Q22 Follow-up types | Which deal types appear on Follow-ups | Type filter options |
 | Q23 Just log meetings | No outcome tracking or rebook | Drop the "Did these meetings happen?" card |
 | Q24/Q25 Platform | Prompt wording names their tools (for example email, calendar, chat and meeting recaps in that suite) | Setup steps name their tools |
-| Q25 AI reads some of it | Keep the check-in paste, plus a quick "who replied that the AI might miss" checklist | Small checklist under the check-in card |
+| Q25 AI reads some of it | Keep the check-in paste. Set `CONFIG.chat = ""` if it can't read chats (every prompt and label drops chat through `chatIf`). Set `CONFIG.aiMisses` to what it misses (for example "phone call-backs and voicemails") | "Quick check" list under the check-in card (`missCheck`) |
 | Q25 AI reads none of it | `CONFIG.aiReads = false` (manual "Who replied?" checklist, no scans, backfill or mailbox prompts) | Today shows the checklist instead of a paste card |
 | Q25 Can't schedule, or not sure | `CONFIG.aiSchedules = false`; morning prompts run by hand | "Copy all morning prompts" button; setup step says so |
 | Q26 CRM not readable by AI | CRM deal import with column mapping | Weekly "import CRM export" step |
@@ -547,12 +562,13 @@ Use this table while building. Each answer changes logic, and some change layout
 | Q29 Manual backup | No sync | Weekly backup reminder banner |
 | Q30 No or don't know | Automation switched off | IT note in Settings |
 | Q31 Route | Which adapter (§7) | Automation panel text |
-| Q32 Package | Which modules exist | Remove views from `NAV` (Part D); links to removed views hide themselves through `hasView(` |
-| Q33 Weekly report | `settings.reportColumns` in the rep's order, each mapped to what it counts from; report day | Weekly report view; report-day banner and .ics |
+| Q32 Package | Which modules exist. Essentials NAV keys: today, coverage, contacts, account, feed, guide, templates, data. Standard adds hot, opps, archive, weekly, meetings, strategy. Full adds focus, learn (and the buying calendar `CAL_PLAYS`). "Guided setup" is the Start here tab (`guide`), which every package keeps | Remove views from `NAV` (Part D); links to removed views hide themselves through `hasView(` |
+| Q33 Weekly report | `settings.reportColumns` in the rep's order, each mapped to what it counts from; report day. A day other than Friday also changes the "Fridays" nav group, `NAV_TIPS.weekly`, `fridayBanner(` and the "Friday wrap-up" guide text: grep 'Friday' | Weekly report view; report-day banner and .ics |
 | Q34 Buying calendar | Date-window plays researched for their segment | Calendar plays section on Focus |
 | Q35 Home | Start view | Default view on open |
 | Q36 Top tabs | none | Tabs instead of the sidebar |
 | Q37 Name, color, logo | none | CONFIG.appName, page title, `--accent` and `--accent-soft` (light and dark), the sidebar logo (`nav .brand img`) and the favicon (`<link rel="icon">`) |
+| Q39 Phone pages | `CONFIG.phoneBar` = their picks as view keys, in NAV order, up to 4 (default `["today","contacts","meetings"]`); `CONFIG.phoneMore` = their More answer | Phone bottom bar; Data & Settings > Phone pages starts from these |
 
 **Things that stay the same in every version:** the one-paste loop with a review screen, courtesy rules, do-not-contact everywhere, not-now check-backs, never auto-sending, local-only data, and short outputs with a clear next step.
 
@@ -577,17 +593,20 @@ Mechanics that stay: `STEPS` days and channels, courtesy rules, ranking points, 
 
 Search for the **anchor** text; line numbers are approximate.
 
-## D1. CONFIG (anchor `const CONFIG = {`, ~line 154)
+## D1. CONFIG (anchor `const CONFIG = {`, ~line 189)
 
 | Key | Default | What it changes |
 |---|---|---|
 | appName | Prospecting Desk | Sidebar brand, page title, backup/sync/ICS file names |
 | company | [Your Company] | `{company}` in templates, signature, every AI prompt |
 | parent / parents | Account / Accounts | Top level of the territory: nav group, Coverage, account page, column headers (`COL.Parent`) |
-| site / sites | Site / Sites | Second level: Coverage rows, contact field label, `{site}` placeholder, table columns (`COL.Site`) |
+| site / sites | Site / Sites | Second level: Coverage rows, contact field label, `{site}` placeholder, table columns (`COL.Site`), the map review "Site" tag. Not covered on purpose: the "Account list" exchange name and phrases like "existing accounts" stay generic |
 | centralOffice | Central office | Head-office row added to parents with 2+ sites |
 | ai / aiShort | your AI assistant / AI | Prompt wording ("Paste into ...") and short labels ("AI Feed", "Map with AI") |
-| mail, chat, calendar, meetingNotes | email, chat, calendar, meeting recaps and transcripts | What prompts tell the AI to search |
+| mail, chat, calendar, meetingNotes | email, chat, calendar, meeting recaps and transcripts | What prompts tell the AI to search (`TX.sources`). `chat: ""` = the AI can't read chats: `chatIf(text)` drops chat from `TX.sources`, every prompt, the Scan button and the catch-up banner |
+| phoneBar | ["today","contacts","meetings"] | Default pages on the phone bottom bar (Q39; view keys from NAV, ones not in NAV are skipped, up to `PHONE_MAX` = 4). The first sits left of "Log meeting", the rest to its right. `S.settings.phoneBar` (Data & Settings > Phone pages, synced with prefs) overrides it |
+| phoneMore | true | `S.settings.phoneMore` overrides it (`phoneMore()`). true: a More button on the phone bar opens the full menu as a drawer. false: phones show only the phoneBar pages (and an account page), other views fall back to the first bar page, and the drawer is hidden (`body.phonemin`) |
+| aiMisses | "" | What the AI can't see (Q25 "Some of it"), for example "phone call-backs and voicemails": Today adds a Quick check (`missCheck`) under the morning check-in, listing people in a sequence with Got back to me / Booked / Not now / Stop. Blank = none |
 | drive | cloud drive | Sync and backup wording |
 | crm | CRM | Weekly report, quota card, ICS reminder |
 | valueLabel | Value | Pipeline measure on hot follow-ups, opportunities, quota, exports (`COL.Value`, field `.value`) |
@@ -600,8 +619,9 @@ Search for the **anchor** text; line numbers are approximate.
 | callWindows | "" | Optional call-time advice shown on the call blitz; blank hides it |
 | aiReads | true | false: Today check-in becomes a manual "Who replied?" list (`replyCheckCard`); no scan buttons, catch-up, mailbox Feed cards (`reads:true`), history backfill or its SETUP items; prompts drop "check my email" lines |
 | aiSchedules | true | false: no "version to schedule" buttons or `sched` item; "Copy all morning prompts" (`copyMorning`) when aiReads |
-| singleLevel | false | true (or parent = site): `SINGLE`, one row per company in `acctListPrompt`, no central-office hint or Sites tile. Equal names: `COL.Parent` = "Parent" |
+| singleLevel | false | true (or parent = site): `SINGLE`, one row per company in `acctListPrompt`, no central-office hint or Sites tile. Equal names: `COL.Parent` = "Parent". In single mode the company lives in `c.site` and is labeled with `TX.Site` on Contacts, Meetings, Weekly and in every AI table, so `site` must be the rep's word too. Known limit: the Map prompt still asks for a type and parent column, which the review fills in on its own |
 | linkedin | true | false: step `li` (key kept) is Email "Short check-in email"; LinkedIn leaves `WK_SRC`, `otherTouch`, `cLastType` |
+| extraMeetingTypes | [] | Team-specific activities that count as meetings (Q5 follow-up): `[{name, goal:true, weekly:false, endsSeq:false}]`. Each is an option in Log meeting `#mType` and Did something else `#otType` ("Name (counts as a meeting)" when goal). `xmt(type)`, `xmtGoal` (false: out of `mtgGoal`, so goal/this week, and `touchesToday`), `xmtWeekly` (false: out of `weekData` setM/firstM/held; CRM list chip "not in counts"), `endsSeq` (false: `saveMeeting`/`saveOther` set lastTouch/lastType "Meeting"/lastNote, push no touch, leave the sequence; `saveOther` moves it on). `mtgTypeUI` sets the note placeholder  A type with `endsSeq:false` logged for a contact updates last touch only: it isn't a sequence touch for the courtesy limits, and the re-engage channel treats it as a meeting |
 | automation | `{on:false, planned:false, route:"tool", tool:"your automation tool", inbox:"inbox", prompts:"prompts", autoLow:false}` | The automation inbox (§9). `on:false`: no automation UI at all, the app works exactly as semi-automated. `planned:true` with `on:false`: only the Settings panel, as "Not connected yet" with recipe and IT note |
 
 Derived wording: `const TX = {` (TX.parent, TX.Site, TX.aParent, TX.sources, TX.mktShort ...), `const COL =` (table header names), `const KS =` (header aliases the paste readers accept). Helpers `cap`, `low`, `art`.
@@ -638,14 +658,26 @@ Derived wording: `const TX = {` (TX.parent, TX.Site, TX.aParent, TX.sources, TX.
 | Solution areas | `const SOL_AREAS =` (Core product, Add-ons, Services) |
 | Strategy cadences | `const STRAT_CAD =`; `defaultStrats()` returns `[]` (no strategies ship) |
 | Owners | `S.settings.team` (ships `[]`); `teamList`, `ownerSelect(id, val)`, `ownerAdd`, `setOwner`: one dropdown ("Me" = `""`) for follow-up owner (Hot rows and `editDeal`), opp owner, next-step owner (`editOpp`, `oppStepDone`) |
-| Buying-calendar plays | `const CAL_PLAYS = []` (`from`/`to` are [fiscal month, day]); `addCalendar` seeds them as Focus items, `calSync`/`inWin` toggle them by date, `function fyMD(` converts using fyStartMonth |
+| Buying-calendar plays | `const CAL_PLAYS = []` (`from`/`to` are [fiscal month, day]); `addCalendar` seeds them as Focus items, `calSync`/`inWin` toggle them by date, `function fyMD(` converts using fyStartMonth. Optional `endDate` on non-calendar focuses (`#fEndDate`) and strategies (`#sgEnd`): `calSync` turns an expired one off once (`endedOn`), so switching it back on sticks; `endChip(x)` shows "ends/ended <date>" in both lists |
+
+**Call notes and Paste from report** (anchor `// ---------- Paste from report`): focuses and strategies have `notes` (`#fNotes`, `#sgNotes`), sent to `blitzPrompt` and `batchPrompt` as background only ("Timely theme (...) (background notes, don't copy: ...)", "Call notes: ..."). "Paste from report" on the Focus and Strategies headers opens `reportDlg()`; `previewPaste` also routes text matching `RPT_HEAD` to `reportPreview(raw)`. `parseReport` reads `=== FOCUS` / `=== STRATEGY` / `=== UPDATE FOCUS: Name` / `=== END STRATEGY: Name` blocks and `### New Focus: Name` markdown, one `Label: value` per line via `RPT_F` / `RPT_S` (site labels from `RPT_SITES`, built from TX; buyers via `rptPersonas` against `PERSONAS`); everything after `Call notes` goes into notes. `rptData` turns fields into settings, `rptFind` matches by name, the preview has tick boxes (UPDATE/END with no match are disabled), and `reportApply` adds (with defaults), merges, or ends (future end date schedules it, otherwise off now), then `calSync` and save.
 | Import column guesses | `const FIELD_GUESS =`, `const FIELD_LABELS =` |
 | Opportunity stages | `const OPP_STAGES =` |
 | Hot follow-up columns | `const HOT_COLS =` |
 | Settings defaults | `function blank(`: personal settings start blank (`goal`, `dailyTouches`, `myname`, `myphone`, `topic`, `tone`, `deadDays`, `startDate`, `reportColumns:[]`, and courtesy `minGap`, `max30`, `restDays`, `perSite` = `""`: empty or 0 is OFF, no fallback); signature is a [Your Name] placeholder. Rotation 30/90. Blank goal/target show "Set your goal" links; blank `deadDays` turns off the gone-dead rule; blank `startDate` makes history backfill ask for a date |
-| Talked = meeting | `settings.talkCounts`, unset (`""`) = off; checkbox `#sTalk` under the goal. `talkOn`, `talkOk`, `mtgGoal` (goal math, Meetings, weekly counts, What's working, Focus). Off: `saveTalked` logs the touch and contact update only, and text makes no meeting claim; on: also a "Phone conversation" meeting. `loadSample` turns it on only if unset |
+| Talked = meeting | `settings.talkCounts`, unset (`""`) = off; checkbox `#sTalk` under the goal. `talkOn`, `talkOk`, `mtgGoal` (goal math, Meetings, weekly counts, What's working, Focus). Off: `saveTalked` logs the touch and contact update only, and text makes no meeting claim; on: also a "Phone conversation" meeting. `loadSample` leaves it as set |
 | Weekly report columns | `settings.reportColumns`: `{name, from, vm, hot}`, `from` in `WK_SRC` (calls, emails, linkedin, set, held, first, manual), empty by default; rules per column, none fixed: `vm` (calls: voicemails/no-answers, default off), `hot` (touch columns: hot/opp touches, default on); set/first by booking date, held by meeting date. `wkRule` note, `wkDesc` `wkPrompt` rule; First time? only with a `first` column. `wkCols`, `wkColsEditor`, `weekData`; fixes in `S.weeklyAdj` |
-| Sample data | `function loadSample(` / `loadSampleGo` (fictional accounts; no template text). Jordan booked (meeting in 3 days), Morgan met today, colleagues ready (Prep, Follow up, Other buyers). Demo-only settings when empty: goal 40, daily touches 20, three report columns |
+| Weekly counts = app only | `weekData` counts touches with `step !== "history"` only; `W.hist` (history call/voicemail/LinkedIn/email touches) shows in vWeekly as "N found by {aiShort} in your history (not counted)". `applyHistory` skips a Call within 1 day of a meeting with that person (`nearDay(.., 1)`); `fixContacts` drops existing history "Call (talked)" touches within 1 day of one of their meetings |
+| Touches today | `goalStats().touchesToday` = my touches dated today + my meetings dated today where `mtgCounts(m)` (no-shows and cancellations excluded) |
+| Seeing sequences | `seqLabel(c)` ("rebook sequence"/"in sequence · step N of M, due <date>" or "all steps done") is the status chip for active contacts in the Contacts and account tables, with a Stop button (`stopSeq`, stopPropagation). `seqList()` sets `filt.status="active"`, clears `filt.parent`/`filt.site`, goes to Contacts; linked from "N in a sequence" in the Due today header. `beginSeq`'s per-site warning names the people (rebooks marked) |
+| Rotation and sequences | `rotation()`: a parent with someone in an active sequence with steps left (`nextStep(c)`) is covered; when overdue, `due` = earliest next-step date, `left = max(0, days)`, `status` "good", `r.seq` = their names, `r.seqDue` = earliest next-step date (set whenever someone has steps left). `rotChip` shows "in a sequence · next step <seqDue>" (names in the title) |
+| Editable drafts | `openDraft`, `openStratDraft`, `blitzScript` show `#dSubj` (input) and `#dBody` (`textarea.out`). `draftEdit()` updates `_draft` and stores to `c.aiDraft` (same key, `edited:true`, keeps `sig` or uses `planSig()`) or, when `_draft.store === "blitz"`, to `c.aiBlitz`; saves after 600ms. openDraft says "Your edited version." and its brief hint has "Edit topic & brief". `ctxPrompt` has an editable brief (`#bNow`, `#bIns`, `#bQ`, `#bPer`): `splitCtx` fills them, `saveCtx` reads them (all blank clears `c.brief`; unchanged keeps its date; `#bPer` sets or clears `c.rapport`) |
+| Draft paste | `draftCodes(raw)` turns "### D1", "**D1**", "- D1", "D1 |" into "=== D1". The paste detector needs a code plus a MESSAGE/SUBJECT/NOTE/OPENER label. `batchPrompt` keeps `S.draftBatchPrev` (same day). `applyDrafts` checks the header name ("D1 | Name") by tokens and, on a mismatch, finds that name in the current or previous map; collects results into a "Pasted N drafts" dialog (`window._draftRes`); blitz-only pastes still toast. `batchWhat()` is the title of both Draft buttons |
+| Site identity | `siteKey(c)` = lowercase "site|parent" (parent from `contactParent(c) || c.parent`), so a shared site name under different parents is a different site. `inSeqAt(c)` = other active-sequence contacts with the same key; `activeAt(c)` = its count (suggestions and `beginSeq`; the warning names the parent when it differs from the site). `sugPick` and `stratMatches` (onePer) key by `siteKey` |
+| Log meeting without a contact | `bookMeeting` shows `#mAcct` (`acctPickers`) when no contact is picked; `saveMeeting` then needs the parent (and site), stores `site` (site or parent) and `parent`, so the account's rotation is credited |
+| Email blast export | Contacts toolbar "Export for email blast" -> `blastDlg()` (buyer-type ticks `#bp{i}`, `#bAcct` any/existing/new, `#bPar` parent, leave-out ticks `#bSeq` `#bLater` `#bRecent`, `#bName`, `#bLog`, live `#bCount`, mail-merge steps). `blastPick()` always drops Do not contact, left, no email and duplicate emails; "recent" is by email (a blast touch in the last 30 days). `blastExport()` writes sheet "Recipients" via `saveSheet` (First_Name, Last_Name, Email, Title, site, parent, Buyer_Type, Account_Type) and, with `#bLog`, logs `{type:"Marketing email", step:"blast"}` touches. Blast touches never count: `contactTouches` (courtesy: `lastAnyTouch`, `touches30`, `dials7`), `fixLast`, `touchesToday`, `weekData` tch all skip step "blast" |
+| Quick check (AI misses) | `missCheck()` in `vToday` under the check-in card, only when `CONFIG.aiMisses` is set; lists `syncPeople()` with Got back to me (`markReplied(id, "Call")`; `markReplied(id, how)` defaults to Email), Booked, Not now and Stop. `chatIf(s, alt)` (right before `const TX`) returns `s` only when `CONFIG.chat` is set |
+| Sample data | `function loadSample(` / `loadSampleGo` (fictional accounts; no template text). Jordan booked (meeting in 3 days), Morgan met today, colleagues ready (Prep, Follow up, Other buyers). Demo-only settings when empty: goal 40, daily touches 20, three report columns. It leaves `talkCounts` as set |
 | Day-one checklist | `const SETUP =` (first item "Set your goal and basics"; includes "Set your courtesy rules" (done when any is set) and "Write your email and call templates") |
 | In-app dialogs | No native `confirm/alert/prompt` (blocked in sandboxed previews). `askConfirm(msg, okLabel)`, `askAlert(msg)`, `askPrompt(msg, def, multi)` return promises and use their own `<dialog id="ask">`, stacked over `#dlg`. `multi` (askDlg `o.multi`) asks with a textarea where Enter adds a line (`histNote` uses it). `beginSeq` warns with Start anyway / Get topic (`askDlg` `extra`, opens `ctxPrompt`) / Cancel |
 
@@ -711,7 +743,7 @@ Every table prompt ends with `OUT_RULE` (Markdown table, exact header, plain tex
 | Action items | `taskScanPrompt` (copy: `copyTaskScan`) / `taskSchedPrompt` (copy: `copyTaskScanSched`) | `TASK_HDR()`: Action Item, Source, From, Site, Due, Priority, Detail |
 | Topics for sequences | `copyTopics` | Name, Site, Suggested Topic, Why, Opener |
 | Hot follow-up run | `hotRunPrompt(since)` (copy: `copyHotRun`) | `HOT_COLS` minus Owner/Notes, plus Open Questions |
-| Opportunity review | `oppRunPrompt` (copy: `copyOppRun`) | Ref, Site, Opportunity, Stage, Amount, Value, Close Date, Contacts, Decision Maker, Activity Log, Next Step, Next Step Owner, Next Step Date, Open Questions |
+| Opportunity review | `oppRunPrompt` (copy: `copyOppRun`) | Ref, Site, Opportunity, Stage, Amount, Value, Close Date, Contacts, Decision Maker, Activity Log, Current Step, Current Step Owner, Current Step Date, Open Questions (applyOpps also accepts the older Next Step columns). Opportunity UI says "Current step"; the fields stay `o.nextStep` / `nextOwner` / `nextDate`. Hot follow-ups and sequences keep "next step" |
 | Weekly count check | `wkPrompt` (items = `settings.reportColumns` names, plus Meetings held) | Item, Count, Details |
 | History backfill | `histPrompt` | Period, Date, Interaction, Name, Title, Email, Phone, Site, Summary, Booked On |
 | Account list | `acctListPrompt` (also AI Feed card `accounts`) | Parent, Site, Site Type, Tier |
@@ -725,15 +757,19 @@ Every table prompt ends with `OUT_RULE` (Markdown table, exact header, plain tex
 | Batch drafts (Today > Due today, "Draft N with AI" / "Paste drafts") | `batchPrompt` (copy: `copyBatch`) | Not a table: one `=== D1` block per person with `SUBJECT:` / `NOTE:` / `MESSAGE:` / `TALKING POINTS:` |
 | Blitz scripts (Today > Call blitz, "Draft N scripts with AI" / "Paste scripts") | `blitzPrompt` (copy: `copyBlitz`) | Not a table: one `=== B1` block per person with `NOTE:` / `MESSAGE:` / `TALKING POINTS:` |
 
+**Action item repeats** (right after `openTasks()`): the AI rewords items day to day, so `taskWords` (stop words `TASK_STOP`, synonyms `TASK_SYN`, simple stemming) and `taskSim` (overlap / smaller set) drive `taskSame`: same person (`taskWho`: contact or from) ≥ 0.5; different people only ≥ 0.9 at the same site; no person: same site (`taskSameCol`) ≥ 0.67, else ≥ 0.85 with 3+ words. `applyTasks` uses `taskDupOf`: an open match gets `taskMergeInto` (earlier due, higher priority, detail appended); a match done in the last 14 days is skipped; the toast counts skips. `taskScanPrompt` also lists "Already done this week" (7 days, not `dupOf`). `tasksCard` shows the top 6 (`window._taskAll` toggles all), a `.tkSel` tick per row with "Mark ticked done" (`tasksDoneTicked`), and "N look like repeats" -> `repeatsDlg` (`taskRepeats` groups) -> `repeatsMerge` (merges into the first, marks the rest done with `dupOf`). `parseReport` skips ``` and ~~~ fence lines.
+
 The `...Prompt` builders return the text; the `copy...` functions only copy it (the automation writer in §9 uses the builders). Automation ids for these four: `checkin`, `tasks`, `opps`, `hot` (§9).
 
-**Batch drafts** (anchor `// ---------- AI batch drafts`): `dueNow()` (due today, not held by courtesy), `batchTodo()` (those without today's draft), `batchPrompt()` (up to 10: step, type, topic and earlier topics, context, update, referral or colleague, focus, `historyLines(c, 5)`, the filled template or "No template for this step yet"; mail/chat lines only when `CONFIG.aiReads`) stores code -> `{id, key}` in `S.draftBatch`. Strategy touches due today (`stratDueList`) are also in `batchTodo`, with key `"st:<strategy id>"`; sequence blocks get the person's strategy angle (`stratFor`). Strategy lines are labeled "Strategy notes (background only, don't copy)" and `STRAT_RULE` asks for 2 to 4 `TALKING POINTS` instead of copying them. `applyDrafts(raw)` sets `c.aiDraft = {date, key, subj, body, note, points}` (points: the `TALKING POINTS:` lines, `cleanNote`ed, bullets stripped, kept out of body); `aiDraftFor(c, key)` returns it only for today and that step. Due today shows "N drafted by AI" and an "AI draft" / "AI note" chip; `openDraft(id, key, fo, tpl)` shows the draft, with "Show the template version" (`tpl` = true) and back. `aiPts(ai)` shows the points ("for you, not to read out") in `openDraft`, `openStratDraft` and `blitzScript`. Paste exchange only: not an automation id.
+**Batch drafts** (anchor `// ---------- AI batch drafts`): `dueNow()` (due today, not held by courtesy), `batchTodo()` (those without today's draft), `batchPrompt()` (up to 10: step, type, topic and earlier topics, context, update, referral or colleague, focus, `historyLines(c, 5)`, the filled template or "No template for this step yet"; mail/chat lines only when `CONFIG.aiReads`) stores code -> `{id, key}` in `S.draftBatch`. Strategy touches due today (`stratDueList`) are also in `batchTodo`, with key `"st:<strategy id>"`; sequence blocks get the person's strategy angle (`stratFor`). Strategy lines are labeled "Strategy notes (background only, don't copy)" and `STRAT_RULE` asks for 2 to 4 `TALKING POINTS` instead of copying them. `applyDrafts(raw)` sets `c.aiDraft = {date, key, subj, body, note, points}` (points: the `TALKING POINTS:` lines, `cleanNote`ed, bullets stripped, kept out of body; if a `SCRIPT_LBL` label (OPENER, WHY I'M CALLING, QUESTION, CLOSE, VOICEMAIL) follows them, those lines go back into the body via `ptsRaw`; a script label with no `MESSAGE:` also starts the body; a singular `TALKING POINT (Focus):` inside the message stays in the script; the prompts require all five script parts and points only at the end of a block); `aiDraftFor(c, key)` returns it only for today and that step. Due today shows "N drafted by AI" and an "AI draft" / "AI note" chip; `openDraft(id, key, fo, tpl)` shows the draft, with "Show the template version" (`tpl` = true) and back. `aiPts(ai)` shows the points ("for you, not to read out") in `openDraft`, `openStratDraft` and `blitzScript`. Stale drafts: `planSig()` hashes active focuses (id, talking point, notes, personas, siteNames) and strategies (id, angle, ask, notes, goal, priority, personas); `batchPrompt` stores it in `S.draftBatch.sig`, `applyDrafts` copies it to `c.aiDraft.sig`, `staleDrafts()` lists today's drafts made under an older one, and `batchTodo(redo)` / `batchPrompt(redo)` / `copyBatch(redo)` include them (Due today "Redraft N with new focus"). `openDraft` shows "Strategy that fits them" and a stale-draft warning. `pickFocus` falls back to auto when the pinned `c.focusId` is off; `aiDraftPrompt` includes focus notes and `stratFor(c)` strategy notes as background. Paste exchange only: not an automation id.
 
 **Blitz scripts:** `blitzTodo()` (blitz list without today's `c.aiBlitz`), `blitzPrompt()` (codes `B1..` in `S.blitzBatch.map` with key `"blitz"`; who, topic, `latestNote`, update, renewal, open deal at the site, focus, strategy notes, `historyLines`; OPENER / WHY / QUESTION / CLOSE / VOICEMAIL, or a NOTE when the person asked to stop, left or is out of office), `copyBlitz()`. `blitzCard` has the toolbar ("Draft N scripts", "Paste scripts", "x of y written by AI") and the row button reads "AI script". `applyDrafts` merges both maps; key `"blitz"` sets `c.aiBlitz = {date, body, note, points}`. `blitzScript(id, tpl)` shows it for today with a chip, the note, `aiPts` and "Show the template version" (`tpl` = true).
 
 Call scripts: `callFocus(body, focus)` adds `TALKING POINT (name): …` before `\nQUESTION:` (or at the end) unless the body already has it; used by `blitzScript` (also sets `c.draftFocus`), `openDraft` for non-email steps and `batchPrompt`. Call blitz rows show "Talking point (name): …" from `pickFocus(c, c.focusId)`.
 
-Text-only prompts (no table): `ctxPrompt` (TOPIC/OPENER -> `saveCtx`), `aiDraftPrompt` (draft any sequence step), `dealDraftPrompt` (hot follow-up draft), `prepPrompt` / `copyPrep` (meeting prep), `followPrompt` / `copyFollow` (meeting follow-up), `taskDraft`, `blitzScript`, `focusOutreach`, `copyHotSummary`, `gapDlg` (one missing role).
+Text-only prompts (no table): `ctxPrompt` (TOPIC/WHY/NOW/PERSONAL/INSIGHT/QUESTION/OPENER -> `saveCtx`), `aiDraftPrompt` (draft any sequence step), `dealDraftPrompt` (hot follow-up draft), `prepPrompt` / `copyPrep` (meeting prep), `followPrompt` / `copyFollow` (meeting follow-up), `taskDraft`, `blitzScript`, `focusOutreach`, `copyHotSummary`, `gapDlg` (one missing role).
+
+**Conversation brief:** `topicSources` order is (1) conversation or latest note, (2) the strategy or theme listed for them (names the active strategies and focuses), (3) renewal, (4) whitespace, (5) public signal. `personBrief(c, short)` lists what the app knows (latest note, update, rapport, referral, renewal, `stratFor` angle, `pickFocus` talking point, `historyLines`) for `ctxPrompt` ("What I already know") and each person in `copyTopics`. `BRIEF_RULES`: INSIGHT from their strategy/theme in its own words, PERSONAL from public professional sources or blank, a source for NOW/PERSONAL/INSIGHT. `copyTopics` columns: Name, Site, Suggested Topic, Why, Now, Personal, Insight, Question, Opener. `BRIEF_KEYS` + `briefParse` (tolerant: bold, numbered or bulleted labels, "Opener (2-3 sentences):", dash separators, "What's happening"/"Opening line" aliases, labels run together on one line when in caps or Title case; multi-line OPENER; blank PERSONAL dropped); `splitCtx` fills `#ctxPrev`; `briefSave` sets `c.brief = {date, now, insight, question}` and `c.rapport` from PERSONAL (from `saveCtx` and `applyTopics`, which also replaces context with the opener when the topic changed). `briefLine(c)` goes into `batchPrompt` sequence blocks, `blitzPrompt` and `aiDraftPrompt`; `openDraft` shows a "Conversation brief" hint. `ctxPrompt(id, seq)` footer: "Save topic only" and "Save and start sequence" (primary when `seq`; an active sequence shows just Save); `saveCtx(id, seq)` archives the old topic into `c.topics` and calls `beginSeq(id, true)`; `startSeq`'s "Get topic & context" and `beginSeq`'s "Get topic" pass `seq = true`. Log meeting (`bookMeeting`) is also in the `#goalpill` header ("+ Log meeting"), the `histDlg` footer and the Edit contact footer.
 
 Map an account keeps its account: `mapPrompt` sets `window._mapFor`; `reviewMap` uses it for a row whose parent is blank or unknown (neither `canon("", par)` nor `aliasOf` knows it); `applyMap` clears it and resolves the parent with `canon("", par)` (so merged-away names follow `S.acctAlias`). `pasteDlg(keepMap)` clears it unless called from the Map dialog (`pasteDlg(1)`).
 
@@ -756,6 +792,7 @@ CRM deal import (Opportunities > "Import CRM export"): `crmImportDlg` (file via 
 - Talked (`talked` / `saveTalked`): next step "pause" with a date adds an action item for that date, "Follow up with {name}: {first line of note}" (source "Phone call"); a help line under the date says so.
 - Multi-line notes: `tkNote`, `otNote`, `mNote`, `ddNote`, `osNote`, `dncNote`, `cbNote`, `cCbNote` are `<textarea rows="3">` (value between the tags, escaped). Timeline text (`.tlr .tlt`) uses `white-space:pre-line`; `historyLines` joins line breaks with " / " so prompt lines stay one line.
 - Strategies (anchor `// ---------- Strategies`): `S.strategies` (shared, synced) `{name, goal, who:"filter"|"ai", personas, acct, siteNames, onePer, find, cadence, channel, angle, ask, active}`; per contact `c.strat[id] = {last, found, why, skipped}`. `stratFits`, `stratMatches`, `stratIsDue`, `stratDueList` (one per person, skips people in a sequence), `stratFor`, `stratTouched` (any touch counts), `stratCard` on Today (before `spreadCard`; those people leave Suggestions), `openStratDraft`, `stratDone`, `stratSkip`, `editStrat`/`saveStrat`, `stratPeople`, `stratHelp`. `suggestScore` adds 3 for a matching strategy.
+- Overlapping strategies: `STRAT_PRI`, `stratRank` / `stratCmp` / `stratsRanked()` rank active strategies by `s.priority` (High/Normal/Low, `#sgPri`), then ending within 60 days (soonest first), then AI-found, then one-time. `stratDueList` gives each person the best-ranked due strategy (others in `x.also`, shown as "+N" on the Today chip) and takes turns across strategies, oldest last touch first; `stratFor` uses the ranking; `stratDone` also sets `last` on that person's other due repeating strategies (one-time ones stay due). The strategy list sorts by active then rank with a priority chip; `stratPeople` shows "due today under <other>"; `parseReport` accepts `Priority:`.
 - Meetings with several people (anchor `// ---------- Meetings with several people`): `m.others` (attendee ids), `mtgPeople`, `mtgNames`, `othersBox`/`othersPicked` in Log meeting and `mtgPeopleDlg` (Edit meeting: Meetings "+ people" and the row's Edit button; also date `#meDate`, type `#meType`, notes `#meNote`; `mtgPeopleSave` moves `m.created` with the date when it was on or after the old date), `touchAttendees`, `mtgSplit`. `save()` runs `dedupeMeetings()` (same date + same person by id or name, `mtgKeys`, `mergeInto`). "Same meeting?" card on Meetings: `groupSuggest`/`groupCard`/`groupMerge`/`groupKeep` (`S.grpSkip`, `m.solo`). `mtgSet(m)` (booked-on) uses the meeting date when the record was entered after it.
 - `mtgDupOk(a, b)`: decides whether two same-day, same-person meetings are one. Hand-logged ones merge only with identical notes; a history copy merges when either note is empty or one contains the other; `m.solo` never merges.
 - `latestNote(c)`: newest real note about a person (touch notes, meetings they were in, notes with source "Note"), falling back to `c.context`. The call blitz rows show it, and `blitzScript` passes it to `fill()` as `{context}`.
@@ -772,6 +809,8 @@ CRM deal import (Opportunities > "Import CRM export"): `crmImportDlg` (file via 
 - Timeline: `timelineRows(contacts, extraMeetings)` + `timelineHtml(rows, showWho)` (15 rows, Show all) on `editContact` and `vAccount` (filter `_acctWho`); `historyLines(c, 5)` feeds `prepPrompt`, `aiDraftPrompt` and `batchPrompt`. `mergeIn` unions `notes` (`mergeNotes`).
 - History dialog: `histDlg(id, key)` shows phone/email (copy), facts (status + next step, topic, context, update, last touch, check back, referral, renewal, do not contact), the timeline and "Add a note" (`histNote`); Edit contact, Done, and Open draft when `key` is the current step. Names that open it: `cn(c, key)` (bold, `.cn`), `mn(m)` (meeting contact), `cnA(c)` (inline link). On every Today card (step rows pass the step key), Contacts table, account People.
 - Sync safety: `save()` runs `stamp()` (edit times and tombstones) once `snapAll()` has set `SH.ready`; `shSync` stamps again before `mergeIn`, so a sync never brings a deleted item back. Clearing data and restoring a backup take a fresh `snapAll()` (they don't tombstone the sync file).
+- Phone sync (browsers without `showOpenFilePicker`, phones included): the sync card swaps the connect buttons for "Load my sync file" (hidden `#phoneIn` -> `phoneLoad(file)`: checks for `contacts`, `stamp()`, `mergeIn`, `mergePrefs`, sets `S.phoneSync = {name, at}`) and "Save my changes" (`phoneSave()`: the share sheet via `navigator.share({files})` when `canShare` allows, else `download()`; sets `S.phoneSync.saved`; AbortError does nothing). `syncPayload()` builds the sync file contents (calls `stamp()`); `shSync` and `phoneSave` both use it.
+- Phone layout (`@media (max-width:640px)` block at the end of the CSS, plus the `#mbar` styles): off-canvas nav (`body.navopen`, `#navScrim`, `navOpen`, `navClose`; `go()` closes it), full-width search and goal pill, 1-column `.g2`, 2-column `.g4`, 16px inputs, bottom-sheet dialogs, toast raised above the bar. `isPhone()`, `phoneBar()`, `phoneOk(k)`, `navLabel(k)`; `phoneMore()`, `phonePagesCard()` (Data & Settings card: page checkboxes `.ppg` capped by `phonePagesCap`, More `#ppMore`, `savePhonePages`, `resetPhonePages`); with More off a phone can still open Data & Settings from the Sync dialog. `render()` builds `#mbar` (with `navCounts` badges), adds a "Sync" link (`phoneSyncDlg()`) to the goal pill on phones, and redirects views a phone can't show when `phoneMore` is false. With no contacts and no file picker, `vToday` shows an "On your phone?" Load my sync file card.
 - One window at a time (anchor `// ---------- one window at a time`, end of script): `WIN` + BroadcastChannel `KEY + ".win"`; a newer window locks older ones (`winLock`, full-screen card); `save()`, `shSync` and `autoCheck` return early while `window._winLocked`; `winTake()` reloads `S`, runs `snapAll()`, renders and re-announces.
 - Guide: `vGuide` steps are lists (`gSteps`, null = hidden). `guideDecides` reads `crText`, `talkOn`, `topicSources` (topic order, shared with `topicRules`), `rotSet`, `STEPS` and the flags: update when logic changes.
 
