@@ -1166,7 +1166,7 @@ footer a { color: var(--muted); }
     e.preventDefault();
     var d = null;
     try { d = window.claude && window.claude.use ? await window.claude.use('downloads') : null; } catch (err) { d = null; }
-    if (!d && !window.claude) { var l = document.createElement('a'); l.href = RELEASE; document.body.appendChild(l); l.click(); l.remove(); return; }
+    if (!d && !window.claude) { var l = document.createElement('a'); l.href = 'downloads/' + ZIPNAME; l.download = ZIPNAME; document.body.appendChild(l); l.click(); l.remove(); return; }
     if (!d) { say('Downloads aren\'t available in this view. Open each file instead: ' + links() + '.'); return; }
     a.textContent = 'Preparing the zip…';
     try {
