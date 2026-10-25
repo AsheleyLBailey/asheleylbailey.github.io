@@ -253,6 +253,30 @@ td.now { font-weight: 700; color: var(--c); }
 .fstat { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); display: grid; gap: 4px; }
 .fstat b { font: 800 1.7rem/1 var(--display); color: var(--c); }
 .fstat span { font-size: 0.86rem; color: var(--muted); line-height: 1.45; }
+.toc { position: sticky; top: calc(var(--hh, 120px) + env(safe-area-inset-top, 0px)); z-index: 15; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.toc-in { display: flex; gap: 6px; justify-content: center; overflow-x: auto; padding: 9px 16px; scrollbar-width: none; max-width: 1180px; margin: 0 auto; }
+.toc-in::-webkit-scrollbar { display: none; }
+.toc a { white-space: nowrap; font-size: 0.86rem; font-weight: 600; color: var(--muted); text-decoration: none; padding: 6px 12px; border-radius: 999px; }
+.toc a:hover { color: var(--ink); }
+.toc a.on { background: var(--c-soft); color: var(--c); }
+[data-sec] { scroll-margin-top: 43px; }
+@media (max-width: 760px) { .toc-in { justify-content: flex-start; } }
+.fmap { max-width: 760px; margin: 0 auto; display: grid; justify-items: center; }
+.fm-node { width: 100%; max-width: 460px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; font-size: 0.95rem; line-height: 1.45; text-align: center; color: var(--ink); }
+.fm-node b { display: block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c); margin-bottom: 2px; }
+.fm-node.trig { background: var(--c-soft); border-color: transparent; }
+.fm-node.dec { border: 2px solid var(--c); }
+.fm-node.err { border-style: dashed; color: var(--muted); font-size: 0.9rem; }
+.fm-node.end { background: var(--c-soft); border-color: transparent; font-weight: 600; }
+.fm-arrow { width: 2px; height: 22px; background: var(--line); position: relative; }
+.fm-arrow::after { content: ""; position: absolute; left: -4px; bottom: -2px; border: 5px solid transparent; border-top: 6px solid var(--line); border-bottom: 0; }
+.fm-arrow i { position: absolute; left: 10px; top: 2px; font-style: normal; font-size: 0.75rem; font-weight: 700; color: var(--c); white-space: nowrap; }
+.fm-side { width: 100%; max-width: 400px; display: grid; grid-template-columns: 1fr; gap: 8px; margin: 8px 0 0; }
+.fm-split { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+.fm-col { display: grid; justify-items: center; align-content: start; }
+.fm-col > .fm-lab { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c); margin-bottom: 8px; }
+.fmap .cap { margin-top: 16px; font-size: 0.85rem; color: var(--muted); text-align: center; }
+@media (max-width: 600px) { .fm-split { grid-template-columns: 1fr; gap: 28px; } }
 .callout { max-width: 820px; margin: 0 auto; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 28px 30px; font-size: 1.08rem; display: grid; gap: 10px; }
 .callout .label { color: var(--c); }
 
@@ -311,7 +335,7 @@ footer a { color: var(--muted); }
       <div class="copy">
         <div class="label">Asheley Bailey · AI Automation and GTM Systems</div>
         <h1>I build web apps and automations that <em>make life easier</em>.</h1>
-        <p class="lede">I design and build automated workflows and web applications that connect business tools through APIs and webhooks. I built my earlier projects myself in WordPress, PHP, Power Automate, and Next.js with TypeScript. For my newest project, Scam Ray, I designed the architecture and the product and directed Claude to build it: an event-driven system that makes and publishes a daily video to three platforms, with my approval before each post. I've spent eight years in B2B technology sales, where I still work today, so I build with the end user and the business goal in mind.</p>
+        <p class="lede">I design and build automated workflows and web applications that connect business tools through APIs and webhooks. I built my earlier projects myself in WordPress, PHP, Power Automate, and Next.js with TypeScript. On Kangaroo, I wrote the account layer by hand, then directed Claude through the core engine. For my newest projects, Scam Ray and Prospecting Desk, I designed the architecture and the product and directed Claude to build them. Scam Ray is an event-driven system that makes and publishes a daily video to three platforms, with my approval before each post. I've spent eight years in B2B technology sales, where I still work today, so I build with the end user and the business goal in mind.</p>
         <div class="btns">
           <a class="btn primary" href="#projects">View projects</a>
           <a class="btn" href="#scam-ray">See the Scam Ray case study</a>
@@ -337,7 +361,7 @@ footer a { color: var(--muted); }
         <div class="tg"><h3>Build</h3><div class="tools"><span>Next.js and TypeScript</span><span>Node.js and Express</span><span>React</span><span>Tailwind CSS and shadcn/ui</span><span>Python</span><span>WordPress and PHP</span><span>DataTables</span><span>Office.js and Outlook add-ins</span><span>Fluent UI</span></div></div>
         <div class="tg"><h3>Data</h3><div class="tools"><span>PostgreSQL and Prisma</span><span>Supabase</span><span>Formidable Forms</span><span>Cognito Forms</span></div></div>
         <div class="tg"><h3>Integrations</h3><div class="tools"><span>REST APIs and webhooks</span><span>OAuth and Auth.js</span><span>Microsoft Graph API</span><span>Google Maps APIs</span><span>Calendly API</span></div></div>
-        <div class="tg"><h3>Automation and AI</h3><div class="tools"><span>Claude Code and Claude API</span><span>Microsoft 365 Copilot</span><span>Power Automate</span></div></div>
+        <div class="tg"><h3>Automation and AI</h3><div class="tools"><span>Claude Code and Claude API</span><span>Azure OpenAI and Vercel AI SDK</span><span>Power Automate</span></div></div>
         <div class="tg"><h3>Hosting and DevOps</h3><div class="tools"><span>Vercel</span><span>AWS Lightsail</span><span>GitHub and GitHub Actions</span></div></div>
       </div>
     </div>
@@ -361,7 +385,7 @@ footer a { color: var(--muted); }
         <div class="art"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="8" width="30" height="27" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M5 16 H35 M13 4 V11 M27 4 V11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M15 22 l10 8 M25 22 l-10 8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span><span class="when">Private alpha</span></div>
         <div class="pbody">
           <h3>Kangaroo</h3>
-          <p>An open-core AI assistant that suggests what to do with each meeting invite, right inside the invite email, and acts only when you tap. The core engine is built, and a two-week test on my own calendar runs October 19 to 31.</p>
+          <p>An open-core AI assistant I'm building that reads each meeting invite, asks the organizer for anything missing, and suggests whether to attend. I built the account layer by hand, then directed an AI coding agent through the core engine. A two-week test on my own calendar runs October 19 to 31.</p>
           <div class="ptags"><span>Next.js</span><span>TypeScript</span><span>Microsoft Graph</span><span>PostgreSQL</span></div>
           <span class="go">Read case study <span aria-hidden="true">→</span></span>
         </div>
@@ -370,8 +394,8 @@ footer a { color: var(--muted); }
         <div class="art"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="4" width="28" height="32" rx="4" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M12 14 l2.5 2.5 4.5-5 M12 25 l2.5 2.5 4.5-5 M23 14 H29 M23 25 H29" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="when">October 2026</span></div>
         <div class="pbody">
           <h3>Prospecting Desk</h3>
-          <p>A sales prospecting app that every rep gets built just for them. Claude interviews the rep and rebuilds the app around how they sell, from copy and paste to fully automated. It shows who to contact each day, why, and what to say. Free to build your own.</p>
-          <div class="ptags"><span>Personalized apps</span><span>Prompt design</span><span>Automation</span><span>Microsoft 365 Copilot</span></div>
+          <p>A single-file app I designed that plans a salesperson's day, with their own AI assistant doing the research. A setup interview has Claude rebuild it around how each rep works. Free to build your own.</p>
+          <div class="ptags"><span>Product design</span><span>AI workflows</span><span>Prompt design</span><span>Personalized apps</span></div>
           <span class="go">Read case study <span aria-hidden="true">→</span></span>
         </div>
       </a>
@@ -379,7 +403,7 @@ footer a { color: var(--muted); }
         <div class="art"><span class="ico"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="3" y="5" width="13" height="10" rx="3" fill="currentColor"/><rect x="24" y="15" width="13" height="10" rx="3" fill="currentColor"/><rect x="3" y="25" width="13" height="10" rx="3" fill="currentColor"/><path d="M16 10 H20 V30 H16 M20 20 H24" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></span><span class="when">November 2025</span></div>
         <div class="pbody">
           <h3>Workflow Automation</h3>
-          <p>Four Power Automate flows supporting a lead-to-meeting process: segmented nurture, webhook-based scheduling, unsubscribe compliance and expense tracking.</p>
+          <p>Four Power Automate flows I designed and built by hand for a lead-to-consultation process: segmented lead nurture, Calendly scheduling written back to each lead, a compliant unsubscribe and expense tracking.</p>
           <div class="ptags"><span>Power Automate</span><span>Calendly API</span><span>Webhooks</span></div>
           <span class="go">Read case study <span aria-hidden="true">→</span></span>
         </div>
@@ -395,6 +419,7 @@ footer a { color: var(--muted); }
       </a>
     </div>
   </section>
+  <div class="wrap cta"><a href="#interests"><span><span class="label">What I'm exploring next</span><b>Connected data, built around each person</b></span><span class="arrow">Read more →</span></a></div>
 </main>
 
 <!-- SCAM RAY -->
@@ -416,8 +441,9 @@ footer a { color: var(--muted); }
       </div>
     </div>
   </section>
+  <nav class="toc" aria-label="On this page"><div class="toc-in"><a href="#scam-ray" data-to="scam-ray-0">What it does</a><a href="#scam-ray" data-to="scam-ray-1">How I built it</a><a href="#scam-ray" data-to="scam-ray-2">Problems</a><a href="#scam-ray" data-to="scam-ray-3">My role</a><a href="#scam-ray" data-to="scam-ray-4">Results</a></div></nav>
 
-  <section class="sec alt">
+  <section class="sec alt" data-sec="scam-ray-0">
     <div class="wrap">
       <div class="head"><div class="label">What it does</div><h2>From a scam tip to a posted video</h2><p>Each step starts the next one on its own. My hands-on steps are approving each video and setting its YouTube cover.</p></div>
       <div class="grid">
@@ -432,7 +458,7 @@ footer a { color: var(--muted); }
         </div>
   </section>
 
-  <section class="sec">
+  <section class="sec" data-sec="scam-ray-1">
     <div class="wrap">
       <div class="head"><div class="label">How I built it</div><h2>Three versions in three weeks</h2><p>Each version fixed what the last one couldn't do.</p></div>
       <div class="scroll">
@@ -447,15 +473,15 @@ footer a { color: var(--muted); }
       </div>
       <div class="head" style="margin-top:40px"><div class="label">Key decisions I made</div><p>My first call, then each step in the order a video moves through the system.</p></div>
       <ul class="checks">
-        <li>I turned down Claude's first plan, which had me editing every video by hand, and asked for a fully automated pipeline.</li>
-        <li>Viewer tips used to wait for a scheduled AI check of the inbox. I redesigned it so the moment a tip email arrives, the app files it, removes the viewer's personal details and starts the AI research itself. The researched tip shows up in the app within minutes, and the AI never needs access to the inbox.</li>
-        <li>Videos were first planned by day, Day 1 to Day 7, which stopped making sense once posting was automatic. I changed it to a queue: when only a few approved videos are left, the app starts the AI writing a new batch, following the rules in my Settings.</li>
-        <li>I chose to render every video in code instead of paying for AI-generated video, which would have cost about $300 a month. The project is meant to show automation, and code gives the same reliable look every day.</li>
-        <li>A note on one video can need two different kinds of AI. A script fix runs inside the app on pay-per-use AI in seconds, for a few cents. A change that needs new code, like a new kind of screen, goes to a full Claude coding session. I designed the hand-off: the AI sorts each note first and shows me where it will go, and both paths send the finished video back to the same review screen for my approval.</li>
-        <li>Each app had its own rules for automatic posting. I filed YouTube's API review myself and ran an unlisted test upload to confirm our videos wouldn't get locked. TikTok only allowed drafts and Instagram blocked my developer sign-up, so I posted by hand in the meantime, then set up a posting service both apps already approved and tested a public post before switching it on. Since October 14, every daily post has gone out to all three apps on its own.</li>
-        <li>I set 14 requirements for the new app, like one-person sign-in and no double posts, and we moved it overnight so no daily post was missed.</li>
-        <li>I built security around least-privileged access for each part. Keys are stored as secrets, never in code or chat, and I added each one myself. The GitHub and Claude keys I created are limited to what they need and expire on a schedule. Email access is limited to the channel's own labels, viewers who send tips are never named, steps that touch private data wait for my typed OK, and I kept AI browser tools away from my signed-in accounts.</li>
-        <li>The public website first ran from a code folder anyone could read. I moved it into the private admin app, so one Next.js app now runs both and all the code stays private.</li>
+        <li><span><b>Full automation.</b> I turned down Claude's first plan, which had me editing every video by hand, and asked for a fully automated pipeline.</span></li>
+        <li><span><b>Event-driven tips.</b> Viewer tips used to wait for a scheduled AI check of the inbox. I redesigned it so the moment a tip email arrives, the app files it, removes the viewer's personal details and starts the AI research itself. The researched tip shows up in the app within minutes, and the AI never needs access to the inbox.</span></li>
+        <li><span><b>A queue, not a calendar.</b> Videos were first planned by day, Day 1 to Day 7, which stopped making sense once posting was automatic. I changed it to a queue: when only a few approved videos are left, the app starts the AI writing a new batch, following the rules in my Settings.</span></li>
+        <li><span><b>Rendered in code.</b> I chose to render every video in code instead of paying for AI-generated video, which would have cost about $300 a month. The project is meant to show automation, and code gives the same reliable look every day.</span></li>
+        <li><span><b>Two paths for fixes.</b> A note on one video can need two different kinds of AI. A script fix runs inside the app on pay-per-use AI in seconds, for a few cents. A change that needs new code, like a new kind of screen, goes to a full Claude coding session. I designed the hand-off: the AI sorts each note first and shows me where it will go, and both paths send the finished video back to the same review screen for my approval.</span></li>
+        <li><span><b>Posting on three apps.</b> Each app had its own rules for automatic posting. I filed YouTube's API review myself and ran an unlisted test upload to confirm our videos wouldn't get locked. TikTok only allowed drafts and Instagram blocked my developer sign-up, so I posted by hand in the meantime, then set up a posting service both apps already approved and tested a public post before switching it on. Since October 14, every daily post has gone out to all three apps on its own.</span></li>
+        <li><span><b>An overnight move.</b> I set 14 requirements for the new app, like one-person sign-in and no double posts, and we moved it overnight so no daily post was missed.</span></li>
+        <li><span><b>Least-privileged security.</b> I built security around least-privileged access for each part. Keys are stored as secrets, never in code or chat, and I added each one myself. The GitHub and Claude keys I created are limited to what they need and expire on a schedule. Email access is limited to the channel's own labels, viewers who send tips are never named, steps that touch private data wait for my typed OK, and I kept AI browser tools away from my signed-in accounts.</span></li>
+        <li><span><b>One private app.</b> The public website first ran from a code folder anyone could read. I moved it into the private admin app, so one Next.js app now runs both and all the code stays private.</span></li>
       </ul>
       <div class="head" style="margin-top:40px"><div class="label">Product design</div><h2>What I designed</h2><p>Claude built these screens from my designs and mockup picks.</p></div>
       <div class="grid two">
@@ -467,7 +493,7 @@ footer a { color: var(--muted); }
     </div>
   </section>
 
-  <section class="sec alt">
+  <section class="sec alt" data-sec="scam-ray-2">
     <div class="wrap">
       <div class="head"><div class="label">The hard part</div><h2>Problems I solved</h2></div>
       <div class="grid two">
@@ -483,20 +509,29 @@ footer a { color: var(--muted); }
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec" data-sec="scam-ray-3">
     <div class="wrap">
-      <div class="head"><div class="label">My role</div><h2>How I directed Claude</h2><p>Claude wrote most of the code. I set the rules, made the calls and checked the output.</p></div>
+      <div class="head"><div class="label">My role</div><h2>How I directed Claude</h2><p>Scam Ray's design and architecture are mine. I decided how it works, set the rules Claude follows, and checked the output before anything went live. Claude wrote most of the code to my direction.</p>
+        <div class="statbar">
+          <div><b>100</b><span>problems I had a hand in solving</span></div>
+          <div><b>30+</b><span>design choices I made from mockups</span></div>
+          <div><b>8</b><span>wrong AI claims I caught and corrected</span></div>
+          <div><b>1 night</b><span>to move to the new app, in 7 stages</span></div>
+        </div></div>
       <ul class="checks">
-        <li>Every Claude session reads a rules file first: match the approved design, make one visual change at a time and test on a preview before going live.</li>
-        <li>No build starts without a plan I approved, and steps that touch private data wait for my typed OK.</li>
-        <li>I test claims before trusting them, like the public TikTok post that proved the drafts-only limit.</li>
-        <li>I check the work. I caught a no-zoom rule that wasn't applied, a test that changed the live app, and a post marked failed that had actually gone out.</li>
-        <li>Each mistake becomes a written rule, so it doesn't happen twice.</li>
+        <li><span><b>I owned the architecture.</b> I took Scam Ray from a review page inside a chat to an event-driven app. I made the calls: jobs start when something happens instead of on a clock, every change is tested with small runs that can be deleted, and the switch happens overnight. Seven stages shipped by morning.</span></li>
+        <li><span><b>I designed the product.</b> The admin app, swipe-to-review, the alert system and the brand, choosing from mockups more than 30 times.</span></li>
+        <li><span><b>I set the rules Claude works by.</b> I put them in instruction files in both code repos so every session starts with them: match the approved look, one visual change at a time, previews before anything goes live, and keys never in chat.</span></li>
+        <li><span><b>I checked the AI's work.</b> I caught 8 wrong claims or half-applied rules, like a no-zoom rule that wasn't applied, a real street name in a fake listing and a wrong post count. Each became a fix, and several became standing rules.</span></li>
+        <li><span><b>I tested the AI's decisions.</b> I ran the note sorter on real notes, caught its wrong labels, and approved a stronger model at about 2¢ a check.</span></li>
+        <li><span><b>I guarded cost and access.</b> A monthly AI spending cap, limited keys that expire, email access limited to the channel's own labels, and my typed OK for anything that touches private data.</span></li>
+        <li><span><b>I ran the cutover myself.</b> When the old system retired, I moved its scheduled jobs, had the new instructions checked against the old ones line by line, and debugged the first test until it passed.</span></li>
+        <li><span><b>I kept the work on track.</b> With seven changes waiting at once, I asked for one roadmap and worked it in order. All seven were finished on October 23.</span></li>
       </ul>
     </div>
   </section>
 
-  <section class="sec alt">
+  <section class="sec alt" data-sec="scam-ray-4">
     <div class="wrap">
       <div class="head"><div class="label">Results</div><h2>What it delivers</h2></div>
       <ul class="checks">
@@ -535,152 +570,175 @@ footer a { color: var(--muted); }
 <main data-page="kangaroo" class="c-kang" hidden>
   <section class="cs-hero">
     <div class="wrap">
-      <span class="tag">Open-core SaaS · Private alpha</span>
+      <span class="tag">Open-core AI tool · Private alpha</span>
       <h1>Kangaroo</h1>
-      <p class="sum">An AI assistant that helps you skip meetings you don't need to attend. It watches your Outlook calendar, suggests what to do with each new invite, and puts that suggestion and its buttons right into the invite email. Nothing happens until you tap.</p>
+      <p class="sum">An AI assistant I'm building that helps you make a sound call on every meeting invite. Kangaroo reads each new invite, then suggests what to do, with short reasons: accept, catch up later, ask for details, or skip with a polite note drafted from your own files. You end up in fewer meetings you didn't need, and better prepared for the ones you attend. For now, nothing is triaged until you tap; the goal is automatic triage past a threshold each user sets. I built the account layer by hand, then directed an AI coding agent through the core engine.</p>
       <div class="statbar">
-        <div><b>11 of 11</b><span>core engine steps shipped</span></div>
-        <div><b>153</b><span>automated tests running on every change</span></div>
-        <div><b>86%</b><span>agreement with my own labels on sample invites</span></div>
-        <div><b>~6,600</b><span>lines of TypeScript app code</span></div>
+        <div><b>2,400</b><span>lines I wrote by hand before bringing in AI</span></div>
+        <div><b>12 of 12</b><span>Phase 1 build steps done</span></div>
+        <div><b>153</b><span>automated tests on every change</span></div>
+        <div><b>15 of 30</b><span>test invites sent, results due Oct 31</span></div>
       </div>
     </div>
   </section>
+  <nav class="toc" aria-label="On this page"><div class="toc-in"><a href="#kangaroo" data-to="kangaroo-0">Problem</a><a href="#kangaroo" data-to="kangaroo-1">How it works</a><a href="#kangaroo" data-to="kangaroo-2">Where it stands</a><a href="#kangaroo" data-to="kangaroo-3">How I built it</a><a href="#kangaroo" data-to="kangaroo-4">Problems</a><a href="#kangaroo" data-to="kangaroo-5">My role</a><a href="#kangaroo" data-to="kangaroo-6">Roadmap</a></div></nav>
 
-  <section class="sec alt">
+  <section class="sec alt" data-sec="kangaroo-0">
     <div class="wrap">
-      <div class="head"><div class="label">The problem</div><h2>Too many meetings, and declining is awkward</h2></div>
+      <div class="head"><div class="label">The problem</div><h2>Too many meetings, and too little to go on</h2></div>
       <div class="prose">
-        <p>Knowledge workers are invited to more meetings than they can usefully attend. Many of those invites could be handled with a short written update instead of 30 to 60 minutes of everyone's time. Declining is awkward, though: you have to decide which meetings are safe to skip, write a polite reply, and still give the organizer what they needed from you. So most people accept by default and lose hours to meetings where they only listen.</p>
-        <p>Kangaroo is built first for individual professionals on Microsoft 365 who use Outlook and OneDrive. Later plans cover power users, organizations, and technical users who want to self-host the open-source core.</p>
+        <p>Knowledge workers get more meeting invites than they can usefully attend, and many arrive with little to go on: no agenda, no clear purpose, sometimes no location. Without that, it's hard to tell whether they're needed, so most people accept by default. They lose hours to meetings where they only listen, and walk into others unsure why they're there or what to bring.</p>
+        <p>Many of those meetings could be a short written update, but declining is awkward. They have to judge which ones are safe to skip, write a polite reply, and make sure the organizer gets what they need from them.</p>
+        <p>Kangaroo is built first for individual professionals on Microsoft 365 who use Outlook and OneDrive. Sign-in works with Microsoft, Google or Apple. Power users, organizations and people who want to self-host the open-source core come in later phases.</p>
       </div>
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec" data-sec="kangaroo-1">
     <div class="wrap">
-      <div class="head"><div class="label">Where it stands</div><h2>The core engine is built</h2><p>Every core engine step is done and running on a test environment against my own calendar. A two-week test on real invites begins October 19.</p></div>
-      <div class="grid">
-        <div class="feat"><h3>Suggestions inside the invite</h3><p>Kangaroo replaces the invite email with its own version that shows its suggestion, its reasons and working buttons, so you can decide without leaving your inbox.</p></div>
-        <div class="feat"><h3>Notes drafted from your files</h3><p>When you decline, Kangaroo drafts a short, polite note from files in a linked OneDrive folder, such as a status update, and you can edit it before it sends.</p></div>
-        <div class="feat"><h3>Day in Review</h3><p>One email a day, at the hour you choose, lists anything you haven't decided yet, with the same one-tap choices.</p></div>
-        <div class="feat"><h3>Real Outlook actions</h3><p>Declines, quiet accepts and accepts go through Microsoft Graph, so the organizer's calendar updates, and every action is written to an audit log.</p></div>
-        <div class="feat"><h3>Monitoring built in</h3><p>An error log, throttled email alerts and an admin Health page show job run times and failures, without storing tokens or email content.</p></div>
-        <div class="feat"><h3>The account layer</h3><p>Sign-in with Microsoft, Google or Apple, linked accounts and calendars, and a protected portal, which I built by hand before this phase.</p></div>
-      </div>
-      <div class="callout"><div class="label">Earlier prototypes</div><p>Before the portal, I built an Outlook add-in that pulled real meetings from selected calendars through Microsoft Graph, in the user's own time zone, with a Decline and Draft Reply flow. I also built a React wireframe for the web app with custom brand illustrations. I parked the add-in when the product moved to a server-side design, which doesn't require users to install anything.</p></div>
-    </div>
-  </section>
-
-  <section class="sec alt">
-    <div class="wrap">
-      <div class="head"><div class="label">How it works</div><h2>Six steps, with you approving every action</h2></div>
+      <div class="head"><div class="label">How it works</div><h2>Six steps, with you in control</h2></div>
       <div class="grid">
         <div class="feat"><div class="top"><span class="n">1</span><span class="t">Within 1 min</span></div><h3>Watch</h3><p>Microsoft Graph notifications report new and changed invites, and a daily sync catches anything missed. Each invite is handled once.</p></div>
-        <div class="feat"><div class="top"><span class="n">2</span><span class="t">Per invite</span></div><h3>Triage</h3><p>Kangaroo's decision engine suggests one of four actions with up to three short reasons.</p></div>
-        <div class="feat"><div class="top"><span class="n">3</span><span class="t">In the inbox</span></div><h3>Show</h3><p>The suggestion and its buttons appear in the invite email, in Day in Review and in the portal.</p></div>
-        <div class="feat"><div class="top"><span class="n">4</span><span class="t">On request</span></div><h3>Draft</h3><p>Notes are drafted from your linked files, which are read in memory and never stored.</p></div>
+        <div class="feat"><div class="top"><span class="n">2</span><span class="t">Per invite</span></div><h3>Check and suggest</h3><p>Kangaroo looks for what you'd need to decide, like an agenda, a purpose and a location, then suggests one of four responses: accept, catch up later, ask the organizer for details, or skip with a polite note. Each comes with up to three short reasons.</p></div>
+        <div class="feat"><div class="top"><span class="n">3</span><span class="t">Where you look</span></div><h3>Show</h3><p>The suggestion and its buttons arrive in an alert email, the nightly Day in Review and the portal. A version that puts them inside the invite email itself works in testing.</p></div>
+        <div class="feat"><div class="top"><span class="n">4</span><span class="t">On request</span></div><h3>Draft</h3><p>Skip notes are drafted from files in a OneDrive folder you link. The files are read in memory and never stored.</p></div>
         <div class="feat"><div class="top"><span class="n">5</span><span class="t">One tap</span></div><h3>Approve</h3><p>You tap your choice. Links open a short confirm page, so a mail scanner opening links can never act for you.</p></div>
         <div class="feat"><div class="top"><span class="n">6</span><span class="t">On approval</span></div><h3>Act</h3><p>Kangaroo checks that the invite hasn't changed since you approved it, then acts once through Graph and logs it.</p></div>
       </div>
+      <div class="head" style="margin-top:40px"><div class="label">The goal</div><h2>Automatic triage</h2><p>Today, Kangaroo suggests and the user taps. The goal is for it to handle invites on its own when they pass a threshold each user sets. It's planned for the pilot phase and isn't built yet.</p></div>
+      <div class="grid">
+        <div class="feat"><div class="top"><span class="t">Opt-in</span></div><h3>Off until turned on</h3><p>Automatic triage stays off unless the user turns it on. The portal shows it as "Coming soon" until it's ready.</p></div>
+        <div class="feat"><div class="top"><span class="t">Per calendar</span></div><h3>Each user's own threshold</h3><p>Each connected calendar gets its own setting and threshold, so a work calendar and a personal one can follow different rules.</p></div>
+        <div class="feat"><div class="top"><span class="t">Reviewed nightly</span></div><h3>Easy to check and undo</h3><p>Anything Kangaroo handles on its own is planned to show up in Day in Review, with a one-tap undo.</p></div>
+      </div>
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec alt" data-sec="kangaroo-2">
     <div class="wrap">
-      <div class="head"><div class="label">Open core</div><h2>A free core, with paid features</h2><p>The engine and portal will be open source so anyone can self-host them with their own AI model. The decision engine and the paid plans are Kangaroo's own.</p></div>
+      <div class="head"><div class="label">Where it stands</div><h2>Phase 1 is built, and its final test is under way</h2><p>Kangaroo runs only on my own calendar for now. The code hasn't changed since October 18; everything since has been testing.</p></div>
+      <div class="grid">
+        <div class="feat"><div class="top"><span class="t">Done</span></div><h3>Groundwork and core engine</h3><p>Phase 0 passed October 17. All 12 Phase 1 steps are built, from calendar watching and suggestions to drafted notes, actions, Day in Review, settings and monitoring.</p></div>
+        <div class="feat"><div class="top"><span class="t">In progress</span></div><h3>Gate 1 test</h3><p>A two-week test of Kangaroo's suggestions on my calendar, October 19 to 31. 15 of 30 test invites have gone out. No results yet.</p></div>
+        <div class="feat"><div class="top"><span class="t">Not started</span></div><h3>Pilots and launch</h3><p>In-invite buttons for everyone, legal pages, onboarding, 5 to 10 pilot users and a price test come next. Billing and plans come after that.</p></div>
+      </div>
+      <div class="callout"><div class="label">Gate 1: how the test works</div><p>My calendar gets almost no real invites, so a test calendar sends 30 scripted invites with realistic guest lists, three each weekday. I treat each one as real and tap my choice. Kangaroo passes if its suggestion matches mine on at least 24 of 30 and it takes no action I didn't tap. The test also checks that notes cite the right file, that nothing is made up when no file matches, and that Kangaroo works alongside a scheduling app on the same calendar. Results are due October 31.</p></div>
+      <ul class="checks">
+        <li><span><b>Found so far.</b> The test has already turned up a few issues, and each one is logged to fix after the gate.</span></li>
+        <li><span><b>An early check.</b> On October 17, Kangaroo matched my labels on 18 of 21 sample invites (86%). It hasn't been re-measured since two later engine changes, so Gate 1 is the real test.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" data-sec="kangaroo-3">
+    <div class="wrap">
+      <div class="head"><div class="label">How I built it</div><h2>Built by hand, then directed</h2><p>I wrote the first version myself. When I brought in an AI coding agent, it built on my account layer.</p></div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Stage</th><th>What happened</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td class="date" data-label="Stage">1 · By hand<br>Dec 2025 to Apr 2026</td><td data-label="What happened">I built an Outlook add-in, a React wireframe, and then the Next.js portal and account layer: 2,400 lines of TypeScript across 19 commits.</td><td data-label="Result">The add-in needed Outlook open, so I moved Kangaroo to the server. My account pages are still in use.</td></tr>
+            <tr><td class="date" data-label="Stage">2 · Directed build<br>Oct 13 to 18, 2026</td><td data-label="What happened">I directed Claude through the groundwork and all 12 core engine steps, one roadmap step and one pull request at a time.</td><td data-label="Result">51 pull requests. 50 merged, each only after I tested it, and 1 I closed.</td></tr>
+            <tr><td class="date" data-label="Stage">3 · Gate 1<br>Oct 19 to 31, 2026</td><td class="auto" data-label="What happened">A live two-week test of Kangaroo's suggestions on my own calendar.</td><td class="auto" data-label="Result">In progress. Results due October 31.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="head" style="margin-top:40px"><div class="label">Key decisions I made</div><p>How Kangaroo is built, how its data is organized, and how it connects to Microsoft 365.</p></div>
+      <ul class="checks">
+        <li><span><b>Data layer.</b> I moved the backend from Microsoft Dataverse to PostgreSQL with Prisma, and upgraded sign-in to Auth.js v5.</span></li>
+        <li><span><b>Many accounts, one user.</b> One Kangaroo user can link many sign-ins, calendars and file sources from different providers, because real people have work and personal accounts and keep files in more than one place.</span></li>
+        <li><span><b>One provider list.</b> A single list drives sign-up, sign-in and every Connect button, so adding a provider means changing one place.</span></li>
+        <li><span><b>Revocable sessions.</b> Every page load checks for an active user, so access can be cut off at once.</span></li>
+        <li><span><b>Settings on each calendar.</b> Auto-decline, alerts and Day in Review settings live on each connected calendar instead of one account page, because different calendars need different rules. I built the account-wide page first and replaced it.</span></li>
+        <li><span><b>Server-side, not an add-in.</b> The first plan put the Outlook add-in first. I'd already moved away from it, so Kangaroo runs on the server and works without Outlook open.</span></li>
+        <li><span><b>Swappable AI layer.</b> Any AI provider connects through one adapter, to avoid lock-in and let self-hosters bring their own model.</span></li>
+        <li><span><b>Open core as a clean copy.</b> Open source with bring-your-own model, developed privately, then published as a clean copy with no history after launch.</span></li>
+        <li><span><b>Four choices, not two.</b> I added "Catch up later," which accepts quietly and shows the time as free, because declining an all-hands looks bad and Tentative reads as doubt. I also added "Ask for details," because many invites have no agenda and you can't make a sound call without one, and had it built now and sent directly instead of later as a draft.</span></li>
+        <li><span><b>Decide where the invite already is.</b> Kangaroo swaps the invite email for its own version with the suggestion and working buttons, so there's no extra email or trip to the portal. It works today as an admin test.</span></li>
+        <li><span><b>Least-access follow-ups.</b> When an organizer answers a details request, Kangaroo reads only that one email thread, never the rest of the inbox.</span></li>
+        <li><span><b>Its own address and monitoring.</b> Kangaroo sends from its own address, with replies going to a monitored support inbox, and keeps its own error log and Health page instead of a third-party tracker.</span></li>
+        <li><span><b>Nothing unfinished in view.</b> Every page users can reach is finished, hidden or marked "Coming soon."</span></li>
+      </ul>
+      <div class="head" style="margin-top:40px"><div class="label">Product design</div><h2>What I designed</h2></div>
       <div class="grid two">
-        <div class="feat"><div class="top"><h3>Self-hosted core</h3><span class="t">Free · open source</span></div><p>Calendar watching, actions, Day in Review and the portal under the AGPL license, running with your own AI model.</p></div>
-        <div class="feat"><div class="top"><h3>Decision engine</h3><span class="t">Paid</span></div><p>Four clear suggestions, Skip, Catch up later, Ask first or Go, each with short reasons you can check. How it decides stays private.</p></div>
-        <div class="feat"><div class="top"><h3>Hosted plans</h3><span class="t">Coming soon</span></div><p>Kangaroo runs it for you, with better drafts, richer knowledge sources and US-only AI processing on higher plans.</p></div>
-        <div class="feat"><div class="top"><h3>Enterprise</h3><span class="t">Coming later</span></div><p>Org-wide policies, single sign-on, analytics and compliance.</p></div>
+        <div class="feat"><h3>The account pages</h3><p>Built by hand: sign-up, sign-in, the dashboard, a Calendars page with a settings sheet for each calendar, Identities, Profile and the sidebar layout.</p></div>
+        <div class="feat"><h3>Day in Review</h3><p>One evening email covering every calendar, sent to the address and at the hour each user picks. I named it, and I caught that delivery wasn't defined for people with several calendars.</p></div>
+        <div class="feat"><h3>Your setup</h3><p>An overview of every connection at the top of the dashboard, because nobody opens each linked-account page to see the whole picture.</p></div>
+        <div class="feat"><h3>The email and its card</h3><p>Black and white with lots of white space, and a card that stands on its own with only a heading, the meeting and the buttons. I set the direction, "whimsical but sophisticated," and picked each version from mockups.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="sec alt">
+  <section class="sec alt" data-sec="kangaroo-4">
     <div class="wrap">
-      <div class="head"><div class="label">The hard part</div><h2>Problems solved in code</h2><p>The first three I solved by hand in the account layer. The rest came up in the core engine build.</p></div>
-      <div class="grid">
-        <div class="feat"><h3>Several accounts, one user</h3><p>Auth.js assumes one login per account. I passed the intent (link an identity, calendar or knowledge source) through the OAuth state value, so a reconnect updates the right record instead of creating duplicates.</p></div>
-        <div class="feat"><h3>All-or-nothing signup</h3><p>The user, their first identity, a 14-day trial and their first calendar are created in one database transaction, so a half-created account can't break later pages.</p></div>
-        <div class="feat"><h3>Revocable sessions</h3><p>Each session is checked against an active internal user, and changing an ID in a request can't touch another user's records.</p></div>
-        <div class="feat"><h3>Mail scanners clicking buttons</h3><p>Outlook's link scanner opens every link before the user does. A link never acts on its own: it opens a confirm page, and links are signed and expire.</p></div>
-        <div class="feat"><h3>Working buttons inside Outlook</h3><p>Taps arrive with a Microsoft-signed token that Kangaroo verifies before acting. The card was rebuilt for the older card format that Mac and phone apps draw.</p></div>
-        <div class="feat"><h3>Never acting twice</h3><p>Each invite is claimed in one atomic database update, so a double tap does nothing. Kangaroo re-reads the event and stops if it changed or was cancelled.</p></div>
-        <div class="feat"><h3>Subscriptions that expire</h3><p>Graph calendar subscriptions last about three days. A daily job renews them and re-syncs, so a missed notification is still caught without duplicates.</p></div>
-        <div class="feat"><h3>Each user's own email hour</h3><p>The free hosting plan only allows daily scheduled jobs, so 24 jobs run one per hour, each sending to users whose chosen hour has come.</p></div>
-        <div class="feat"><h3>Least-privilege mail</h3><p>Kangaroo reads only the reply thread to its own request for details, and its sending app is limited to a single shared mailbox.</p></div>
+      <div class="head"><div class="label">The hard part</div><h2>Problems I caught and solved</h2><p>The hardest problems in the build, and how I worked through them.</p></div>
+      <div class="grid two">
+        <div class="feat"><div class="top"><span class="t">Planning</span></div><h3>Plans that ignored what was built</h3><p>The first plan put the add-in first, which I'd already moved away from, and a later plan for the settings step ignored my per-calendar pages. I caught both. Kangaroo became server-side, and the settings step was rebuilt on an audit of my pages.</p></div>
+        <div class="feat"><div class="top"><span class="t">Suggestions</span></div><h3>Labels that contradicted their reasons</h3><p>One invite's reasons said skip while its label said keep, and later every test invite came back "keep" without a real evaluation. I caught both. Each led to an engine fix and a fresh re-score.</p></div>
+        <div class="feat"><div class="top"><span class="t">Writing</span></div><h3>Notes that didn't sound human</h3><p>Details requests asked a lunch for an agenda, ignored a missing location, used odd formats and always signed off the same way. I flagged each one, and after five fixes the notes read like normal email.</p></div>
+        <div class="feat"><div class="top"><span class="t">Outlook</span></div><h3>Buttons that vanished</h3><p>Testing in Outlook on the web, Mac and phone, I found the buttons only showed on the web, then disappeared after a redesign. The card was rebuilt for the older format Mac and phones draw, and a line of text was added because Outlook hides a card with none.</p></div>
+        <div class="feat"><div class="top"><span class="t">Testing</span></div><h3>A test that couldn't fail</h3><p>The test invites had only two people, no matching files, and stated their own answers. I had realistic guest lists and a file-citation check added to Gate 1, and proposed harder tiered tests before pilots.</p></div>
+        <div class="feat"><div class="top"><span class="t">Testing</span></div><h3>A calendar with no invites</h3><p>My test account gets almost no real invites, so I had a test calendar send scripted ones. I also caught that the test had 27 invites instead of 30, and that three were set for a Saturday when the sender only runs on weekdays.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec" data-sec="kangaroo-5">
     <div class="wrap">
-      <div class="head"><div class="label">Key decisions</div><h2>Choices behind the design</h2></div>
-      <div class="grid">
-        <div class="feat"><h3>Decide inside the invite</h3><p>Nobody waits for an evening email to decide on invites, so I moved the suggestion and buttons into the invite email itself.</p></div>
-        <div class="feat"><h3>Nothing unfinished reaches users</h3><p>Every page users can reach is complete, hidden or marked "Coming soon", with a screenshot review on desktop and phone before each release.</p></div>
-        <div class="feat"><h3>Microsoft first</h3><p>The first customers live in Outlook and OneDrive. Google is planned for later, because Google's Drive read access requires a paid third-party security assessment.</p></div>
-        <div class="feat"><h3>Swappable AI layer</h3><p>One provider-agnostic module means switching AI models is a settings change, and token usage is logged per invite to check the cost model.</p></div>
-        <div class="feat"><h3>Open source as a clean copy</h3><p>Development stays private, and the core will be released as a clean copy after the hosted plan is live and the product is proven.</p></div>
-        <div class="feat"><h3>Human approval first</h3><p>Nothing happens until you tap. Auto-decline will be opt-in, with a daily report and one-click undo, and is marked "Coming soon" until then.</p></div>
-      </div>
+      <div class="head"><div class="label">My role</div><h2>Founder and product owner</h2><p>Kangaroo is my product. I built the account layer and the early prototypes by hand, then directed an AI coding agent through the core engine. I set the requirements, made the design calls, tested every change and approved every merge. Claude wrote the engine code and its tests.</p>
+        <div class="statbar">
+          <div><b>2,400</b><span>lines of code I wrote by hand</span></div>
+          <div><b>28</b><span>architecture and design decisions I made</span></div>
+          <div><b>50</b><span>merges, each after I tested the change</span></div>
+          <div><b>29</b><span>problems I caught or raised</span></div>
+        </div></div>
+      <ul class="checks">
+        <li><span><b>I built the foundation by hand.</b> The Outlook add-in, a React wireframe, and the Next.js portal: sign-up, sign-in, calendars, identities and the move to PostgreSQL. About 28% of today's app code is still mine.</span></li>
+        <li><span><b>I set up the infrastructure.</b> Hosting and the database, the Microsoft app registration, the Azure AI deployment, a mail setup that limits Kangaroo to sending from one mailbox, and the registration for in-email buttons.</span></li>
+        <li><span><b>I owned the design.</b> The architecture, the data model, the four choices, Day in Review, the email design and the rule that nothing unfinished reaches users.</span></li>
+        <li><span><b>I tested every change.</b> On the test site and in Outlook on the web, Mac and phone, in light and dark mode, reporting each problem with screenshots.</span></li>
+        <li><span><b>I set the rules.</b> Questions come as tap-to-answer choices, the plan is agreed before anything is built, and no code is written without my explicit yes. I added that last rule after closing a pull request built from an idea I'd only described.</span></li>
+        <li><span><b>I decided what ships.</b> One roadmap step at a time, each with a done check, and each phase ends with a go or hold call from me.</span></li>
+      </ul>
     </div>
   </section>
 
-  <section class="sec alt">
+  <section class="sec alt" data-sec="kangaroo-6">
     <div class="wrap">
       <div class="head"><div class="label">Roadmap</div><h2>Seven phases, each with a go/no-go gate</h2><p>Each phase ends with a review, and the next one starts only when the gate is met.</p></div>
       <div class="scroll">
         <table>
           <thead><tr><th>Phase</th><th>Goal</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td data-label="Phase"><b>0 · Groundwork</b></td><td data-label="Goal">Working rules, CI, licensing and an accounts plan</td><td data-label="Status" class="auto">Done</td></tr>
-            <tr><td data-label="Phase"><b>1 · Core engine</b></td><td data-label="Goal">Kangaroo working end to end on my own Outlook calendar</td><td data-label="Status" class="now">Built · Gate 1 test in progress, no results yet</td></tr>
-            <tr><td data-label="Phase"><b>2 · Pilot beta</b></td><td data-label="Goal">5 to 10 free pilot users, legal pages and a polish pass</td><td data-label="Status">Next</td></tr>
-            <tr><td data-label="Phase"><b>3 · Public launch</b></td><td data-label="Goal">The hosted plan, billing, a marketing site and the open-source release</td><td data-label="Status">Planned</td></tr>
-            <tr><td data-label="Phase"><b>4 · Premium</b></td><td data-label="Goal">Better drafts and richer knowledge sources</td><td data-label="Status">Planned</td></tr>
+            <tr><td data-label="Phase"><b>0 · Groundwork</b></td><td data-label="Goal">Working rules, CI, licensing and secret scanning</td><td data-label="Status" class="auto">Done</td></tr>
+            <tr><td data-label="Phase"><b>1 · Core engine</b></td><td data-label="Goal">Kangaroo working end to end on my own Outlook calendar</td><td data-label="Status" class="now">Built · Gate 1 test in progress, results due Oct 31</td></tr>
+            <tr><td data-label="Phase"><b>2 · Pilot beta</b></td><td data-label="Goal">In-invite buttons for everyone, opt-in automatic triage, legal pages, onboarding, 5 to 10 pilot users and a price test</td><td data-label="Status">Next</td></tr>
+            <tr><td data-label="Phase"><b>3 · Public launch</b></td><td data-label="Goal">Hosted plans, billing and the open-source release</td><td data-label="Status">Planned</td></tr>
+            <tr><td data-label="Phase"><b>4 · Premium</b></td><td data-label="Goal">Better drafts and richer file sources</td><td data-label="Status">Planned</td></tr>
             <tr><td data-label="Phase"><b>5 · Enterprise</b></td><td data-label="Goal">Organizations, admin tools and compliance</td><td data-label="Status">Planned</td></tr>
-            <tr><td data-label="Phase"><b>6 · Expansion</b></td><td data-label="Goal">Google Workspace, more connectors and integrations</td><td data-label="Status">Later</td></tr>
+            <tr><td data-label="Phase"><b>6 · Expansion</b></td><td data-label="Goal">Google, more storage options, Teams and an optional Outlook add-in</td><td data-label="Status">Later</td></tr>
           </tbody>
         </table>
       </div>
-      <div class="callout"><div class="label">Gate 1: how the test works</div><p>For two weeks, starting October 19, a test calendar sends 30 realistic invites to my Outlook calendar, three each weekday. Each one has the label I expect, written down in advance. I treat every invite as real and tap my choice. Kangaroo passes if it agrees with me on at least 24 of 30 and takes no wrong actions. Results are due October 31.</p></div>
-      <ul class="checks">
-        <li>Finished the groundwork phase: working rules, CI, licensing, an accounts plan and secret scanning on every change.</li>
-        <li>Built all 11 core engine steps in 50 merged pull requests, each with a done check.</li>
-        <li>Added 153 automated tests that run on every pull request, along with lint, typecheck, build and a full-history secret scan.</li>
-        <li>Kangaroo agreed with my labels on 18 of 21 sample invites, against a bar of 16 of 20.</li>
-      </ul>
+      <div class="head" style="margin-top:40px"><div class="label">Open core</div><h2>An open-source core, with hosted plans planned</h2><p>The core is licensed as open source (AGPL) so anyone can self-host it with their own AI model. The code stays private until launch. Nothing is for sale yet.</p></div>
+      <div class="grid two">
+        <div class="feat"><div class="top"><h3>Self-hosted core</h3><span class="t">Open source · after launch</span></div><p>Calendar watching, actions, Day in Review and the portal, running with your own AI model.</p></div>
+        <div class="feat"><div class="top"><h3>Hosted plans</h3><span class="t">Planned</span></div><p>Kangaroo runs it for you. Starting prices are set, and the first one gets tested with pilot users before launch.</p></div>
+        <div class="feat"><div class="top"><h3>Premium</h3><span class="t">Planned</span></div><p>Better drafts and richer file sources for power users.</p></div>
+        <div class="feat"><div class="top"><h3>Enterprise</h3><span class="t">Later</span></div><p>Org-wide policies, single sign-on, analytics and compliance.</p></div>
+      </div>
     </div>
   </section>
 
   <section class="sec">
     <div class="wrap">
-      <div class="head"><div class="label">My role</div><h2>Sole builder, from idea to private alpha</h2><p>I wrote every commit in the three repositories between December 2025 and April 2026, along with the product documents: a feature roadmap, security requirements, the tech stack and a go-to-market strategy. In October 2026 I brought in Claude Code to build the core engine under my direction. I approved every step and made every product call, from moving decisions into the invite email to the rule that nothing unfinished reaches users.</p></div>
-      <div class="chips">
-        <span>Product owner</span><span>Brand and UX design</span><span>Full-stack development</span><span>Data modeling</span><span>Cloud infrastructure</span><span>Testing and QA</span><span>Pricing and cost modeling</span>
-      </div>
-      <div class="head"><h2>How I run the AI-assisted build</h2></div>
-      <div class="grid two">
-        <div class="feat"><h3>Plan first</h3><p>Nothing is built until I approve the plan, and any change to it needs my approval.</p></div>
-        <div class="feat"><h3>One step at a time</h3><p>Each step has a done check and its own pull request, and CI must pass before it merges.</p></div>
-        <div class="feat"><h3>Phase gates</h3><p>Each phase ends with a summary and a go or hold decision from me.</p></div>
-        <div class="feat"><h3>My approval for anything risky</h3><p>Spending money, changing anything live, emailing real people, deleting data and setting prices all wait for my yes.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec alt">
-    <div class="wrap">
       <div class="head"><div class="label">Technology</div><h2>Stack</h2></div>
       <div class="chips">
         <span>Next.js</span><span>React</span><span>TypeScript</span><span>Auth.js</span><span>OAuth (Microsoft, Google, Apple)</span><span>PostgreSQL (Neon)</span><span>Prisma</span>
-        <span>Tailwind CSS</span><span>shadcn/ui</span><span>Microsoft Graph API</span><span>Outlook Actionable Messages</span><span>Adaptive Cards</span><span>Azure OpenAI</span>
-        <span>Vercel AI SDK</span><span>Vercel and Vercel Cron</span><span>GitHub Actions</span><span>Vitest</span><span>gitleaks</span><span>Office.js</span><span>Fluent UI</span><span>Express (add-in prototype)</span><span>Claude Code</span>
+        <span>Tailwind CSS</span><span>shadcn/ui</span><span>Vercel AI SDK</span><span>Azure OpenAI</span><span>Microsoft Graph API</span><span>Microsoft Entra</span><span>Outlook Actionable Messages</span><span>Adaptive Cards</span>
+        <span>Vercel</span><span>GitHub Actions</span><span>Vitest</span><span>gitleaks</span><span>Claude Code</span>
       </div>
-      <p class="private">Source code is private. The core is planned for open-source release as a clean copy after the hosted plan launches. A walkthrough is available on request.</p>
+      <p class="private">Source code is private. The core is planned for open-source release as a clean copy after launch. A walkthrough is available on request.</p>
     </div>
   </section>
 
@@ -693,7 +751,7 @@ footer a { color: var(--muted); }
     <div class="wrap">
       <span class="tag">Personalized AI sales app · Free to build your own</span>
       <h1>Prospecting Desk</h1>
-      <p class="sum">A prospecting app that shows a salesperson who to contact each day, why, and what to say, without ever contacting anyone too often. It isn't one-size-fits-all: Claude interviews each rep and rebuilds the app around how they sell.</p>
+      <p class="sum">An app I designed that shows a salesperson who to contact each day, why, and what to say, without contacting anyone too often. Each rep gets their own version: a setup interview has Claude rebuild the app around how they sell. Claude wrote the code. I designed how it works and made the product calls.</p>
       <div class="byo">
         <span class="lbl">Build your own · free</span>
         <h2>Get a version built around how you sell</h2>
@@ -707,207 +765,115 @@ footer a { color: var(--muted); }
       </div>
       <div class="statbar">
         <div><b>30 to 55</b><span>setup questions that shape each rep's app</span></div>
-        <div><b>3</b><span>automation levels, from copy and paste to hands-off</span></div>
+        <div><b>5</b><span>builds tested end to end as made-up reps</span></div>
         <div><b>1 file</b><span>no server, install or account needed</span></div>
         <div><b>0</b><span>messages ever sent without the rep</span></div>
       </div>
     </div>
   </section>
+  <nav class="toc" aria-label="On this page"><div class="toc-in"><a href="#prospecting-desk" data-to="prospecting-desk-0">What it does</a><a href="#prospecting-desk" data-to="prospecting-desk-1">How I built it</a><a href="#prospecting-desk" data-to="prospecting-desk-2">Problems</a><a href="#prospecting-desk" data-to="prospecting-desk-3">My role</a><a href="#prospecting-desk" data-to="prospecting-desk-4">Status</a><a href="#prospecting-desk" data-to="prospecting-desk-5">Free kit</a></div></nav>
 
-  <section class="sec alt">
+  <section class="sec alt" data-sec="prospecting-desk-0">
     <div class="wrap">
-      <div class="head"><div class="label">The problem</div><h2>Prospecting context was scattered everywhere</h2><p>Salespeople often cover dozens of organizations, many with several sites, while working toward a meeting goal every term. Most of the work to get there is manual: writing every message, piecing together history from many tools, deciding who to contact next and rebuilding the week for reports.</p></div>
+      <div class="head"><div class="label">What it does</div><h2>A rep's day, from first check-in to Friday report</h2><p>Salespeople often cover dozens of organizations, with history spread across email, chat, the CRM and spreadsheets. Prospecting Desk pulls it into one to-do list that knows the history with every person.</p></div>
       <div class="grid">
-        <div class="feat"><h3>Outreach written by hand</h3><p>Every email is written one person at a time, which is the biggest time sink.</p></div>
-        <div class="feat"><h3>History in many places</h3><p>Who you've talked to, about what and when, lives across email, chat, meeting transcripts, the CRM, BI reports and spreadsheets.</p></div>
-        <div class="feat"><h3>No one deciding who's next</h3><p>It's easy to contact some people too often and forget others, and whole accounts can go untouched for months.</p></div>
-        <div class="feat"><h3>Follow-ups that slipped</h3><p>Quotes, renewals and stalled deals have no consistent next step, and "check back in the spring" has nothing to bring it back.</p></div>
-        <div class="feat"><h3>Manual Friday reporting</h3><p>Logging meetings in the CRM and counting the week's calls, messages and emails means rebuilding the week from memory.</p></div>
-        <div class="feat"><h3>Every rep sells differently</h3><p>Territories, buyers, goals, tools and tone vary from rep to rep, so one fixed set of rules never fits everyone.</p></div>
+        <div class="feat"><div class="top"><span class="n">1</span><span class="t">Each morning</span></div><h3>Check-in</h3><p>The app writes a prompt, the rep's AI assistant searches their email and calendar, and one pasted table brings back replies, booked meetings, out-of-office notes and "not now" answers. A review screen shows every change before it's saved.</p></div>
+        <div class="feat"><div class="top"><span class="n">2</span><span class="t">Today</span></div><h3>Who to contact next</h3><p>Everyone eligible is ranked, from referrals and upcoming renewals to accounts that have gone quiet. Each person needs a real reason to reach out, like a renewal or a past conversation, never a generic "checking in."</p></div>
+        <div class="feat"><div class="top"><span class="n">3</span><span class="t">Outreach</span></div><h3>Drafts for the whole day</h3><p>Timed email, call and LinkedIn sequences, with every draft and call script for the day written by AI in one paste, using each person's history. The rep edits and sends. The app never sends anything itself.</p></div>
+        <div class="feat"><div class="top"><span class="n">4</span><span class="t">Meetings</span></div><h3>Prep and follow-up</h3><p>A prep brief before each meeting, then a recap email and a dated next step after. A no-show starts a short rebooking sequence.</p></div>
+        <div class="feat"><div class="top"><span class="n">5</span><span class="t">Deals</span></div><h3>Nothing slips</h3><p>Quiet quotes and renewals move to Hot Follow-ups with a revival draft. "Check back in the spring" is saved with the date and comes back on its own, with an opener that quotes what they said.</p></div>
+        <div class="feat"><div class="top"><span class="n">6</span><span class="t">Fridays</span></div><h3>Report and learn</h3><p>The week's meetings and activity, counted in the team's own categories. What's working compares reply and meeting rates and suggests changes the rep can apply or undo.</p></div>
       </div>
+      <div class="callout"><div class="label">Built for each rep</div><p>The kit is two files: a core app that ships empty, and a setup prompt. A rep attaches both to a Claude chat, and Claude interviews them one tap-to-answer question at a time about how they sell, like the kinds of buyers they reach and how their territory is organized. It never asks for real accounts, customers or deals, and it stops anyone who starts pasting them. Claude shows a one-screen plan for approval, edits the app's code to fit, and tests the build in a browser before handing it over. Real data is loaded into the finished app afterward, on the rep's own computer.</p></div>
+      <div class="callout"><div class="label">Three levels of automation</div><p>Semi-automated works on day one with copy and paste. The recommended start is semi-automated with automation built in and switched off until IT approves. Fully automated has a scheduled flow drop results into a synced folder for the app to pick up. Every level goes through the same review screens.</p></div>
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec" data-sec="prospecting-desk-1">
     <div class="wrap">
-      <div class="head"><div class="label">One app, built for each rep</div><h2>A setup interview turns the core app into yours</h2><p>The core app is finished and tested, with every view and engine but no one's wording, numbers or territory. A rep attaches it and the setup prompt to a Claude chat and types "Run this." Claude customizes the app's code itself rather than rebuilding it, so every build keeps the same design and tested engine.</p></div>
-      <div class="grid">
-        <div class="feat"><div class="top"><span class="n">1</span><span class="t">Interview</span></div><h3>One question at a time</h3><p>Tap-to-answer cards, each with a recommended option and a one-line reason. Quick setup is about 30 questions with sensible defaults; full setup is about 55, plus one card for each extra meeting type. Claude asks a follow-up when an answer is vague.</p></div>
-        <div class="feat"><div class="top"><span class="n">2</span><span class="t">Blueprint</span></div><h3>Approve the plan</h3><p>Claude lists every answer, then shows a one-screen blueprint: the goal and pace math, who gets suggested first, the sequence, courtesy rules, views and what changed from the core app.</p></div>
-        <div class="feat"><div class="top"><span class="n">3</span><span class="t">Build</span></div><h3>Five editing passes</h3><p>Words and settings, then logic, layout, buying calendar and sample data, and automation. Claude writes every template, call script and buyer playbook from scratch for the rep's market and voice.</p></div>
-        <div class="feat"><div class="top"><span class="n">4</span><span class="t">Test</span></div><h3>Checked before delivery</h3><p>Claude checks the code, opens every view in a headless browser with empty and sample data, pastes a sample table for each changed AI exchange, runs a sequence, and screenshots Today.</p></div>
-        <div class="feat"><div class="top"><span class="n">5</span><span class="t">Deliver</span></div><h3>A finished app</h3><p>One .html file with the rep's answers built in, plus a short how-to, the daily and weekly routine, and a list of what changed. Most settings can still be changed inside the app later.</p></div>
-        <div class="feat"><div class="top"><span class="n">6</span><span class="t">Own it</span></div><h3>Each build is separate</h3><p>Every build saves its data under its own app name, so several builds on one computer never mix. Nothing private goes into the build chat; real data is loaded into the rep's own copy afterward.</p></div>
-      </div>
+      <div class="head"><div class="label">How I built it</div><h2>Three approaches, one kept</h2><p>Each approach fixed what the last one couldn't do.</p></div>
       <div class="scroll">
         <table>
-          <thead><tr><th>The interview covers</th><th>What gets customized</th></tr></thead>
+          <thead><tr><th>Approach</th><th>How it worked</th><th>Why I moved on</th></tr></thead>
           <tbody>
-            <tr><td data-label="Topic"><b>Mode and package</b></td><td data-label="Customizes">How connected the app is (see Automation below), and Essentials, Standard or Full, which decides which views exist</td></tr>
-            <tr><td data-label="Topic"><b>Goal</b></td><td data-label="Customizes">What they sell and to whom, the scoreboard (meetings, pipeline, revenue or activity), the goal and pace, what counts as a meeting, other activities the team counts as meetings (like a site visit), deal value and fiscal year</td></tr>
-            <tr><td data-label="Topic"><b>Territory</b></td><td data-label="Customizes">Organizations with several sites, single companies or a mix; a named list, geography or segment; growing existing accounts or winning new ones; account rotation</td></tr>
-            <tr><td data-label="Topic"><b>Buyer types</b></td><td data-label="Customizes">Claude proposes 5 to 9 buyer types for their market and the core ones they contact most, then writes a playbook for each</td></tr>
-            <tr><td data-label="Topic"><b>Outreach</b></td><td data-label="Customizes">Channels, sequence length, how past contacts are re-engaged, courtesy limits, topic priority, who writes drafts, tone and their usual ask</td></tr>
-            <tr><td data-label="Topic"><b>Deals</b></td><td data-label="Customizes">Whether the CRM or the app is the record, when a deal counts as stale, which follow-ups to revive, and meeting outcome tracking</td></tr>
-            <tr><td data-label="Topic"><b>Data and AI</b></td><td data-label="Customizes">Email suite, AI assistant and whether it can read email or run scheduled prompts, CRM, meeting notes, spreadsheet imports and backup</td></tr>
-            <tr><td data-label="Topic"><b>Layout and you</b></td><td data-label="Customizes">Weekly report categories, buying calendar, home screen, navigation, the pages on the phone's bottom bar, app name, accent color, logo and signature</td></tr>
+            <tr><td class="date" data-label="Approach">1 · AI prompt alone</td><td data-label="How it worked">An AI chat assistant was asked who to contact and what to say.</td><td data-label="Why I moved on">Answers were long and told me nothing new.</td></tr>
+            <tr><td class="date" data-label="Approach">2 · One app</td><td data-label="How it worked">A single-file app holds the history, rules and judgment. The AI only gathers data, through copy and paste.</td><td data-label="Why I moved on">It fit one way of selling. Other reps have different buyers, goals and rules, so I came up with a build-your-own version.</td></tr>
+            <tr><td class="date" data-label="Approach">3 · Core app plus interview</td><td class="auto" data-label="How it worked">A tested core app, plus a setup interview where Claude edits its code for each rep.</td><td class="auto" data-label="Why I moved on">It's the version in the free kit.</td></tr>
           </tbody>
         </table>
       </div>
-      <div class="callout"><div class="label">The same in every build</div><p>The one-paste loop with a review screen, courtesy rules, do-not-contact everywhere, "not now" check-backs, the rep's data kept with the rep, short outputs with a clear next step, and never sending anything automatically.</p></div>
-    </div>
-  </section>
-
-  <section class="sec alt">
-    <div class="wrap">
-      <div class="head"><div class="label">Automation</div><h2>From copy and paste to hands-off</h2><p>The first interview question asks how connected the app should be. The company automation route is built into the core app and switched off until a rep turns it on. Every level feeds results through the same review screens, and the app only ever drafts: the rep sends.</p></div>
-      <div class="grid">
-        <div class="feat"><div class="top"><span class="n">1</span><span class="t">Semi-automated</span></div><h3>Copy, paste, review</h3><p>The app writes each prompt, the rep runs it in their AI assistant and pastes one table back. It works on day one, anywhere, with no IT approval. If the AI can run saved prompts on a schedule, like Copilot's scheduled prompts, the two morning prompts run on their own.</p></div>
-        <div class="feat"><div class="top"><span class="n">2</span><span class="t">Start semi, plan for automated</span></div><h3>The recommended start</h3><p>The app works semi-automated now, with the automation built in but switched off. Settings shows it as "Not connected yet," with a two-line note the rep can send IT about what would be connected.</p></div>
-        <div class="feat"><div class="top"><span class="n">3</span><span class="t">Automated</span></div><h3>Results arrive on their own</h3><p>A scheduled flow saves each AI result as a file in a synced inbox folder. The app reads it when it opens or when the rep clicks "Check inbox," shows an "Inbox from automation" card on Today for review, and never applies the same file twice. Copy and paste stays as a fallback.</p></div>
-      </div>
-      <div class="scroll">
-        <table>
-          <thead><tr><th>Automation route</th><th>How it works</th><th>What it needs</th></tr></thead>
-          <tbody>
-            <tr><td data-label="Route"><b>Claude with connectors</b></td><td data-label="How">Claude reads email, calendar and CRM through connectors on a schedule and saves result files to the same inbox folder</td><td data-label="Needs">Claude connectors for the rep's tools</td></tr>
-            <tr><td data-label="Route"><b>Company automation tool</b></td><td data-label="How">Built into the core app. A weekday 7:00 flow in Power Automate, Zapier, Make or Apps Script reads the prompt files the app saves, gathers email and calendar text since its last run (so Monday covers the weekend), runs it through the work AI and saves the answer to the inbox folder. The app shows the flow recipe step by step</td><td data-label="Needs">Chrome or Edge, a synced cloud folder, and a tool that can call the work AI, like Power Automate's Copilot action. IT approval, because email text goes to the AI service</td></tr>
-            <tr><td data-label="Route"><b>Direct connection</b></td><td data-label="How">The app calls an AI service and the rep's data systems itself. Claude builds this connection during setup, on the same pattern as the inbox</td><td data-label="Needs">API keys and IT approval, ideally through a company-hosted relay so no key is stored in the file</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="callout"><div class="label">Automation never skips review</div><p>Automated results go through the same paste router as manual ones. Only low-risk rows can apply on their own, and only if the rep turns that on: out-of-office dates, action items, update notes and meetings for people already booked. New bookings, replies, "not now," do-not-contact, meeting changes, referrals, people who left and every deal always wait for the rep. Bad or empty files show a one-line reason instead of being applied. Not sure which route fits? "Help me choose" recommends one from the rep's email, AI, CRM and IT answers.</p></div>
-    </div>
-  </section>
-
-  <section class="sec">
-    <div class="wrap">
-      <div class="head"><div class="label">What it does</div><h2>A prospecting to-do list that knows the history</h2><p>The full package has every view below. Essentials and Standard keep a smaller set.</p></div>
-      <div class="grid">
-        <div class="feat"><h3>Today</h3><p>The whole day on one screen, in the order to work it: replies to answer first, action items, sequence steps due, meetings to confirm, prep and follow up, check-backs, who to start next, strategy touches, a call blitz with AI-written call scripts, and the most overdue accounts.</p></div>
-        <div class="feat"><h3>Sequences</h3><p>Timed email, call and LinkedIn plans, with drafts filled in from each person's context, or written by AI for the whole day's batch in one paste, with the template version one tap away. Drafts can be edited in the app, talking points never go into the sent text, and drafts made before a plan change are flagged for a redraft. Cold, warm re-engage, referral and no-show rebook versions, in short, standard, long, phone-first or email-first lengths.</p></div>
-        <div class="feat"><h3>Opportunities and follow-ups</h3><p>Active deals with clear next steps and questions for missing details, stale quotes and renewals with a revival draft, a quota card with pipeline coverage, and an archive of closed items.</p></div>
-        <div class="feat"><h3>Coverage and account pages</h3><p>Every account and site, who you know there, which buyer roles are missing, and when each account was last touched. Click any name to see phone, email, key facts and the full history before reaching out.</p></div>
-        <div class="feat"><h3>Meetings</h3><p>Prep briefs before, recap emails and a dated next step after, and held, no-show, rescheduled or canceled outcomes. A no-show starts a short rebook sequence. Group meetings count once, a meeting can be logged by account without a contact, teams can add their own meeting types like a site visit, and a meeting counts toward the goal on the day it happens.</p></div>
-        <div class="feat"><h3>Strategies, focus and buying calendar</h3><p>Strategies are repeatable plays the rep sets up: who to reach, how often, the angle and the ask. Active ones put people on Today and shape the AI drafts. When plays overlap the higher priority wins, plays can end on a date, and "Paste from report" updates them after a preview. The themes you're pushing right now, grouped by solution area, woven into outreach and tracked for results. Calendar plays switch themselves on and off by date.</p></div>
-        <div class="feat"><h3>Weekly report</h3><p>The week's meetings to log in the CRM, activity counts in the team's own categories, an AI check that lists work done outside the app as not counted so nothing is double-counted, and a one-click row for the team spreadsheet.</p></div>
-        <div class="feat"><h3>What's working</h3><p>Reply and meeting rates by buyer type, topic source, channel and step, with suggested changes you can apply or undo in one click once there are enough results.</p></div>
-        <div class="feat"><h3>Start here</h3><p>A day-one setup checklist that ticks itself off, the daily and weekly routines with a button for every step, and a "How it decides" page that explains every rule.</p></div>
-        <div class="feat"><h3>Conversation briefs</h3><p>A short note on each person: what's happening, a personal note, an insight and a question. Later drafts use it, along with one public, professional connection point and where it was found. It never invents one.</p></div>
-        <div class="feat"><h3>Contacts and email blasts</h3><p>Contacts the AI finds need a source or start unticked, with a review to undo them. "Export for email blast" builds a mail-merge sheet that leaves out do-not-contact and recently contacted people, and blasts never count as touches.</p></div>
-        <div class="feat"><h3>Phone layout</h3><p>At phone width, a slide-out menu and a bottom bar of the pages the rep picks during setup, with load and save for the sync file. Checked in a phone-sized browser, not yet on a real phone.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec alt">
-    <div class="wrap">
-      <div class="head"><div class="label">How it works</div><h2>The app writes the prompt, the AI gathers the data</h2><p>An offline file can't call an AI assistant directly, so in semi-automated mode the two trade information through the clipboard, one table per prompt. Any AI that accepts a pasted prompt and returns a table works, including Microsoft 365 Copilot, Gemini and ChatGPT.</p></div>
-      <div class="grid two">
-        <div class="feat"><div class="top"><span class="n">1</span><span class="t">In the app</span></div><h3>Build the prompt</h3><p>The app writes a prompt that includes what it already knows, and asks for a table with fixed columns.</p></div>
-        <div class="feat"><div class="top"><span class="n">2</span><span class="t">In the AI assistant</span></div><h3>Gather</h3><p>The AI searches email, chat, calendar, meeting transcripts, files or the public web, inside the rep's own account.</p></div>
-        <div class="feat"><div class="top"><span class="n">3</span><span class="t">One paste</span></div><h3>Review</h3><p>The app recognizes the table from its header row. A review screen marks each row as new, updated or left, the rep unticks anything wrong, and saves once.</p></div>
-        <div class="feat"><div class="top"><span class="n">4</span><span class="t">Automatic</span></div><h3>Plan</h3><p>The app ranks who to contact next, builds sequences, applies the courtesy rules and updates Today.</p></div>
-      </div>
-      <div class="scroll">
-        <table>
-          <thead><tr><th>Prompt</th><th>When</th><th>What the AI gathers</th></tr></thead>
-          <tbody>
-            <tr><td data-label="Prompt"><b>Morning check-in</b></td><td data-label="When">Weekdays, can be scheduled</td><td data-label="Gathers">Replies, booked or changed meetings, out-of-office notes, "not now" and stop requests, referrals and news for everyone in a sequence</td></tr>
-            <tr><td data-label="Prompt"><b>Action items scan</b></td><td data-label="When">Weekdays, can be scheduled</td><td data-label="Gathers">Unanswered emails and promises made in meetings</td></tr>
-            <tr><td data-label="Prompt"><b>History backfill</b></td><td data-label="When">Once, at setup</td><td data-label="Gathers">Everyone you've worked with since a chosen start date, in two-week chunks</td></tr>
-            <tr><td data-label="Prompt"><b>Account list and mapping</b></td><td data-label="When">At setup, then per account</td><td data-label="Gathers">Every organization in the territory, whether your contacts are still there, and missing roles from public directories</td></tr>
-            <tr><td data-label="Prompt"><b>Topic suggestions</b></td><td data-label="When">Before a sequence</td><td data-label="Gathers">A specific reason to reach out to each person, in the rep's priority order, never a generic "checking in"</td></tr>
-            <tr><td data-label="Prompt"><b>Hot follow-up run</b></td><td data-label="When">Daily or weekly</td><td data-label="Gathers">The latest thread on each quote, renewal or stale deal, with a drafted next step</td></tr>
-            <tr><td data-label="Prompt"><b>Opportunity review</b></td><td data-label="When">Weekly</td><td data-label="Gathers">Every interaction on each deal, its stage, the next step, and questions about what's missing</td></tr>
-            <tr><td data-label="Prompt"><b>Meeting prep and follow-up</b></td><td data-label="When">Before and after a meeting</td><td data-label="Gathers">History plus public research with links before; a recap email and dated next step after</td></tr>
-            <tr><td data-label="Prompt"><b>Trends and signals</b></td><td data-label="When">Weekly</td><td data-label="Gathers">Recurring themes, public buying signals, renewals and warm contacts who went quiet</td></tr>
-            <tr><td data-label="Prompt"><b>Weekly activity check</b></td><td data-label="When">Report day</td><td data-label="Gathers">Calls, emails and meetings that happened outside the app</td></tr>
-            <tr><td data-label="Prompt"><b>What's working coaching</b></td><td data-label="When">Monthly</td><td data-label="Gathers">The three changes most likely to add meetings, one thing to stop and one experiment, from result rates with no names</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="callout"><div class="label">Rules for facts, AI for meaning</div><p>Rules decide facts, like whether someone replied, whether a meeting is on the calendar, or whether it's too soon to reach out. The AI decides meaning: what an email is asking, which topic fits and what to say. If a rep's AI can't read their email, the build swaps the check-in for a quick "Who replied?" checklist instead.</p></div>
-    </div>
-  </section>
-
-  <section class="sec">
-    <div class="wrap">
-      <div class="head"><div class="label">How it decides</div><h2>Persistent without being pushy</h2><p>Courtesy rules apply on every list, including sequences, the call blitz and suggested contacts. They ship switched off, and the interview always asks for them, starting from three presets.</p></div>
-      <div class="scroll">
-        <table>
-          <thead><tr><th>Preset</th><th>Days between touches</th><th>Most touches in 30 days</th><th>Rest after no reply</th><th>People per site at once</th></tr></thead>
-          <tbody>
-            <tr><td data-label="Preset"><b>Gentle</b></td><td data-label="Days apart">4</td><td data-label="Per 30 days">5</td><td data-label="Rest">90 days</td><td data-label="Per site">1</td></tr>
-            <tr><td data-label="Preset"><b>Balanced (recommended)</b></td><td data-label="Days apart">3</td><td data-label="Per 30 days">7</td><td data-label="Rest">45 days</td><td data-label="Per site">2</td></tr>
-            <tr><td data-label="Preset"><b>High volume</b></td><td data-label="Days apart">1</td><td data-label="Per 30 days">10</td><td data-label="Rest">30 days</td><td data-label="Per site">3</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="grid">
-        <div class="feat"><h3>Who to contact next</h3><p>A point score ranks everyone eligible: a referral, an upcoming renewal, an existing account or a long quiet spell raise someone, and a recent conversation or a full site lowers them. What's working adjusts the weights.</p></div>
-        <div class="feat"><h3>A real reason every time</h3><p>Every person needs an approved topic before outreach, found in order: renewal, whitespace, past conversation, public signal, then focus. If nothing real turns up, it says "Needs input."</p></div>
-        <div class="feat"><h3>Opposite-channel re-engage</h3><p>If the last contact was an email or meeting, the sequence starts with a call. If it was a call, it starts with an email. Someone you know never gets a cold intro.</p></div>
-        <div class="feat"><h3>"Not now" check-backs</h3><p>The app saves the date and what they said, pauses everything or just that topic, then brings them back on that date with an opener that quotes them.</p></div>
-        <div class="feat"><h3>Held, not lost</h3><p>A touch that breaks a rule shows as held with the date it comes back, and later steps shift with it instead of piling up. Do-not-contact is honored everywhere.</p></div>
-        <div class="feat"><h3>Stale deals move</h3><p>Once a deal has been quiet for the number of days the rep chooses, it moves to Hot Follow-ups with a revival draft.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec alt">
-    <div class="wrap">
-      <div class="head"><div class="label">Privacy by design</div><h2>The rep's data stays with the rep</h2><p>Each build is one HTML file opened in the browser, so in semi-automated mode there's no new system for IT to approve.</p></div>
-      <div class="grid two">
-        <div class="feat"><h3>Nothing is sent anywhere</h3><p>In semi-automated mode the app's code makes no network requests. I confirmed this by searching the source for any network calls.</p></div>
-        <div class="feat"><h3>The AI stays in the rep's account</h3><p>All searching of email, chat and files happens in the rep's own AI assistant, such as Microsoft 365 Copilot inside an organization's tenant. The app never connects to it.</p></div>
-        <div class="feat"><h3>You see everything that moves</h3><p>Every prompt is visible before it goes to the AI, and every result is reviewed before it's saved. Outreach is always sent by the rep.</p></div>
-        <div class="feat"><h3>Backup is a file you own</h3><p>Data lives in browser storage, with a sync file in the rep's own cloud drive folder. It merges item by item and lets the app run on a second PC.</p></div>
-        <div class="feat"><h3>It keeps little</h3><p>Raw email and calendar content is never stored, only one-line summaries, and the coaching prompt sends result rates, not names.</p></div>
-        <div class="feat"><h3>Private by design</h3><p>A rep's account data is saved in their own browser and synced to their company's cloud drive, never in the build chat or the app file. The setup prompt stops anyone who starts pasting real customer data into the chat, and the download and every example on this page use made-up companies and people.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec">
-    <div class="wrap">
-      <div class="head"><div class="label">The hard part</div><h2>Problems solved</h2></div>
-      <div class="grid">
-        <div class="feat"><h3>Making one app fit every rep</h3><p>Instead of a settings page with hundreds of options, Claude edits the code for each rep using a code map of the core app, so a build carries their own wording, rules and views.</p></div>
-        <div class="feat"><h3>Testing a prompt, not just code</h3><p>Claude sessions played made-up reps from start to finish. An early run that built from a description alone looked too plain, so the prompt now customizes the core app. Later runs found 24, 14, 14 and then 10 gaps in the prompt and app, and all of them were fixed.</p></div>
-        <div class="feat"><h3>Automation without extra permissions</h3><p>Fully automatic runs usually need connections and permissions most reps don't have. Scheduled prompts deliver the morning results with no extra access, and the automation routes wait until IT approves.</p></div>
-        <div class="feat"><h3>A local file can't call an AI</h3><p>Each prompt asks for a table with fixed columns. One paste box recognizes every table by its header row, and a review screen shows each change before saving.</p></div>
-        <div class="feat"><h3>The first approach was too generic</h3><p>An AI chat prompt on its own mostly lists missing roles in long replies. So I made the AI the data gatherer and the app the place where history, rules and judgment come together.</p></div>
-        <div class="feat"><h3>Volume without harassment</h3><p>Sales managers want volume, and buyers don't want to be chased. Courtesy rules run across every channel and list, plus the "not now" choice of pausing everything or just one topic.</p></div>
-        <div class="feat"><h3>Messy account structure</h3><p>An organization-to-site model handles single companies, separate site teams, central offices and units that buy for everyone, with name matching for common abbreviations.</p></div>
-        <div class="feat"><h3>Long history, cut-off answers</h3><p>History comes in two-week chunks, each tagged with a code so one Paste button knows which chunk arrived. "Copy the rest" handles answers the AI cuts off.</p></div>
-        <div class="feat"><h3>Surviving a cleared browser</h3><p>A sync file in a cloud drive merges item by item, the newest edit wins, and it carries settings and templates too.</p></div>
-        <div class="feat"><h3>Measuring without manual tagging</h3><p>Every touch records its topic source, focus, channel and step. A reply counts within 21 days, and suggestions wait until there are enough samples.</p></div>
-        <div class="feat"><h3>Checking AI, not trusting it</h3><p>Topic suggestions follow a priority order and the rep reviews each one, with no generic topics allowed. An AI can also invent plausible people, so found contacts need a source and every paste goes through review.</p></div>
-        <div class="feat"><h3>What only the rep knows</h3><p>Cards ask for things no system has, like close dates, who signs off and next steps, and the answers feed the next AI run.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec alt">
-    <div class="wrap">
-      <div class="head"><div class="label">Status</div><h2>Built and tested with made-up reps</h2><p>The core app and setup prompt run end to end with fictional data.</p></div>
+      <div class="head" style="margin-top:40px"><div class="label">Key decisions I made</div><p>How the app is built, how data moves through it, and how it's shared.</p></div>
       <ul class="checks">
-        <li>Built every view, a sidebar grouped by routine with live counts, light and dark mode, guided setup, cloud-drive sync, the weekly report and What's working.</li>
-        <li>Turned it into a core app with no one's wording or numbers, and added an activity timeline on every contact, in-app dialogs, separate storage per build, and on/off settings for AI tools that can't read email or schedule prompts.</li>
-        <li>Passed 98 automated browser checks on the core app with zero errors and zero pop-ups.</li>
-        <li>Ran the setup prompt end to end as a hospital-software rep and a cleaning-services rep. All checks passed on both builds (78 and 68), and both kept the core app's design.</li>
-        <li>Built the company automation route into the core app, switched off by default, and added a contact history pop-up on every name.</li>
-        <li>Ran an Automated-mode build from the setup prompt as a payroll-software rep: 61 edits and 76 checks with zero failures. The run found 14 gaps in the prompt and app, and all 14 were fixed.</li>
-        <li>Retested the updated core app with 93 checks and zero failures, covering automation off, automation on and a Monday run that picks up Friday through Sunday.</li>
-        <li>Ran two more builds from the setup prompt: an HVAC-contracts rep on full setup with two custom meeting types (71 edits, 49 checks, zero failures, 14 gaps fixed), and an LED-lighting rep on quick setup with a phone bar (58 edits, 87 checks, one failure that was fixed, 10 gaps fixed).</li>
-        <li>Re-ran 675 regression checks after every change, with zero failures and zero console errors.</li>
+        <li><span><b>Architecture.</b> I chose a single HTML file that runs in the browser, with no server, install or account, and with the rep's own AI assistant doing the thinking behind it.</span></li>
+        <li><span><b>AI as the data layer.</b> Instead of templates and rules alone, the app has the AI assistant gather and build the information it runs on, then the app plans the day from it.</span></li>
+        <li><span><b>One-paste data flow.</b> Each AI result comes back as one bulk paste instead of a form full of boxes, through a single Paste button. A marker in the AI's answer tells the app which batch just arrived.</span></li>
+        <li><span><b>Data model.</b> I had accounts modeled as parent organizations with their sites and central offices, and focus areas grouped under solution areas, each type with its own rule.</span></li>
+        <li><span><b>A rules layer for plays.</b> I designed Strategies so a rep's plays control who gets contacted, how often and with what angle. Strategy notes are context for the AI, which turns them into talking points instead of copying them.</span></li>
+        <li><span><b>Single user by design.</b> Each app is private to one person, and the sync file is a personal backup, not a shared database.</span></li>
+        <li><span><b>The shared kit's design.</b> A tested foundation app plus a setup prompt. Every build starts from a cleaned copy of the full app instead of a description, which kept the design and quality the same across builds.</span></li>
+        <li><span><b>Logic separate from content.</b> The kit ships the engine only. Templates, scripts and playbooks are written fresh for each rep, so no one's approach is built in.</span></li>
+        <li><span><b>A prompt audit.</b> I asked for a review of every AI prompt in the app and the data each one uses.</span></li>
       </ul>
-      <div class="callout"><div class="label">Known limits</div><p>Automation was tested with a simulated folder and sample data, not yet with a real automation tool, cloud drive or browser permission prompt, and the Claude-connector and direct routes haven't been tested. The app reads the inbox only while it's open. Every build test used pre-written answers, and the latest fixes were checked by regression tests, not a new build run. The phone layout was checked only in a phone-sized desktop browser, and an edited draft that isn't sent clears the next day. A few prompts still ask for mailbox access when the AI can't read email, and each app is for one person.</p></div>
+      <div class="head" style="margin-top:40px"><div class="label">Product design</div><h2>What I designed</h2><p>Claude built these from my requests and the options I picked.</p></div>
+      <div class="grid two">
+        <div class="feat"><h3>Navigation</h3><p>I turned down the first set of layouts and chose a sidebar grouped by routine (Every day, Accounts, Fridays) that collapses to icons, with live counts, outline icons, hover tips and a full-width layout.</p></div>
+        <div class="feat"><h3>Start here</h3><p>A guided screen with the setup, daily, weekly and occasional steps, each with a button, so a new rep always knows what to do next.</p></div>
+        <div class="feat"><h3>The setup interview</h3><p>One tap-to-answer question at a time, a choice of semi-automated or automated setup, and a rep's own app name, color and logo.</p></div>
+        <div class="feat"><h3>Phone version</h3><p>A short set of pages on a bottom bar instead of the whole app, chosen by each rep in the setup interview.</p></div>
+      </div>
     </div>
   </section>
 
-  <section class="sec" id="desk-download">
+  <section class="sec alt" data-sec="prospecting-desk-2">
+    <div class="wrap">
+      <div class="head"><div class="label">The hard part</div><h2>Problems I caught and solved</h2><p>The hardest design problems in the build, and how I worked through them.</p></div>
+      <div class="grid two">
+        <div class="feat"><div class="top"><span class="t">Personalization</span></div><h3>Making one app fit every rep</h3><p>The first approach built each rep's app from a written description, and it came out far plainer than the original. I chose a different base: every build starts from a cleaned copy of the full, tested app, and Claude customizes its code for each rep. Every build now keeps the same design and engine.</p></div>
+        <div class="feat"><div class="top"><span class="t">Separation</span></div><h3>Keeping personal data out of shared code</h3><p>When I reviewed the shared copy, I found leftover personal settings, report categories, courtesy numbers and outreach playbooks still inside it. That led to a clean split: the kit ships the engine only, and everything personal is written fresh for each rep during setup.</p></div>
+        <div class="feat"><div class="top"><span class="t">AI reliability</span></div><h3>AI that invents data</h3><p>An AI assistant admitted it had made up contacts it returned. I had every AI-added contact deleted and replaced with one full sweep, and the app now requires a source for each found contact and sends every paste through a review screen.</p></div>
+        <div class="feat"><div class="top"><span class="t">Data quality</span></div><h3>Messy AI output</h3><p>Pasted results came back with brackets, links and citation tags, and some dates were a day off. I reported each case with the exact pattern so the parsing could be fixed, and designed a marker in the AI's answer so the app knows which batch arrived.</p></div>
+        <div class="feat"><div class="top"><span class="t">Data integrity</span></div><h3>Counts that didn't add up</h3><p>I caught meetings importing twice, group meetings counted once per person, and activity counted that never happened. The fixes made each meeting a single record however many people attend, and the weekly numbers count only work logged in the app.</p></div>
+        <div class="feat"><div class="top"><span class="t">Testing</span></div><h3>Testing a prompt, not just code</h3><p>A setup prompt can't be unit-tested like code. Claude ran five builds as made-up reps from start to finish. I approved each run, reviewed what it found, and chose to fix every gap before sharing the kit.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" data-sec="prospecting-desk-3">
+    <div class="wrap">
+      <div class="head"><div class="label">My role</div><h2>How I directed Claude</h2><p>Prospecting Desk was my idea and my design. I decided what it does and how it works, tested every feature by hand, and sent it back for changes until it worked the way a rep needs. Claude wrote the code to my direction.</p>
+        <div class="statbar">
+          <div><b>36</b><span>product decisions I made</span></div>
+          <div><b>13</b><span>times I overruled Claude's recommendation</span></div>
+          <div><b>~30</b><span>features that were my ideas</span></div>
+          <div><b>40+</b><span>bugs I caught by testing by hand</span></div>
+        </div></div>
+      <ul class="checks">
+        <li><span><b>I came up with the concept.</b> A single-file app that runs in the browser with an AI assistant doing the thinking, and later a build-your-own version that rebuilds it around each rep.</span></li>
+        <li><span><b>I designed the workflow.</b> Outreach first, re-engaging past contacts on the opposite channel, quiet deals separated from active ones, and Strategies that decide who gets contacted and when.</span></li>
+        <li><span><b>I brought the features.</b> Strategies, conversation briefs, Hot Follow-ups, the email blast export, custom meeting types and the phone layout all started as my requests.</span></li>
+        <li><span><b>I overruled Claude when it was wrong.</b> 13 times, like starting with outreach instead of account research, building from a cleaned copy instead of a description, and counting a meeting on the day it happens instead of when it's booked.</span></li>
+        <li><span><b>I tested it and changed it.</b> I used every feature by hand and caught more than 40 bugs, from brackets left in pasted emails to drafts that ignored the rep's strategy. Each time I reported exactly what broke, sent it back for a fix and tested it again.</span></li>
+        <li><span><b>I kept the scope tight.</b> No rebuilding tools that already exist, no team sharing, and only the pages a rep needs on a phone.</span></li>
+        <li><span><b>I set the ground rules.</b> No private data in the build, made-up placeholders only, and status reports that flag anything unconfirmed and never invent numbers.</span></li>
+        <li><span><b>I decided what shipped.</b> I chose which changes go into the shared core app, approved every made-up-rep test run, had every gap fixed, and decided when the kit was ready to share.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec alt" data-sec="prospecting-desk-4">
+    <div class="wrap">
+      <div class="head"><div class="label">Status</div><h2>Built and tested with made-up reps</h2></div>
+      <ul class="checks">
+        <li>Five builds from the setup prompt, as made-up reps selling hospital software, cleaning services, payroll software, HVAC contracts and LED lighting. Every build passed its checks after fixes, and all kept the core app's design.</li>
+        <li>675 regression checks re-run after every change, with zero failures and zero console errors.</li>
+        <li>The company automation route is built in and switched off, and passed 93 checks with automation off, on, and on a Monday run that picks up the weekend.</li>
+        <li>The free kit is on version 0.3.</li>
+      </ul>
+      <div class="callout"><div class="label">Known limits</div><p>No real salesperson has used it yet, and every build test used pre-written answers. Automation was tested with a simulated folder and sample data, not a real automation tool, and the Claude-connector and direct routes are untested. The phone layout was checked only in a phone-sized desktop browser. Each app is for one person.</p></div>
+    </div>
+  </section>
+
+  <section class="sec" id="desk-download" data-sec="prospecting-desk-5">
     <div class="wrap">
       <div class="head"><div class="label">Make your own</div><h2>Build your own Prospecting Desk</h2><p>Download the core app and a prompt that has Claude interview you one question at a time, then rebuild the app's rules, wording and layout around how you sell.</p></div>
       <div class="grid two">
@@ -930,15 +896,6 @@ footer a { color: var(--muted); }
 
   <section class="sec alt">
     <div class="wrap">
-      <div class="head"><div class="label">My role</div><h2>Product owner, directing an AI-assisted build</h2><p>I designed Prospecting Desk with salespeople in mind and built the first version in one day. I defined the problem and the daily workflow, set the courtesy rules and data limits, and made the key calls, like building on scheduled prompts so the app needs no extra permissions. Then I turned it into something any rep can shape: I decided what stays in the core app and what each rep chooses, shaped the setup interview and the automation levels, and had every build tested as made-up users before sharing it. Claude, an AI coding assistant, wrote and tested the code and the setup prompt under my direction.</p></div>
-      <div class="chips">
-        <span>Product owner</span><span>Workflow design</span><span>Prompt design</span><span>Personalization</span><span>Automation design</span><span>Data modeling</span><span>Privacy and security</span><span>Testing</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec">
-    <div class="wrap">
       <div class="head"><div class="label">Technology</div><h2>Stack</h2></div>
       <div class="chips">
         <span>HTML, CSS and JavaScript (no framework)</span><span>SheetJS</span><span>localStorage and IndexedDB</span><span>File System Access API</span><span>Clipboard API</span><span>iCalendar (.ics)</span>
@@ -955,53 +912,122 @@ footer a { color: var(--muted); }
 <main data-page="workflow-automation" class="c-flow" hidden>
   <section class="cs-hero">
     <div class="wrap">
-      <span class="tag">Power Automate · November 2025</span>
+      <span class="tag">Power Automate · Built by hand · November 2025</span>
       <h1>Workflow Automation</h1>
-      <p class="sum">Four Power Automate flows supporting a lead-to-meeting process: segmented lead nurture, meeting scheduling, unsubscribe compliance and expense tracking, with Cognito Forms serving as a lightweight CRM.</p>
+      <p class="sum">Four Power Automate flows I designed and built by hand for a lead-to-consultation process. They nurture each lead with emails written for its segment, write every Calendly booking back to the right lead, honor unsubscribes right away, and keep an expense sheet up to date, all with Cognito Forms as the lead database.</p>
       <div class="statbar">
-        <div><b>4</b><span>automated flows</span></div>
-        <div><b>7</b><span>integrated tools and APIs</span></div>
-        <div><b>End to end</b><span>from new lead to booked meeting</span></div>
+        <div><b>4</b><span>flows I designed and built myself</span></div>
+        <div><b>2</b><span>lead streams, intake and public</span></div>
+        <div><b>Up to 4</b><span>timed emails per lead, each re-checked before sending</span></div>
+        <div><b>6</b><span>tools connected, from forms to Teams</span></div>
       </div>
     </div>
   </section>
+  <nav class="toc" aria-label="On this page"><div class="toc-in"><a href="#workflow-automation" data-to="workflow-automation-0">The goal</a><a href="#workflow-automation" data-to="workflow-automation-1">The flows</a><a href="#workflow-automation" data-to="workflow-automation-2">Decisions</a><a href="#workflow-automation" data-to="workflow-automation-3">Problems</a><a href="#workflow-automation" data-to="workflow-automation-4">My role</a><a href="#workflow-automation" data-to="workflow-automation-5">Status</a></div></nav>
 
-  <section class="sec alt">
+  <section class="sec alt" data-sec="workflow-automation-0">
     <div class="wrap">
-      <div class="head"><div class="label">The goal</div><h2>From new lead to booked meeting, automatically</h2><p>Nurture each lead according to its segment, attribute every booking to its source, and honor unsubscribe requests immediately.</p></div>
+      <div class="head"><div class="label">The goal</div><h2>From new lead to booked consultation, without manual follow-up</h2><p>The process had two streams of leads, one from an intake form and one from the public, and each lead was tracked and followed up by hand. The goal was for every lead to get the right emails, every booking recorded on the lead, and every unsubscribe honored at once.</p></div>
+      <ul class="checks">
+        <li><span><b>Easy to maintain.</b> Simple to keep running, with an intuitive setup.</span></li>
+        <li><span><b>Easy to grow.</b> New campaigns, lead types and meeting types can be added without a rebuild.</span></li>
+        <li><span><b>No manual tracking.</b> Leads move through the process on their own.</span></li>
+        <li><span><b>Existing tools.</b> Built on a Microsoft 365 Business Standard plan, with Cognito Forms staying the lead database.</span></li>
+      </ul>
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec" data-sec="workflow-automation-1">
     <div class="wrap">
-      <div class="head"><div class="label">The flows</div><h2>Four flows, one process</h2></div>
+      <div class="head"><div class="label">The flows</div><h2>Four flows, one process</h2><p>Each flow runs on its own, and they share the same lead record, so a booking or unsubscribe in one changes what the others do.</p></div>
       <div class="grid two">
-        <div class="feat"><div class="top"><span class="n">1</span></div><h3>Segmented lead nurture</h3><p>Sends segment-specific email sequences, with suppression rules and re-entry logic.</p></div>
-        <div class="feat"><div class="top"><span class="n">2</span></div><h3>Consultation scheduling</h3><p>Uses Calendly webhooks and UTM parameters to attribute each booking to its source, with error alerts and an approval step.</p></div>
-        <div class="feat"><div class="top"><span class="n">3</span></div><h3>Unsubscribe compliance</h3><p>Removes contacts from all sequences when they opt out, in line with CAN-SPAM.</p></div>
-        <div class="feat"><div class="top"><span class="n">4</span></div><h3>Expense tracking</h3><p>Records recurring business expenses in an Excel balance sheet.</p></div>
+        <div class="feat"><div class="top"><span class="n">1</span><span class="t">New lead</span></div><h3>Segmented lead nurture</h3><p>Each new lead is sorted into one of two categories, one with six subtypes split by time frame, and gets up to four timed emails written for its segment. Before each email, the flow re-checks the lead's record and skips the send if they've booked a consultation or unsubscribed. If a consultation is cancelled and not rebooked, the emails pick back up.</p></div>
+        <div class="feat"><div class="top"><span class="n">2</span><span class="t">Calendly webhook</span></div><h3>Consultation scheduling</h3><p>The intake form and every email send prospects to Calendly with the lead's two IDs attached. When a meeting is booked, a webhook starts the flow, which matches both IDs to the lead and writes the date and time to their record. A cancellation clears it, waits to give the prospect time to rebook, then sends a reschedule email.</p></div>
+        <div class="feat"><div class="top"><span class="n">3</span><span class="t">Unsubscribe form</span></div><h3>Unsubscribe compliance</h3><p>Every email carries an unsubscribe link with the lead's IDs. It opens a form that confirms the prospect's email address and shows whether they're already unsubscribed. One button sets the lead to inactive, which stops every email, in line with CAN-SPAM.</p></div>
+        <div class="feat"><div class="top"><span class="n">4</span><span class="t">Daily schedule</span></div><h3>Expense tracking</h3><p>A daily flow logs monthly and annual recurring expenses into an Excel table, with formulas for the running balance, a totals row and filters by month, year and type. Only revenue and one-off expenses are entered by hand.</p></div>
+      </div>
+      <div class="head" style="margin-top:40px"><div class="label">A closer look</div><h2>The scheduling flow, step by step</h2><p>The most complex of the four flows, with two paths and two safety nets. Redrawn and simplified from the original.</p></div>
+      <div class="fmap" aria-label="Diagram of the consultation scheduling flow">
+        <div class="fm-node trig"><b>Trigger</b>Calendly webhook: a consultation is booked or cancelled</div>
+        <div class="fm-arrow"></div>
+        <div class="fm-node">Look up the lead in Cognito Forms using the entry ID from the booking</div>
+        <div class="fm-arrow"></div>
+        <div class="fm-node dec"><b>Check</b>Do the entry ID and the case number both match this lead?</div>
+        <div class="fm-side"><div class="fm-node err"><b>If not: alert and stop</b>Post the flow name, a link to the run, the scheduler, the time and both IDs to a Teams channel so someone can fix the record</div></div>
+        <div class="fm-arrow"><i>Yes</i></div>
+        <div class="fm-node dec"><b>Route</b>The case number shows the lead type, intake or public, and picks that path</div>
+        <div class="fm-arrow"></div>
+        <div class="fm-split">
+          <div class="fm-col">
+            <span class="fm-lab">If booked</span>
+            <div class="fm-node">Write the consultation date and time to the lead</div>
+            <div class="fm-arrow"></div>
+            <div class="fm-node end">Nurture emails skip this lead while it's booked</div>
+          </div>
+          <div class="fm-col">
+            <span class="fm-lab">If cancelled</span>
+            <div class="fm-node">Clear the date and time from the lead</div>
+            <div class="fm-side"><div class="fm-node err"><b>If that fails</b>Pause and send an approval request with the details, then carry on once the entry is fixed</div></div>
+            <div class="fm-arrow"></div>
+            <div class="fm-node">Wait to give the prospect time to rebook</div>
+            <div class="fm-arrow"></div>
+            <div class="fm-node dec"><b>Check</b>Did they rebook?</div>
+            <div class="fm-arrow"><i>No</i></div>
+            <div class="fm-node end">Send a reschedule email, and nurture emails pick back up</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="sec alt">
+  <section class="sec alt" data-sec="workflow-automation-2">
     <div class="wrap">
-      <div class="head"><div class="label">Skills</div><h2>What this project shows</h2></div>
+      <div class="head"><div class="label">Key decisions I made</div><p>How the data is set up, how the flows find the right lead, and how the system grows.</p></div>
+      <ul class="checks">
+        <li><span><b>Clean data first.</b> Before automating anything, I made every needed field required on the lead form and added hidden fields for marketing status and an auto-generated case number, so every flow has complete data to work with.</span></li>
+        <li><span><b>Two IDs on every lead.</b> Each lead carries an entry ID and a case number, and the flows match on both, so a booking or an unsubscribe can't update the wrong person.</span></li>
+        <li><span><b>IDs carried through links.</b> Both IDs travel as URL parameters into Calendly and the unsubscribe form, so the flows know exactly which lead acted without asking anyone to type anything.</span></li>
+        <li><span><b>Check before every send.</b> Instead of a fixed sequence, the nurture flow re-reads the lead's record after each wait, so it stops the moment someone books or unsubscribes.</span></li>
+        <li><span><b>The case number picks the path.</b> The case number shows whether a lead came from intake or the public, so the scheduling flow knows which workflow to follow.</span></li>
+        <li><span><b>Built to grow.</b> Email frameworks are in place for future lead subtypes, and the scheduling flow is set up for more meeting types, so adding one means filling in a framework instead of rebuilding.</span></li>
+        <li><span><b>Existing tools only.</b> Everything runs on a Microsoft 365 Business Standard plan, plus the forms and scheduling tools already in place.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" data-sec="workflow-automation-3">
+    <div class="wrap">
+      <div class="head"><div class="label">The hard part</div><h2>Problems I solved</h2></div>
       <div class="grid two">
-        <div class="feat"><h3>Lead lifecycle design</h3><p>Segmentation, suppression and re-entry rules.</p></div>
-        <div class="feat"><h3>API and webhook integration</h3><p>Real-time booking data from Calendly.</p></div>
-        <div class="feat"><h3>Attribution</h3><p>UTM parameters carried from first click to booked meeting.</p></div>
-        <div class="feat"><h3>Reliability</h3><p>Error alerting and human approval at critical steps.</p></div>
+        <div class="feat"><div class="top"><span class="t">Integration</span></div><h3>Knowing who booked</h3><p>Calendly doesn't know which lead is booking. I passed both IDs as UTM parameters, so Calendly saves them with each booking and sends them through its webhook to Power Automate.</p></div>
+        <div class="feat"><div class="top"><span class="t">Error handling</span></div><h3>Bookings that don't match</h3><p>If the IDs don't match a lead, the flow posts the flow name, a link to the run, the scheduler, the time and both IDs to a Teams channel, so someone can fix the record right away.</p></div>
+        <div class="feat"><div class="top"><span class="t">Error handling</span></div><h3>Updates that fail</h3><p>If a cancelled booking can't be cleared from the lead, the flow pauses and sends an approval request with the details. Once they fix the entry and approve, the flow carries on.</p></div>
+        <div class="feat"><div class="top"><span class="t">Logic</span></div><h3>Cancellations</h3><p>A cancelled consultation clears the lead's booking, waits to give them time to rebook, then sends a reschedule email. If they don't rebook, their nurture emails resume.</p></div>
+        <div class="feat"><div class="top"><span class="t">Security</span></div><h3>A safe unsubscribe link</h3><p>The form only finds a lead when both IDs match, and it shows the email address on file before anything changes, so a guessed link can't unsubscribe someone else.</p></div>
+        <div class="feat"><div class="top"><span class="t">Email</span></div><h3>Designed emails from Outlook</h3><p>I converted the email templates to HTML so the Outlook connector could send them as designed, with a button to book a consultation and a link to unsubscribe.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec alt" data-sec="workflow-automation-4">
     <div class="wrap">
-      <div class="head"><div class="label">Next steps</div><h2>Planned improvements</h2></div>
+      <div class="head"><div class="label">My role</div><h2>Designed and built by me</h2><p>I built this before I started building with AI. I gathered the requirements, designed the process and the data, and built and tested every flow myself in Power Automate.</p></div>
+      <ul class="checks">
+        <li><span><b>I set the requirements.</b> Easy maintenance, room to grow, no manual tracking, and only tools already in place.</span></li>
+        <li><span><b>I redesigned the lead form.</b> Required fields, a hidden marketing status and an auto-generated case number for each lead type.</span></li>
+        <li><span><b>I designed the segments.</b> Two categories, one with six subtypes split by time frame, with templates for each and frameworks for the rest.</span></li>
+        <li><span><b>I built every flow.</b> The branching, timed waits, record checks, webhook handling, Teams alerts and approval steps.</span></li>
+        <li><span><b>I documented it.</b> A 12-page guide covering each flow's use case, requirements, solution, connectors and full flow diagram.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" data-sec="workflow-automation-5">
+    <div class="wrap">
+      <div class="head"><div class="label">Status</div><h2>Built in November 2025, no longer in use</h2><p>The flows are no longer running or maintained. If I rebuilt the process today, I would:</p></div>
       <ul class="checks">
         <li>Move expense vendors into a lookup table and prevent duplicate entries.</li>
-        <li>Rebuild the lead-to-meeting process in Salesforce, with n8n handling the booking webhook.</li>
+        <li>Rebuild the lead-to-consultation process in Salesforce, with n8n handling the booking webhook.</li>
       </ul>
     </div>
   </section>
@@ -1010,7 +1036,7 @@ footer a { color: var(--muted); }
     <div class="wrap">
       <div class="head"><div class="label">Technology</div><h2>Stack</h2></div>
       <div class="chips">
-        <span>Power Automate</span><span>Cognito Forms</span><span>Outlook</span><span>Calendly API</span><span>Webhooks</span><span>Microsoft Teams</span><span>Approvals</span><span>Excel</span>
+        <span>Power Automate</span><span>Cognito Forms</span><span>Outlook</span><span>HTML email</span><span>Calendly API</span><span>Webhooks</span><span>UTM parameters</span><span>Microsoft Teams</span><span>Approvals</span><span>Excel</span>
       </div>
     </div>
   </section>
@@ -1271,5 +1297,26 @@ footer a { color: var(--muted); }
   function set() { document.documentElement.style.setProperty('--hh', h.offsetHeight + 'px'); }
   set();
   if (window.ResizeObserver) new ResizeObserver(set).observe(h); else window.addEventListener('resize', set);
+})();
+</script>
+<script>
+(function () {
+  function bar() { var m = document.querySelector('main[data-page]:not([hidden])'); return m && m.querySelector('.toc'); }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('.toc a[data-to]'); if (!a) return;
+    e.preventDefault();
+    var t = document.querySelector('[data-sec="' + a.getAttribute('data-to') + '"]');
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  function mark() {
+    var nav = bar(); if (!nav) return;
+    var links = nav.querySelectorAll('a[data-to]'), y = nav.getBoundingClientRect().bottom + 24, cur = null;
+    links.forEach(function (a) { var t = document.querySelector('[data-sec="' + a.getAttribute('data-to') + '"]'); if (t && t.getBoundingClientRect().top <= y) cur = a; });
+    links.forEach(function (a) { a.classList.toggle('on', a === cur); });
+    if (cur && cur.scrollIntoView && nav.scrollWidth > nav.clientWidth + 4) { var r = cur.getBoundingClientRect(), n = nav.firstChild.getBoundingClientRect(); if (r.left < n.left || r.right > n.right) nav.firstChild.scrollLeft += r.left - n.left - 16; }
+  }
+  window.addEventListener('scroll', mark, { passive: true });
+  window.addEventListener('hashchange', function () { setTimeout(mark, 50); });
+  mark();
 })();
 </script>
